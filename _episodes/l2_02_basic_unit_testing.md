@@ -12,8 +12,10 @@ objectives:
 - "Understand how to compile and run the test?"
 - "Understand some of the macros available in google test"
 keypoints:
-- "GoogleTest is an easy to use and one of most popular frameworks for testing in C++."
-- "A simple unit test should follow the Arrange-Act-Assert (AAA) strategy."
+- "We learnt about some of the popular testing frameworks for C++."
+- "We learnt about Googletest and how to use it to write our tests."
+- "We learnt about anatomy of a unit test and how to write effective unit tests."
+- "Finally, we saw an example to demonstrate the above concepts."
 ---
 
 ## 1. Popular frameworks for testing in C++
@@ -214,7 +216,7 @@ For writing your Unit Tests, it is advisable to follow the guidelines given belo
 
 With the above guidelines in mind, we can write some of the unit tests for our `Fibonacci.cpp` that we learnt in Chapter 1. The complete code is given below and can be found in [Chapter2](../code/Chapter2/Fibonacci_test.cpp).
 
-```Cpp
+```cpp
 #include <iostream>
 #include "gtest/gtest.h"
 
@@ -285,9 +287,7 @@ TEST(FibonacciTest, HandlesNegativeInput) {
 
 
 
-**## Summary**
+### Summary
+In this chapter, we learnt about basics of GoogleTest to write tests in C++.
 
-1. We learnt about some of the popular testing frameworks for C++.
-2. We learnt about Googletest and how to use it to write our tests.
-3. We learnt about anatomy of a unit test and how to write effective unit tests.
-4. Finally, we saw an example to demonstrate the above concepts.
+{% include links.md %}
