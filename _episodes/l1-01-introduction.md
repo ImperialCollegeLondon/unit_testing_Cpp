@@ -111,13 +111,13 @@ in general about several techniques used when writing tests in
 
 ### Unit Testing
 
-This is the main type of testing kind we will be dealing with in this course. Unit
+This is the main type of testing we will be dealing with in this course. Unit
 testing refers to **taking a component of a program and testing it in
 isolation**. Generally this means testing an individual class or function.
 
 For this kind of testing to make sense, or even just to work, your code needs to
 be modular, written in small, independent components that can be easily unit tested.
-Therefore, a side effect of writing unit tests is that if forces you, in a sense,
+Therefore, a side effect of writing unit tests is that it forces you, in a sense,
 to improve the quality and sustainability of your code because, otherwise, it will
 not be testable!
 
