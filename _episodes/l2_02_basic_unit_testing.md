@@ -36,7 +36,7 @@ Simply defining, GoogleTest is a testing framework developed by Google's testing
 3. **Large and Active Community**: Google Test has a large and active community of developers. This means that there is ample support available in terms of documentation, tutorials, forums, and online resources. 
 4. **Mature and Stable**: It is a mature and stable framework that has been used extensively in industry projects and open-source software. 
 5. **Wide Platform Support**: Google Test supports multiple platforms, including Windows, Linux, macOS, and various compilers. It is compatible with popular development environments and build systems, making it suitable for a wide range of C++ projects.
-6. **Flexible and Extensible**: Google Test provides flexibility in test organization and customization. It allows you to structure your tests using test cases and test suites. You can also define custom test fixtures and customize test execution and reporting. Additionally, Google Test can be extended with custom assertion macros and utilities to suit your specific testing needs.
+6. **Flexible and Extensible**: Google Test provides flexibility in test organization and customization. It allows you to structure your tests using test cases and test suites. You can also define custom test fixtures and customise test execution and reporting. Additionally, Google Test can be extended with custom assertion macros and utilities to suit your specific testing needs.
 
 
 
@@ -70,7 +70,7 @@ The different parts in the above cell have the following meaning
 - `TEST`: This is the macro provided by the Google Test framework to define a test case.
 - `TestSuiteName`: It is the name of the test suite or test fixture. It groups related tests together. It should be a valid C++ identifier.
 - `TestName`: It is the name of the individual test case within the test suite. It should also be a valid C++ identifier.
-- `Test logic and assertions`: This is the body of the test case where you write the actual test code, including any necessary assertions to verify the expected behavior. The section `Test Assertions` describes more about various assertions available in GoogleTest.
+- `Test logic and assertions`: This is the body of the test case where you write the actual test code, including any necessary assertions to verify the expected behaviour. The section `Test Assertions` describes more about various assertions available in GoogleTest.
 
 #### 2.3. Initialise GoogleTest framework in your main
 
@@ -157,3 +157,94 @@ EXPECT_TRUE(my_condition) << "My condition is not true";
 
 ## 4. Anatomy of a Unit Test
 
+A Unit test in general follows a three step structure as mentioned below:-
+
+1. **Setup**: In the setup phase, we prepare the necessary preconditions for the unit test. This involves creating any required objects, initialising variables, and setting up the environment to mimic the desired test scenario. The setup step ensures that the unit being tested has the necessary dependencies and context to execute successfully.
+2. **Execution**: The execution step involves invoking the unit under test with the specified inputs or parameters. This is the actual execution of the code being tested. The unit is executed with the predetermined inputs, and its output or behavior is observed.
+3. **Verification**: In the verification step, we check whether the actual output or behaviour matches the expected result. This typically involves making assertions or comparisons between the observed output and the expected output. If the assertions pass, the test is considered successful. Otherwise, if any assertion fails, it indicates a discrepancy between the expected and actual outcomes, highlighting a potential issue in the unit being tested.
+
+This 3 step structure if often referred as `Arrange-Act-Assert (AAA)` in some textbooks and online resources. 
+
+
+
+### 5. Writing Effective Unit Tests
+
+For writing your Unit Tests, it is advisable to follow the guidelines given below.
+
+1. **Clear and Descriptive Names**: Choose meaningful names for your test methods that accurately describe the scenario being tested. A good test method name should clearly convey the input, expected behavior, or outcome being verified. Avoid vague or generic names that don't provide sufficient information about the purpose of the test.
+
+   a. `calculateTotal_WithValidInputs_ShouldReturnCorrectSum`
+
+   b. `validateEmail_WithInvalidFormat_ShouldReturnFalse`
+
+2. **Consistent Formatting**: Consistency in naming conventions helps maintain a uniform and predictable test suite. Choose a naming style and stick to it throughout your test methods. Some common conventions include using **CamelCase** or **underscore-separated** words. Additionally, consider using a prefix like `test_` or a suffix like `should` to distinguish test methods from regular code.
+
+3. **Single Responsibility**: Each test method should focus on testing a single aspect or behaviour of the unit under test. Avoid testing multiple scenarios within a single test method, as it can make the test less readable and harder to diagnose when failures occur. Instead, break down complex scenarios into multiple smaller tests, each targeting a specific case or condition.
+
+4. **Test Data Organization**: Separate the test data from the test methods. Consider using dedicated variables or data structures to store test data. This allows for better readability and maintainability, as changes to the test data can be easily managed without modifying the test methods themselves.
+
+
+
+#### 6. Unit Test for the Fibonacci Sequence
+
+With the above guidelines in mind, we can write some of the unit tests for our `Fibonacci.cpp` that we learnt in Chapter 1. The complete code is given below and can be found in [Chapter2](../code/Chapter2/Fibonacci_test.cpp).
+
+>##### Testing Fibonacci Sequence
+>
+>```C++
+>#include <iostream>
+>#include "gtest/gtest.h"
+>
+>/*Returns the n'th term of the Fibonacci sequence.*/
+>int recursive_fibonacci(int n)
+>{
+>    if (n <= 1) {
+>        return n;
+>    } else {
+>        return recursive_fibonacci(n - 1) + recursive_fibonacci(n - 2);
+>    }
+>}
+>
+>TEST(FibonacciTest, HandlesZeroInput) {
+>    EXPECT_EQ(recursive_fibonacci(0), 0);
+>}
+>
+>TEST(FibonacciTest, HandlesValueOneAsInput) {
+>    EXPECT_EQ(recursive_fibonacci(1), 1);
+>}
+>
+>TEST(FibonacciTest, HandlesPositiveInput) {
+>    EXPECT_EQ(recursive_fibonacci(5), 5);
+>}
+>
+>int main(int argc, char **argv)
+>{
+>    testing::InitGoogleTest(&argc, argv);
+>    return RUN_ALL_TESTS();
+>}
+>```
+>
+>On compiling and running above program, we get the following output.
+>
+>```bash
+>[==========] Running 3 tests from 1 test suite.
+>[----------] Global test environment set-up.
+>[----------] 3 tests from FibonacciTest
+>[ RUN      ] FibonacciTest.HandlesZeroInput
+>[       OK ] FibonacciTest.HandlesZeroInput (0 ms)
+>[ RUN      ] FibonacciTest.HandlesValueOneAsInput
+>[       OK ] FibonacciTest.HandlesValueOneAsInput (0 ms)
+>[ RUN      ] FibonacciTest.HandlesPositiveInput
+>[       OK ] FibonacciTest.HandlesPositiveInput (0 ms)
+>[----------] 3 tests from FibonacciTest (0 ms total)
+>
+>[----------] Global test environment tear-down
+>[==========] 3 tests from 1 test suite ran. (0 ms total)
+>[  PASSED  ] 3 tests.
+>```
+>
+>{: .output}
+
+**### Summary**
+
+{% include links.md %}
