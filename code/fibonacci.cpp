@@ -12,12 +12,21 @@ int recursive_fibonacci(int n)
 
 int main()
 {
-    std::cout << recursive_fibonacci(0) << "\n";
-    std::cout << recursive_fibonacci(1) << "\n";
-    std::cout << recursive_fibonacci(2) << "\n";
-    std::cout << recursive_fibonacci(3) << "\n";
-    std::cout << recursive_fibonacci(4) << "\n";
-    std::cout << recursive_fibonacci(5) << "\n";
-    std::cout << recursive_fibonacci(6) << "\n";
+    // Manual tests
+    // Case 1: When n is 0 or 1
+    int n = 0;
+    std::cout << "Fib(" << n << ") = " << recursive_fibonacci(n) << "\n";
+
+    n = 1;
+    std::cout << "Fib(" << n << ") = " << recursive_fibonacci(n) << "\n";
+
+    // Case 2: When n is greater than 1.
+    n = 5;
+    std::cout << "Fib(" << n << ") = " << recursive_fibonacci(n) << "\n";
+
+    // Case 3: When n is negative.
+    n = -3;
+    std::cout << "Fib(" << n << ") = " << recursive_fibonacci(n) << "\n";
+
     return 0;
 }
