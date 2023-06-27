@@ -128,6 +128,7 @@ $ g++ your_code.cpp -I path_to_your_gtest.h -L path_to_your_lgtest.a -lgtest_mai
 
 Googletest offers many types of assertions as described in [GoogleTest Assertions](http://google.github.io/googletest/reference/assertions.html). A few of them are described below as they will be used in our upcoming sections/chapters.
 
+<br> </br>
 **1. Equality Assertions**: Equality assertions are used to compare values for equality. The most commonly used assertion is `ASSERT_EQ(expected, actual)`, which verifies that the `expected` and `actual` values are equal. For example:
 
 ```cpp
@@ -140,8 +141,7 @@ ASSERT_EQ(your_function(function_arguments), expected_value);
 
 Other useful equality assertions include `ASSERT_NE`, `ASSERT_LT`, `ASSERT_LE`, `ASSERT_GT`, and `ASSERT_GE` for performing inequality comparisons.
 
-
-
+<br> </br>
 **2. Boolean Assertions**: Boolean assertions are used to verify boolean conditions. For example, `ASSERT_TRUE(condition)` checks that the `condition` is `true`, while `ASSERT_FALSE(condition)` ensures that the `condition` is `false`.
 
 ```cpp
@@ -150,7 +150,7 @@ ASSERT_FALSE(hasError);  // Verify that the hasError flag is false
 ```
 
 
-
+<br> </br>
 **3. Exception Assertions**: Exception assertions are used to validate that specific exceptions are thrown during the execution of code. In Google Test, you can use the `ASSERT_THROW(statement, exceptionType)` assertion. For example:
 
 ```cpp
@@ -158,7 +158,7 @@ ASSERT_THROW(throwException(), std::runtime_error);  // Verify that throwExcepti
 ```
 
 
-
+<br> </br>
 **4. String Assertions**: String assertions are used to compare string values. Google Test provides various string assertions, such as `ASSERT_STREQ`, `ASSERT_STRNE`, `ASSERT_STRCASEEQ`, and `ASSERT_STRCASENE`. These assertions allow you to compare strings for equality, inequality, or case-insensitive equality.
 
 ```
@@ -175,7 +175,7 @@ EXPECT_TRUE(my_condition) << "My condition is not true";
 ```
 
 
-
+<br> </br>
 ## 5. Anatomy of a Unit Test
 
 A Unit test in general follows a three step structure as mentioned below:-
@@ -187,8 +187,8 @@ A Unit test in general follows a three step structure as mentioned below:-
 This 3 step structure if often referred as `Arrange-Act-Assert (AAA)` in some textbooks and online resources. 
 
 
-
-### 6. Writing Effective Unit Tests
+<br> </br>
+## 6. Writing Effective Unit Tests
 
 For writing your Unit Tests, it is advisable to follow the guidelines given below.
 
@@ -212,7 +212,7 @@ For writing your Unit Tests, it is advisable to follow the guidelines given belo
 
 
 
-### 7. Unit Test for the Fibonacci Sequence
+## 7. Unit Test for the Fibonacci Sequence
 
 With the above guidelines in mind, we can write some of the unit tests for our `Fibonacci.cpp` that we learnt in Chapter 1. The complete code is given below and can be found in [Chapter2](../code/Chapter2/Fibonacci_test.cpp).
 
@@ -270,7 +270,7 @@ On compiling and running above program, we get the following output.
 
 
 
-#### 6.1 Exercise
+### 7.1 Exercise
 
 Modify the above program to test for the negative values.
 
@@ -288,6 +288,6 @@ TEST(FibonacciTest, HandlesNegativeInput) {
 
 
 ### Summary
-In this chapter, we learnt about basics of GoogleTest to write tests in C++.
+In this chapter, we learnt about the basics of GoogleTest and how to use it to write tests in C++.
 
 {% include links.md %}
