@@ -46,15 +46,16 @@ For this chapter, we will consider the same example `fibonacci.cpp` that we used
 
 For using GoogleTest in your code, you need to follow the following steps in general.
 
-#### 2.1. Adding the required header files
+### 2.1. Adding the required header files
 
 The first step would be to add the required header files in your program. For Googletest, you would need to add the following line in your code.
 
-```cpp
-#include "gtest/gtest.h"
-```
+> ##Header file required
+>```cpp
+>#include "gtest/gtest.h"
+>```
 
-#### 2.2. Create your tests
+### 2.2. Create your tests
 
 The next step would be to to define your test. Googletest uses the following convention in naming various tests.
 
@@ -72,7 +73,7 @@ The different parts in the above cell have the following meaning
 - `TestName`: It is the name of the individual test case within the test suite. It should also be a valid C++ identifier.
 - `Test logic and assertions`: This is the body of the test case where you write the actual test code, including any necessary assertions to verify the expected behaviour. The section `Test Assertions` describes more about various assertions available in GoogleTest.
 
-#### 2.3. Initialise GoogleTest framework in your main
+### 2.3. Initialise GoogleTest framework in your main
 
 For this sub-section, we are assuming that you are writing your own main function (GoogleTest also allows you to run your code without your own main function by linking to a main function provided in `lgest_main`. Please see the next section for more details). You would need to include the following lines in your main function as shown below.
 
@@ -89,7 +90,7 @@ int main(int argc, char **argv)
 
 The `RUN_ALL_TESTS()` is typically called from `main` and when it is invoked, it scans the program for all the test cases and  test methods defined using the `test` macro.   It then executes each test case and captures the results of each individual test method within the test case. After running all the tests, it provides a summary of the test results, including the number of tests run, passed, and failed.
 
-#### 2.4. Compile and run your program
+### 2.4. Compile and run your program
 
 In order to compile your program and link with the required libraries, you can use the following instruction as a template. Please remember to modify the paths according to your system and location of the files.
 
