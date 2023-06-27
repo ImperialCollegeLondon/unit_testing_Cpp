@@ -50,7 +50,7 @@ For using GoogleTest in your code, you need to follow the following steps in gen
 
 The first step would be to add the required header files in your program. For Googletest, you would need to add the following line in your code.
 
-```C++
+```cpp
 #include "gtest/gtest.h"
 ```
 
@@ -58,7 +58,7 @@ The first step would be to add the required header files in your program. For Go
 
 The next step would be to to define your test. Googletest uses the following convention in naming various tests.
 
-```c++
+```cpp
 TEST(TestSuiteName, TestName)
 {
     // Test logic and assertions
@@ -76,7 +76,7 @@ The different parts in the above cell have the following meaning
 
 For this sub-section, we are assuming that you are writing your own main function (GoogleTest also allows you to run your code without your own main function by linking to a main function provided in `lgest_main`. Please see the next section for more details). You would need to include the following lines in your main function as shown below.
 
-```c++
+```cpp
 int main(int argc, char **argv)
 {
     // Initialise GoogleTest Framework
@@ -115,7 +115,7 @@ Googletest offers many types of assertions as described in [GoogleTest Assertion
 
 **1. Equality Assertions**: Equality assertions are used to compare values for equality. The most commonly used assertion is `ASSERT_EQ(expected, actual)`, which verifies that the `expected` and `actual` values are equal. For example:
 
-```c++
+```cpp
 ASSERT_EQ(expected_value, your_function(function_arguments));  
 // Verify that the expexted value is equal to the value returned by your function.
 
@@ -127,14 +127,14 @@ Other useful equality assertions include `ASSERT_NE`, `ASSERT_LT`, `ASSERT_LE`, 
 
 **2. Boolean Assertions**: Boolean assertions are used to verify boolean conditions. For example, `ASSERT_TRUE(condition)` checks that the `condition` is `true`, while `ASSERT_FALSE(condition)` ensures that the `condition` is `false`.
 
-```c++
+```cpp
 ASSERT_TRUE(isValid);  // Verify that the isValid flag is true
 ASSERT_FALSE(hasError);  // Verify that the hasError flag is false
 ```
 
 **3. Exception Assertions**: Exception assertions are used to validate that specific exceptions are thrown during the execution of code. In Google Test, you can use the `ASSERT_THROW(statement, exceptionType)` assertion. For example:
 
-```c++
+```cpp
 ASSERT_THROW(throwException(), std::runtime_error);  // Verify that throwException() throws a std::runtime_error
 ```
 
@@ -149,7 +149,7 @@ The majority of the macros listed above come as a pair with an `EXPECT_` variant
 
 All assertion macros support streaming a custom failure message into them with the `<<` operator, for example:
 
-```c++
+```cpp
 EXPECT_TRUE(my_condition) << "My condition is not true";
 ```
 
@@ -189,9 +189,9 @@ For writing your Unit Tests, it is advisable to follow the guidelines given belo
 
 With the above guidelines in mind, we can write some of the unit tests for our `Fibonacci.cpp` that we learnt in Chapter 1. The complete code is given below and can be found in [Chapter2](../code/Chapter2/Fibonacci_test.cpp).
 
->##### Testing Fibonacci Sequence
+>## Testing Fibonacci Sequence
 >
->```C++
+>```Cpp
 >#include <iostream>
 >#include "gtest/gtest.h"
 >
