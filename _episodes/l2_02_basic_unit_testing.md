@@ -27,7 +27,7 @@ There are a number of popular frameworks that can be used for testing in C++. A 
 In this course, we will focus mainly on GoogleTest.
 
 
-## A brief about GoogleTest
+## 1. A brief about GoogleTest
 
 Simply defining, GoogleTest is a testing framework developed by Google's testing technology team to develop and write C++ tests.  GoogleTest offers multiple advantages over other frameworks:-
 
@@ -40,5 +40,120 @@ Simply defining, GoogleTest is a testing framework developed by Google's testing
 
 
 
+## 2. Writing Unit test using GoogleTest
 
+For this chapter, we will consider the same example `fibonacci.cpp` that we used in the previous chapter. Also, for understanding how to use GoogleTest, we will simply be converting all the tests that we wrote manually in the same file using GoogleTest framework.
+
+For using GoogleTest in your code, you need to follow the following steps in general.
+
+#### 2.1. Adding the required header files
+
+The first step would be to add the required header files in your program. For Googletest, you would need to add the following line in your code.
+
+```C++
+#include "gtest/gtest.h"
+```
+
+#### 2.2. Create your tests
+
+The next step would be to to define your test. Googletest uses the following convention in naming various tests.
+
+```c++
+TEST(TestSuiteName, TestName)
+{
+    // Test logic and assertions
+}
+```
+
+The different parts in the above cell have the following meaning
+
+- `TEST`: This is the macro provided by the Google Test framework to define a test case.
+- `TestSuiteName`: It is the name of the test suite or test fixture. It groups related tests together. It should be a valid C++ identifier.
+- `TestName`: It is the name of the individual test case within the test suite. It should also be a valid C++ identifier.
+- `Test logic and assertions`: This is the body of the test case where you write the actual test code, including any necessary assertions to verify the expected behavior. The section `Test Assertions` describes more about various assertions available in GoogleTest.
+
+#### 2.3. Initialise GoogleTest framework in your main
+
+For this sub-section, we are assuming that you are writing your own main function (GoogleTest also allows you to run your code without your own main function by linking to a main function provided in `lgest_main`. Please see the next section for more details). You would need to include the following lines in your main function as shown below.
+
+```c++
+int main(int argc, char **argv)
+{
+    // Initialise GoogleTest Framework
+    testing::InitGoogleTest(&argc, argv);
+    
+    // Instruction to Run the test cases.
+    return RUN_ALL_TESTS();
+}
+```
+
+The `RUN_ALL_TESTS()` is typically called from `main` and when it is invoked, it scans the program for all the test cases and  test methods defined using the `test` macro.   It then executes each test case and captures the results of each individual test method within the test case. After running all the tests, it provides a summary of the test results, including the number of tests run, passed, and failed.
+
+#### 2.4. Compile and run your program
+
+In order to compile your program and link with the required libraries, you can use the following instruction as a template. Please remember to modify the paths according to your system and location of the files.
+
+```bash
+# For compiling and linking, please use the instruction below
+$ g++ your_code.cpp -I path_to_your_gtest.h -L path_to_your_lgtest.a -lgtest -lpthread -o your_executable_name
+ 
+# Run your code  
+$ ./your_executable_name
+```
+
+If you do not want to write your main function, you can link against the one provided in the `libgtest_main.a` library by using the following instruction.
+
+```bash
+$ g++ your_code.cpp -I path_to_your_gtest.h -L path_to_your_lgtest.a -lgtest_main -lgtest -lpthread -o your_executable_name
+```
+
+
+
+## 3. Test Assertions in GoogleTest
+
+Googletest offers many types of assertions as described in [GoogleTest Assertions](http://google.github.io/googletest/reference/assertions.html). A few of them are described below as they will be used in our upcoming sections/chapters.
+
+**1. Equality Assertions**: Equality assertions are used to compare values for equality. The most commonly used assertion is `ASSERT_EQ(expected, actual)`, which verifies that the `expected` and `actual` values are equal. For example:
+
+```c++
+ASSERT_EQ(expected_value, your_function(function_arguments));  
+// Verify that the expexted value is equal to the value returned by your function.
+
+// You can alo change the order if you prefer.
+ASSERT_EQ(your_function(function_arguments), expected_value);
+```
+
+Other useful equality assertions include `ASSERT_NE`, `ASSERT_LT`, `ASSERT_LE`, `ASSERT_GT`, and `ASSERT_GE` for performing inequality comparisons.
+
+**2. Boolean Assertions**: Boolean assertions are used to verify boolean conditions. For example, `ASSERT_TRUE(condition)` checks that the `condition` is `true`, while `ASSERT_FALSE(condition)` ensures that the `condition` is `false`.
+
+```c++
+ASSERT_TRUE(isValid);  // Verify that the isValid flag is true
+ASSERT_FALSE(hasError);  // Verify that the hasError flag is false
+```
+
+**3. Exception Assertions**: Exception assertions are used to validate that specific exceptions are thrown during the execution of code. In Google Test, you can use the `ASSERT_THROW(statement, exceptionType)` assertion. For example:
+
+```c++
+ASSERT_THROW(throwException(), std::runtime_error);  // Verify that throwException() throws a std::runtime_error
+```
+
+**4. String Assertions**: String assertions are used to compare string values. Google Test provides various string assertions, such as `ASSERT_STREQ`, `ASSERT_STRNE`, `ASSERT_STRCASEEQ`, and `ASSERT_STRCASENE`. These assertions allow you to compare strings for equality, inequality, or case-insensitive equality.
+
+```
+ASSERT_STREQ("Hello", getString());  // Verify that getString() returns the exact string "Hello"
+ASSERT_STRCASEEQ("hello", getLowerCaseString());  // Verify that getLowerCaseString() returns "hello" in a case-insensitive manner
+```
+
+The majority of the macros listed above come as a pair with an `EXPECT_` variant and an `ASSERT_` variant. Upon failure, `EXPECT_` macros generate nonfatal failures and allow the current function to continue running, while `ASSERT_` macros generate fatal failures and abort the current function.
+
+All assertion macros support streaming a custom failure message into them with the `<<` operator, for example:
+
+```c++
+EXPECT_TRUE(my_condition) << "My condition is not true";
+```
+
+
+
+## 4. Anatomy of a Unit Test
 
