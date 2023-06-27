@@ -208,7 +208,10 @@ the test inputs.
 > >
 > > ### Case 4 - Use a non-integer input e.g. 3.5
 > >
-> > **Correct output:*- No output - it will fail, possibly during compilation.
+> >Luckily, this is not possible in C++, being a strongly typed language, so one
+> > less thing to test. However, it can be an issue in other programming languages
+> > like Python, in which case some sort of [defensive programming](https://en.m.wikipedia.org/wiki/Defensive_programming)
+> > should be put in place to handle these cases.
 > {: .solution}
 {: .challenge}
 
