@@ -14,7 +14,7 @@ objectives:
 - "Appreciate the benefits of test automation"
 keypoints:
 - "Testing is the standard approach to software quality assurance"
-- "Testing helps to ensure that code performs its intended function: well-tested code is likely to be more reliable, correct and malleable"
+- "Testing helps to ensure that code performs its intended function: well-tested code is likely to be more reliable, correct and flexible"
 - "Good tests thoroughly exercise critical code"
 - "Code without any tests should arouse suspicion, but it is entirely possible to write a comprehensive but practically worthless test suite"
 - "Testing can contribute to performance, security and long-term stability as the size of the codebase and its network of contributors grows"
@@ -28,7 +28,7 @@ keypoints:
 
 ## Why Test?
 
-There are a number of compelling reasons to properly test a research code:
+There are a number of compelling reasons to properly test research code:
 
 - Show that physical laws or mathematical relationships are correctly encoded
 - Check that code works when running on a new system
@@ -125,12 +125,12 @@ not be testable!
 
 Integration goes a step forward and tests if multiple components working as a group
 work as expected. They are typically designed to expose faults in the
-interaction of the different units, eg. inconsistent number or type of inputs/outputs,
+interaction of the different units, e.g. inconsistent number or type of inputs/outputs,
 wrong structure of these, inconsistent physical units, etc.
 
 ### Testing Done Right
 
-It's important to be clear about what software tests are able to provide and
+It's important to be clear about what software tests can provide and
 what they can't. Unfortunately it isn't possible to write tests that completely
 guarantee that your code is bug free or provides a one hundred percent faithful
 implementation of a particular model. In fact it's perfectly possible to write
@@ -201,7 +201,7 @@ the test inputs.
 > > that is outside of its intended usage. At the moment the function will just
 > > return the input value, but whether this is the correct behaviour depends on
 > > the wider context in which it will be used. It might be better for this type
-> > of input value to cause an error to be raised however. The value of this
+> > of input value to throw an exception, however. The value of this
 > > test case is that it encourages you to think about this scenario and what
 > > the behaviour should be. It also demonstrates to others that you've
 > > considered this scenario and the function behaviour is as intended.
