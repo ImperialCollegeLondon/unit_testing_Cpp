@@ -84,37 +84,49 @@ to formalise your tests and take advantage of the above.
 > taken.
 {: .callout}
 
-### Types of Testing
+## Types of Testing
 
-This isn't a topic we will discuss in much detail but is worth mentioning as the
-jargon here can be another factor that is intimidating. In fact there are entire
-[websites](http://softwaretestingfundamentals.com) dedicated to explaining the
-different types of testing. Ultimately, however there are only a few types of
-testing that we need to worry about.
+Once testing is formalised, the inevitable consequence is that there would be
+different types of testing for different purposes. In this course, we will
+put the focus on unit tests and integration tests, but you might hear about:
 
-#### Unit Testing
+- [Unit testing](https://softwaretestingfundamentals.com/unit-testing/)
+- [Integration testing](https://softwaretestingfundamentals.com/integration-testing/)
+- [System testing](https://softwaretestingfundamentals.com/system-testing/)
+- [Acceptance testing](https://softwaretestingfundamentals.com/acceptance-testing/)
+- [Functional testing](https://softwaretestingfundamentals.com/functional-testing/)
+- [Compliance testing](https://softwaretestingfundamentals.com/compliance-testing/)
+- [Performance testing](https://softwaretestingfundamentals.com/performance-testing/)
+- [Regression testing](https://softwaretestingfundamentals.com/regression-testing/)
+- [Usability testing](https://softwaretestingfundamentals.com/usability-testing/)
+- [Penetration or security testing](https://softwaretestingfundamentals.com/security-testing/)
+- (and others)
 
-The main type of testing kind we will be dealing with in this course. Unit
-testing refers to taking a component of a program and testing it in
-isolation. Generally this means testing an individual class or function. This is
-part of the reason that testing encourages more modular and sustainable code
-development. You're encouraged to write your code into functionally independent
-components that can be easily unit tested.
+The jargon here can be intimidating, but you do not need to to worry about most
+of these for this course.
 
-#### Functional Testing
+You can get more information about most of these types of testing as well as
+in general about several techniques used when writing tests in
+[Software Testing Fundamentals](http://softwaretestingfundamentals.com).
 
-Unlike unit testing that focuses on independent parts of the system, functional
-testing checks the compliance of the system overall against a defined set of
-criteria. In other words does the software as a whole do what it's supposed to
-do?
+### Unit Testing
 
-#### Regression Testing
+This is the main type of testing kind we will be dealing with in this course. Unit
+testing refers to **taking a component of a program and testing it in
+isolation**. Generally this means testing an individual class or function.
 
-This refers to the practice of running previously written tests whenever a new
-change is introduced to the code. This is good to do even when making seemingly
-insignificant changes. Carrying out regression testing allows you to remain
-confident that your code is functioning as expected even as it grows in
-complexity and capability.
+For this kind of testing to make sense, or even just to work, your code needs to
+be modular, written in small, independent components that can be easily unit tested.
+Therefore, a side effect of writing unit tests is that if forces you, in a sense,
+to improve the quality and sustainability of your code because, otherwise, it will
+not be testable!
+
+### Integration Testing
+
+Integration goes a step forward and tests if multiple components working as a group
+work as expected. They are typically designed to expose faults in the
+interaction of the different units, eg. inconsistent number or type of inputs/outputs,
+wrong structure of these, inconsistent physical units, etc.
 
 ### Testing Done Right
 
@@ -139,15 +151,18 @@ the test inputs.
 
 > ## Testing and Coverage
 >
-> Consider the following Python function:
+> Consider the following C++ function:
 >
-> ```python
-> def recursive_fibonacci(n):
->     """Return the n'th number of the fibonacci sequence"""
->     if n <= 1:
->         return n
->     else:
->         return recursive_fibonacci(n - 1) + recursive_fibonacci(n - 2)
+> ```cpp
+> /*Returns the n'th term of the Fibonacci sequence.*/
+> int recursive_fibonacci(int n)
+> {
+>     if (n <= 1) {
+>         return n;
+>     } else {
+>         return recursive_fibonacci(n - 1) + recursive_fibonacci(n - 2);
+>     }
+> }
 > ```
 >
 > Try to think up some test cases of increasing complexity, there are four
@@ -193,11 +208,7 @@ the test inputs.
 > >
 > > ### Case 4 - Use a non-integer input e.g. 3.5
 > >
-> > **Correct output:*- Depends...
-> > **Coverage:*- Whole function
-> > **Reason:*- This is similar to case 3, but may not arise in more strongly
-> > typed languages. What should the function do here? Work as is? Raise an
-> > error? Round to the nearest integer?
+> > **Correct output:*- No output - it will fail, possibly during compilation.
 > {: .solution}
 {: .challenge}
 
