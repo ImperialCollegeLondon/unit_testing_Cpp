@@ -50,7 +50,8 @@ For using GoogleTest in your code, you need to follow the following steps in gen
 
 The first step would be to add the required header files in your program. For Googletest, you would need to add the following line in your code.
 
-> ##Header file required
+> ## Header file required
+>
 >```cpp
 >#include "gtest/gtest.h"
 >```
