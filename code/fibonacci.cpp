@@ -24,9 +24,9 @@ int main()
     n = 5;
     std::cout << "Fib(" << n << ") = " << recursive_fibonacci(n) << "\n";
 
-
     // Case 3: When n is negative.
     n = -3;
     std::cout << "Fib(" << n << ") = " << recursive_fibonacci(n) << "\n";
+
     return 0;
 }
