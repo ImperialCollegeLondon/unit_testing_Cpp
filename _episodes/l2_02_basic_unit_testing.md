@@ -59,8 +59,6 @@ For this episode, we will consider the same example `fibonacci.cpp` that we used
 To demonstrate how to use GoogleTest, we will simply be converting these tests that we wrote manually in the same file using GoogleTest framework. Section 5 below will describe the anatomy of a test, but first lets see how they look like in the practical case.
 For using GoogleTest in your code, you need to follow the following steps in general.
 
-
-
 ### 3.1. Adding the required header files
 
 The first step would be to add the required header files in your program. For Googletest, you would need to add the following line in your code.
@@ -122,14 +120,11 @@ If you do not want to write your main function, you can link against the one pro
 $ g++ your_code.cpp -I path_to_your_gtest.h -L path_to_your_lgtest.a -lgtest_main -lgtest -lpthread -o your_executable_name
 ```
 
-
-
 ## 4. Test Assertions in GoogleTest
 
 Googletest offers many types of assertions as described in [GoogleTest Assertions](http://google.github.io/googletest/reference/assertions.html). A few of them are described below as they will be used in our upcoming sections/chapters.
 
-<br> </br>
-**1. Equality Assertions**: Equality assertions are used to compare values for equality. The most commonly used assertion is `ASSERT_EQ(expected, actual)`, which verifies that the `expected` and `actual` values are equal. For example:
+1. ** Equality Assertions**: Equality assertions are used to compare values for equality. The most commonly used assertion is `ASSERT_EQ(expected, actual)`, which verifies that the `expected` and `actual` values are equal. For example:
 
 ```cpp
 ASSERT_EQ(expected_value, your_function(function_arguments));  
@@ -138,28 +133,22 @@ ASSERT_EQ(expected_value, your_function(function_arguments));
 // You can alo change the order if you prefer.
 ASSERT_EQ(your_function(function_arguments), expected_value);
 ```
-
 Other useful equality assertions include `ASSERT_NE`, `ASSERT_LT`, `ASSERT_LE`, `ASSERT_GT`, and `ASSERT_GE` for performing inequality comparisons.
 
-<br> </br>
-**2. Boolean Assertions**: Boolean assertions are used to verify boolean conditions. For example, `ASSERT_TRUE(condition)` checks that the `condition` is `true`, while `ASSERT_FALSE(condition)` ensures that the `condition` is `false`.
+2. ** Boolean Assertions**: Boolean assertions are used to verify boolean conditions. For example, `ASSERT_TRUE(condition)` checks that the `condition` is `true`, while `ASSERT_FALSE(condition)` ensures that the `condition` is `false`.
 
 ```cpp
 ASSERT_TRUE(isValid);  // Verify that the isValid flag is true
 ASSERT_FALSE(hasError);  // Verify that the hasError flag is false
 ```
 
-
-<br> </br>
-**3. Exception Assertions**: Exception assertions are used to validate that specific exceptions are thrown during the execution of code. In Google Test, you can use the `ASSERT_THROW(statement, exceptionType)` assertion. For example:
+3. **Exception Assertions**: Exception assertions are used to validate that specific exceptions are thrown during the execution of code. In Google Test, you can use the `ASSERT_THROW(statement, exceptionType)` assertion. For example:
 
 ```cpp
 ASSERT_THROW(throwException(), std::runtime_error);  // Verify that throwException() throws a std::runtime_error
 ```
 
-
-<br> </br>
-**4. String Assertions**: String assertions are used to compare string values. Google Test provides various string assertions, such as `ASSERT_STREQ`, `ASSERT_STRNE`, `ASSERT_STRCASEEQ`, and `ASSERT_STRCASENE`. These assertions allow you to compare strings for equality, inequality, or case-insensitive equality.
+4. **String Assertions**: String assertions are used to compare string values. Google Test provides various string assertions, such as `ASSERT_STREQ`, `ASSERT_STRNE`, `ASSERT_STRCASEEQ`, and `ASSERT_STRCASENE`. These assertions allow you to compare strings for equality, inequality, or case-insensitive equality.
 
 ```
 ASSERT_STREQ("Hello", getString());  // Verify that getString() returns the exact string "Hello"
@@ -174,8 +163,6 @@ All assertion macros support streaming a custom failure message into them with t
 EXPECT_TRUE(my_condition) << "My condition is not true";
 ```
 
-
-<br> </br>
 ## 5. Anatomy of a Unit Test
 
 A Unit test in general follows a three step structure as mentioned below:-
@@ -186,8 +173,6 @@ A Unit test in general follows a three step structure as mentioned below:-
 
 This 3 step structure if often referred as `Arrange-Act-Assert (AAA)` in some textbooks and online resources. 
 
-
-<br> </br>
 ## 6. Writing Effective Unit Tests
 
 For writing your Unit Tests, it is advisable to follow the guidelines given below.
@@ -195,13 +180,12 @@ For writing your Unit Tests, it is advisable to follow the guidelines given belo
 1. **Clear and Descriptive Names**: Choose meaningful names for your test methods that accurately describe the scenario being tested. A good test method name should clearly convey the input, expected behavior, or outcome being verified. Avoid vague or generic names that don't provide sufficient information about the purpose of the test.
 
    a. `calculateTotal_WithValidInputs_ShouldReturnCorrectSum`
-
    b. `validateEmail_WithInvalidFormat_ShouldReturnFalse`
 
-   
-
 2. **Consistent Formatting**: Consistency in naming conventions helps maintain a uniform and predictable test suite. Choose a naming style and stick to it throughout your test methods. Some common conventions include using **CamelCase** or **underscore-separated** words. Additionally, consider using a prefix like `test_` or a suffix like `should` to distinguish test methods from regular code.
+
 3. **Single Responsibility**: Each test method should focus on testing a single aspect or behaviour of the unit under test. Avoid testing multiple scenarios within a single test method, as it can make the test less readable and harder to diagnose when failures occur. Instead, break down complex scenarios into multiple smaller tests, each targeting a specific case or condition.
+
 4. **Test Data Organization**: Separate the test data from the test methods. Consider using dedicated variables or data structures to store test data. This allows for better readability and maintainability, as changes to the test data can be easily managed without modifying the test methods themselves.
 
 ## 7. Unit Test for the Fibonacci Sequence
