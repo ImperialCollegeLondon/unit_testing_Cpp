@@ -126,6 +126,8 @@ $ g++ your_code.cpp -I path_to_your_gtest.h -L path_to_your_lgtest.a -lgtest_mai
 ```
 ## 4. Test Assertions in GoogleTest
 
+[Assertions in C++](https://cplusplus.com/reference/cassert/assert/) are statements used to validate assumptions or conditions during program execution. They are primarily used for debugging and testing purposes to check if certain conditions are true. Assertions help detect programming errors and provide a mechanism to halt the program's execution or display an error message when a condition is not satisfied.
+
 GoogleTest offers many types of assertions as described in [GoogleTest Assertions](http://google.github.io/googletest/reference/assertions.html). A few of them are described below as they will be used in our upcoming sections/chapters.
 
 1. ** Equality Assertions**: Equality assertions are used to compare values for equality. The most commonly used assertion is `ASSERT_EQ(expected, actual)`, which verifies that the `expected` and `actual` values are equal. For example:
