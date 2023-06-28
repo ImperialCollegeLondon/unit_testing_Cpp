@@ -119,7 +119,6 @@ If you do not want to write your main function, you can link against the one pro
 ```bash
 $ g++ your_code.cpp -I path_to_your_gtest.h -L path_to_your_lgtest.a -lgtest_main -lgtest -lpthread -o your_executable_name
 ```
-
 ## 4. Test Assertions in GoogleTest
 
 Googletest offers many types of assertions as described in [GoogleTest Assertions](http://google.github.io/googletest/reference/assertions.html). A few of them are described below as they will be used in our upcoming sections/chapters.
@@ -152,7 +151,7 @@ ASSERT_THROW(throwException(), std::runtime_error);  // Verify that throwExcepti
 
 ```
 ASSERT_STREQ("Hello", getString());  // Verify that getString() returns the exact string "Hello"
-ASSERT_STRCASEEQ("hello", getLowerCaseString());  // Verify that getLowerCaseString() returns "hello" in a case-insensitive manner
+ASSERT_STRCASEEQ("hello", getString());  // Verify that getString() returns "hello" in a case-insensitive manner
 ```
 
 The majority of the macros listed above come as a pair with an `EXPECT_` variant and an `ASSERT_` variant. Upon failure, `EXPECT_` macros generate nonfatal failures and allow the current function to continue running, while `ASSERT_` macros generate fatal failures and abort the current function.
@@ -255,7 +254,6 @@ Add the following lines in your code.
 TEST(FibonacciTest, HandlesNegativeInput) {
     EXPECT_EQ(recursive_fibonacci(-3), -3);
 }
-
 ```
 
 ### Summary
