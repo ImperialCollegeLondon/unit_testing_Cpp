@@ -31,9 +31,6 @@ There are a number of popular frameworks that can be used for testing in C++. A 
 
 In this course, we will focus mainly on GoogleTest.
 
-
-
-
 ## 2. A brief about GoogleTest
 
 Simply defining, GoogleTest is a testing framework developed by Google's testing technology team to develop and write C++ tests.  GoogleTest offers multiple advantages over other frameworks:-
