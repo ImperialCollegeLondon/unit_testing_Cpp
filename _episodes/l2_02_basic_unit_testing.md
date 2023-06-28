@@ -63,8 +63,6 @@ The first step would be to add the required header files in your program. For Go
 #include "gtest/gtest.h"
 ```
 
-
-
 ### 3.2. Create your tests
 
 The next step would be to to define your test. Googletest uses the following convention in naming various tests.
