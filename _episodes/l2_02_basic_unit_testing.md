@@ -136,8 +136,6 @@ ASSERT_TRUE(isValid);  // Verify that the isValid flag is true
 ASSERT_FALSE(hasError);  // Verify that the hasError flag is false
 ```
 
-
-<br> </br>
 **3. Exception Assertions**: Exception assertions are used to validate that specific exceptions are thrown during the execution of code. In Google Test, you can use the `ASSERT_THROW(statement, exceptionType)` assertion. For example:
 
 ```cpp
