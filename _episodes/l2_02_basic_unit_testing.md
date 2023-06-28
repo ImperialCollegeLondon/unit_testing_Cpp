@@ -115,9 +115,6 @@ If you do not want to write your main function, you can link against the one pro
 ```bash
 $ g++ your_code.cpp -I path_to_your_gtest.h -L path_to_your_lgtest.a -lgtest_main -lgtest -lpthread -o your_executable_name
 ```
-
-
-
 ## 4. Test Assertions in GoogleTest
 
 Googletest offers many types of assertions as described in [GoogleTest Assertions](http://google.github.io/googletest/reference/assertions.html). A few of them are described below as they will be used in our upcoming sections/chapters.
