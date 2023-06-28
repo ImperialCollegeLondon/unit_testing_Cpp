@@ -81,8 +81,6 @@ The different parts in the above cell have the following meaning
 - `TestName`: It is the name of the individual test case within the test suite. It should also be a valid C++ identifier.
 - `Test logic and assertions`: This is the body of the test case where you write the actual test code, including any necessary assertions to verify the expected behaviour. The section `Test Assertions` describes more about various assertions available in GoogleTest.
 
-
-
 ### 3.3. Initialise GoogleTest framework in your main
 
 For this sub-section, we are assuming that you are writing your own main function (GoogleTest also allows you to run your code without your own main function by linking to a main function provided in `lgest_main`. Please see the next section for more details). You would need to include the following lines in your main function as shown below.
