@@ -208,29 +208,29 @@ With the above guidelines in mind, we can write some of the unit tests for our `
 /*Returns the n'th term of the Fibonacci sequence.*/
 int recursive_fibonacci(int n)
 {
-if (n <= 1) {
-   return n;
-} else {
-   return recursive_fibonacci(n - 1) + recursive_fibonacci(n - 2);
-}
+    if (n <= 1) {
+        return n;
+    } else {
+        return recursive_fibonacci(n - 1) + recursive_fibonacci(n - 2);
+    }
 }
 
 TEST(FibonacciTest, HandlesZeroInput) {
-EXPECT_EQ(recursive_fibonacci(0), 0);
+    EXPECT_EQ(recursive_fibonacci(0), 0);
 }
 
 TEST(FibonacciTest, HandlesValueOneAsInput) {
-EXPECT_EQ(recursive_fibonacci(1), 1);
+    EXPECT_EQ(recursive_fibonacci(1), 1);
 }
 
 TEST(FibonacciTest, HandlesPositiveInput) {
-EXPECT_EQ(recursive_fibonacci(5), 5);
+    EXPECT_EQ(recursive_fibonacci(5), 5);
 }
 
 int main(int argc, char **argv)
 {
-testing::InitGoogleTest(&argc, argv);
-return RUN_ALL_TESTS();
+    testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
 }
 ```
 
