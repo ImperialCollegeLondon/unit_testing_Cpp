@@ -259,9 +259,6 @@ On compiling and running above program, we get the following output.
 [==========] 3 tests from 1 test suite ran. (0 ms total)
 [  PASSED  ] 3 tests.
 ```
-
-
-
 ### 7.1 Exercise
 
 Modify the above program to test for the negative values.
