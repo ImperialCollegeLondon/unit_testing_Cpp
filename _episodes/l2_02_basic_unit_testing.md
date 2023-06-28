@@ -53,8 +53,6 @@ For this episode, we will consider the same example `fibonacci.cpp` that we used
 To demonstrate how to use GoogleTest, we will simply be converting these tests that we wrote manually in the same file using GoogleTest framework. Section 5 below will describe the anatomy of a test, but first lets see how they look like in the practical case.
 For using GoogleTest in your code, you need to follow the following steps in general.
 
-
-
 ### 3.1. Adding the required header files
 
 The first step would be to add the required header files in your program. For Googletest, you would need to add the following line in your code.
