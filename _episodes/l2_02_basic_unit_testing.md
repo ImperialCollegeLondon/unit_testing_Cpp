@@ -1,5 +1,5 @@
 ---
-title: "Introduction to Unit Testing using Google Test"
+title: "Introduction to Unit Testing using GoogleTest"
 teaching: TBC
 exercises: TBC
 questions:
@@ -8,12 +8,12 @@ questions:
 - "How to write unit tests with GoogleTest?"
 objectives:
 - "Understand the basic components of a unit test"
-- "Understand how to write a unit test using google test library?"
+- "Understand how to write a unit test using GoogleTest library?"
 - "Understand how to compile and run the test?"
-- "Understand some of the macros available in google test"
+- "Understand some of the macros available in GoogleTest"
 keypoints:
 - "We learnt about some of the popular testing frameworks for C++."
-- "We learnt about Googletest and how to use it to write our tests."
+- "We learnt about GoogleTest and how to use it to write our tests."
 - "We learnt about anatomy of a unit test and how to write effective unit tests."
 - "Finally, we saw an example to demonstrate the above concepts."
 ---
@@ -41,12 +41,12 @@ In this course, we will focus mainly on GoogleTest.
 
 Simply defining, GoogleTest is a testing framework developed by Google's testing technology team to develop and write C++ tests.  GoogleTest offers multiple advantages over other frameworks:-
 
-1. **Comprehensive Features**: Google Test provides a rich set of features, including a wide range of assertion macros, test fixtures, parameterized tests, test discovery, test filtering, and powerful mocking capabilities. It offers a complete testing framework that can handle various testing scenarios.
-2. **Integration with Google Test ecosystem**: Google Test integrates well with other tools and libraries in the Google Test ecosystem. For example, it can be seamlessly used with Google Mock for creating mock objects and behaviours. This integration enhances the testing capabilities and flexibility.
-3. **Large and Active Community**: Google Test has a large and active community of developers. This means that there is ample support available in terms of documentation, tutorials, forums, and online resources. 
+1. **Comprehensive Features**: GoogleTest provides a rich set of features, including a wide range of assertion macros, test fixtures, parameterized tests, test discovery, test filtering, and powerful mocking capabilities. It offers a complete testing framework that can handle various testing scenarios.
+2. **Integration with GoogleTest ecosystem**: GoogleTest integrates well with other tools and libraries in the GoogleTest ecosystem. For example, it can be seamlessly used with GoogleMock for creating mock objects and behaviours. This integration enhances the testing capabilities and flexibility.
+3. **Large and Active Community**: GoogleTest has a large and active community of developers. This means that there is ample support available in terms of documentation, tutorials, forums, and online resources. 
 4. **Mature and Stable**: It is a mature and stable framework that has been used extensively in industry projects and open-source software. 
-5. **Wide Platform Support**: Google Test supports multiple platforms, including Windows, Linux, macOS, and various compilers. It is compatible with popular development environments and build systems, making it suitable for a wide range of C++ projects.
-6. **Flexible and Extensible**: Google Test provides flexibility in test organization and customization. It allows you to structure your tests using test cases and test suites. You can also define custom test fixtures and customise test execution and reporting. Additionally, Google Test can be extended with custom assertion macros and utilities to suit your specific testing needs.
+5. **Wide Platform Support**: GoogleTest supports multiple platforms, including Windows, Linux, macOS, and various compilers. It is compatible with popular development environments and build systems, making it suitable for a wide range of C++ projects.
+6. **Flexible and Extensible**: GoogleTest provides flexibility in test organization and customization. It allows you to structure your tests using test cases and test suites. You can also define custom test fixtures and customise test execution and reporting. Additionally, GoogleTest can be extended with custom assertion macros and utilities to suit your specific testing needs.
 
 ## 3. Writing Unit test using GoogleTest
 
@@ -61,7 +61,7 @@ For using GoogleTest in your code, you need to follow the following steps in gen
 
 ### 3.1. Adding the required header files
 
-The first step would be to add the required header files in your program. For Googletest, you would need to add the following line in your code.
+The first step would be to add the required header files in your program. For GoogleTest, you would need to add the following line in your code.
 
 ```cpp
 #include "gtest/gtest.h"
@@ -69,7 +69,7 @@ The first step would be to add the required header files in your program. For Go
 
 ### 3.2. Create your tests
 
-The next step would be to to define your test. Googletest uses the following convention in naming various tests.
+The next step would be to to define your test. GoogleTest uses the following convention in naming various tests.
 
 ```cpp
 TEST(TestSuiteName, TestName)
@@ -80,7 +80,7 @@ TEST(TestSuiteName, TestName)
 
 The different parts in the above cell have the following meaning
 
-- `TEST`: This is the macro provided by the Google Test framework to define a test case.
+- `TEST`: This is the macro provided by the GoogleTest framework to define a test case.
 - `TestSuiteName`: It is the name of the test suite or test fixture. It groups related tests together. It should be a valid C++ identifier.
 - `TestName`: It is the name of the individual test case within the test suite. It should also be a valid C++ identifier.
 - `Test logic and assertions`: This is the body of the test case where you write the actual test code, including any necessary assertions to verify the expected behaviour. The section `Test Assertions` describes more about various assertions available in GoogleTest.
@@ -121,7 +121,7 @@ $ g++ your_code.cpp -I path_to_your_gtest.h -L path_to_your_lgtest.a -lgtest_mai
 ```
 ## 4. Test Assertions in GoogleTest
 
-Googletest offers many types of assertions as described in [GoogleTest Assertions](http://google.github.io/googletest/reference/assertions.html). A few of them are described below as they will be used in our upcoming sections/chapters.
+GoogleTest offers many types of assertions as described in [GoogleTest Assertions](http://google.github.io/googletest/reference/assertions.html). A few of them are described below as they will be used in our upcoming sections/chapters.
 
 1. ** Equality Assertions**: Equality assertions are used to compare values for equality. The most commonly used assertion is `ASSERT_EQ(expected, actual)`, which verifies that the `expected` and `actual` values are equal. For example:
 
@@ -141,13 +141,13 @@ ASSERT_TRUE(isValid);  // Verify that the isValid flag is true
 ASSERT_FALSE(hasError);  // Verify that the hasError flag is false
 ```
 
-3. **Exception Assertions**: Exception assertions are used to validate that specific exceptions are thrown during the execution of code. In Google Test, you can use the `ASSERT_THROW(statement, exceptionType)` assertion. For example:
+3. **Exception Assertions**: Exception assertions are used to validate that specific exceptions are thrown during the execution of code. In GoogleTest, you can use the `ASSERT_THROW(statement, exceptionType)` assertion. For example:
 
 ```cpp
 ASSERT_THROW(throwException(), std::runtime_error);  // Verify that throwException() throws a std::runtime_error
 ```
 
-4. **String Assertions**: String assertions are used to compare string values. Google Test provides various string assertions, such as `ASSERT_STREQ`, `ASSERT_STRNE`, `ASSERT_STRCASEEQ`, and `ASSERT_STRCASENE`. These assertions allow you to compare strings for equality, inequality, or case-insensitive equality.
+4. **String Assertions**: String assertions are used to compare string values. GoogleTest provides various string assertions, such as `ASSERT_STREQ`, `ASSERT_STRNE`, `ASSERT_STRCASEEQ`, and `ASSERT_STRCASENE`. These assertions allow you to compare strings for equality, inequality, or case-insensitive equality.
 
 ```
 ASSERT_STREQ("Hello", getString());  // Verify that getString() returns the exact string "Hello"
