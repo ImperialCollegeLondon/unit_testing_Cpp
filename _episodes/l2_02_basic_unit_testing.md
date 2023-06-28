@@ -204,8 +204,6 @@ For writing your Unit Tests, it is advisable to follow the guidelines given belo
 3. **Single Responsibility**: Each test method should focus on testing a single aspect or behaviour of the unit under test. Avoid testing multiple scenarios within a single test method, as it can make the test less readable and harder to diagnose when failures occur. Instead, break down complex scenarios into multiple smaller tests, each targeting a specific case or condition.
 4. **Test Data Organization**: Separate the test data from the test methods. Consider using dedicated variables or data structures to store test data. This allows for better readability and maintainability, as changes to the test data can be easily managed without modifying the test methods themselves.
 
-
-
 ## 7. Unit Test for the Fibonacci Sequence
 
 With the above guidelines in mind, we can write some of the unit tests for our `Fibonacci.cpp` that we learnt in Chapter 1. The complete code is given below and can be found in [Chapter2](../code/Chapter2/Fibonacci_test.cpp).
