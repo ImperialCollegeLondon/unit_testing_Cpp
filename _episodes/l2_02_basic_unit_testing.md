@@ -148,7 +148,7 @@ ASSERT_THROW(throwException(), std::runtime_error);  // Verify that throwExcepti
 
 ```
 ASSERT_STREQ("Hello", getString());  // Verify that getString() returns the exact string "Hello"
-ASSERT_STRCASEEQ("hello", getLowerCaseString());  // Verify that getLowerCaseString() returns "hello" in a case-insensitive manner
+ASSERT_STRCASEEQ("hello", getString());  // Verify that getString() returns "hello" in a case-insensitive manner
 ```
 
 The majority of the macros listed above come as a pair with an `EXPECT_` variant and an `ASSERT_` variant. Upon failure, `EXPECT_` macros generate nonfatal failures and allow the current function to continue running, while `ASSERT_` macros generate fatal failures and abort the current function.
