@@ -96,9 +96,7 @@ int main(int argc, char **argv)
 }
 ```
 
-The `RUN_ALL_TESTS()` is typically called from `main` and when it is invoked, it scans the program for all the test cases and  test methods defined using the `test` macro.   It then executes each test case and captures the results of each individual test method within the test case. After running all the tests, it provides a summary of the test results, including the number of tests run, passed, and failed.
-
-
+The `RUN_ALL_TESTS()` is typically called from `main` and when it is invoked, it scans the program for all the test cases and  test methods defined using the `test` macro. It then executes each test case and captures the results of each individual test method within the test case. After running all the tests, it provides a summary of the test results, including the number of tests run, passed, and failed.
 
 ### 3.4. Compile and run your program
 
