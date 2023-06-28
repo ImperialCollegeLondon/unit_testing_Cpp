@@ -254,15 +254,28 @@ On compiling and running above program, we get the following output.
 ```
 ### 7.1 Exercise
 
-Modify the above program to test for the negative values.
+Modify the above program to throw an exception for the negative values and write a test for the same.
 
 **Solution**
 
-Add the following lines in your code.
+Add the following lines in your code. Full solution given in [Solution](../code/Chapter2/Exercise_solution).
 
 ```cpp
-TEST(FibonacciTest, HandlesNegativeInput) {
-    EXPECT_EQ(recursive_fibonacci(-3), -3);
+// Change the function as shown below.
+int recursive_fibonacci(int n)
+{
+    if(n < 0)
+        throw std::invalid_argument("Input must be a non-negative number");
+    else if (n <= 1) {
+        return n;
+    } else {
+        return recursive_fibonacci(n - 1) + recursive_fibonacci(n - 2);
+    }
+}
+
+// Add the required test.
+TEST(FibonacciTest, ThrowsExceptionNegativeInput) {
+    EXPECT_THROW(recursive_fibonacci(-3), std::invalid_argument);
 }
 ```
 
