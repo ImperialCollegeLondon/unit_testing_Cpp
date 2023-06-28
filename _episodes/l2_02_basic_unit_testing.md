@@ -202,9 +202,6 @@ For writing your Unit Tests, it is advisable to follow the guidelines given belo
 
 2. **Consistent Formatting**: Consistency in naming conventions helps maintain a uniform and predictable test suite. Choose a naming style and stick to it throughout your test methods. Some common conventions include using **CamelCase** or **underscore-separated** words. Additionally, consider using a prefix like `test_` or a suffix like `should` to distinguish test methods from regular code.
 3. **Single Responsibility**: Each test method should focus on testing a single aspect or behaviour of the unit under test. Avoid testing multiple scenarios within a single test method, as it can make the test less readable and harder to diagnose when failures occur. Instead, break down complex scenarios into multiple smaller tests, each targeting a specific case or condition.
-
-   
-
 4. **Test Data Organization**: Separate the test data from the test methods. Consider using dedicated variables or data structures to store test data. This allows for better readability and maintainability, as changes to the test data can be easily managed without modifying the test methods themselves.
 
 
