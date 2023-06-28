@@ -167,8 +167,6 @@ A Unit test in general follows a three step structure as mentioned below:-
 
 This 3 step structure if often referred as `Arrange-Act-Assert (AAA)` in some textbooks and online resources. 
 
-
-<br> </br>
 ## 6. Writing Effective Unit Tests
 
 For writing your Unit Tests, it is advisable to follow the guidelines given below.
