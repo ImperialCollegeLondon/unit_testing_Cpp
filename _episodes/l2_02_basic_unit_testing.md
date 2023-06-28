@@ -174,7 +174,6 @@ For writing your Unit Tests, it is advisable to follow the guidelines given belo
 1. **Clear and Descriptive Names**: Choose meaningful names for your test methods that accurately describe the scenario being tested. A good test method name should clearly convey the input, expected behavior, or outcome being verified. Avoid vague or generic names that don't provide sufficient information about the purpose of the test.
 
    a. `calculateTotal_WithValidInputs_ShouldReturnCorrectSum`
-
    b. `validateEmail_WithInvalidFormat_ShouldReturnFalse`
 2. **Consistent Formatting**: Consistency in naming conventions helps maintain a uniform and predictable test suite. Choose a naming style and stick to it throughout your test methods. Some common conventions include using **CamelCase** or **underscore-separated** words. Additionally, consider using a prefix like `test_` or a suffix like `should` to distinguish test methods from regular code.
 3. **Single Responsibility**: Each test method should focus on testing a single aspect or behaviour of the unit under test. Avoid testing multiple scenarios within a single test method, as it can make the test less readable and harder to diagnose when failures occur. Instead, break down complex scenarios into multiple smaller tests, each targeting a specific case or condition.
