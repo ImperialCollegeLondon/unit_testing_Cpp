@@ -3,9 +3,9 @@ title: "Introduction to Unit Testing using Google Test"
 teaching: TBC
 exercises: TBC
 questions:
-- "What framework/libraries can be used for Unit Testing in C++?"
-- "What is Google test library?"
-- "How to write Unit Test using Google test?"
+- "What framework/libraries can be used for unit testing in C++?"
+- "What is GoogleTest?"
+- "How to write unit tests with GoogleTest?"
 objectives:
 - "Understand the basic components of a unit test"
 - "Understand how to write a unit test using google test library?"
