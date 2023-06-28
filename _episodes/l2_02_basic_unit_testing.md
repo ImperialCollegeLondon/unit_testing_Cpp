@@ -36,8 +36,9 @@ Testing frameworks help in writing and executing tests for code validation and q
 - [Catch2](https://github.com/catchorg/Catch2)
 - [UT++](https://boost-ext.github.io/ut/)
 - [doctest](https://github.com/doctest/doctest)
+- [CTest](https://cmake.org/cmake/help/latest/manual/ctest.1.html)
 
-In this course, we will focus mainly on GoogleTest.
+In this course, we will use GoogleTest, as it is popular and easy to use, though the concepts are the same as for other testing frameworks..
 
 ## 2. A brief about GoogleTest
 
