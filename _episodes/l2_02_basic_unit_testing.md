@@ -8,13 +8,15 @@ questions:
 - "How to write unit tests with GoogleTest?"
 objectives:
 - "Understand the basic components of a unit test"
-- "Understand how to write a unit test using GoogleTest library?"
-- "Understand how to compile and run the test?"
+- "Understand how to write a unit test using GoogleTest"
+- "Understand how to compile and run the tests"
 - "Understand some of the macros available in GoogleTest"
 keypoints:
 - "We learnt about some of the popular testing frameworks for C++."
-- "We learnt about GoogleTest and how to use it to write our tests."
-- "We learnt about anatomy of a unit test and how to write effective unit tests."
+- "We learnt the baiscs of GoogleTest."
+- "We learnt how to use GoogleTest to write our tests."
+- "We learnt about anatomy of a unit tests." 
+- "We learnt how to write effective unit tests."
 - "Finally, we saw an example to demonstrate the above concepts."
 ---
 
