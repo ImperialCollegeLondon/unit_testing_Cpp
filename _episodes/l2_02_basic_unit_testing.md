@@ -44,8 +44,13 @@ Simply defining, GoogleTest is a testing framework developed by Google's testing
 
 ## 3. Writing Unit test using GoogleTest
 
-For this chapter, we will consider the same example `fibonacci.cpp` that we used in the previous chapter. Also, for understanding how to use GoogleTest, we will simply be converting all the tests that we wrote manually in the same file using GoogleTest framework.
+For this episode, we will consider the same example `fibonacci.cpp` that we used previously. There we identified 3 possible cases when using the `recursive_fibonacci` function for which we wrote some manual tests:
 
+- `n` equal to 0 or 1
+- `n` a negative number
+- `n` a positive number greater than 1
+
+To demonstrate how to use GoogleTest, we will simply be converting these tests that we wrote manually in the same file using GoogleTest framework. Section 5 below will describe the anatomy of a test, but first lets see how they look like in the practical case.
 For using GoogleTest in your code, you need to follow the following steps in general.
 
 
