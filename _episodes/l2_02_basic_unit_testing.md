@@ -274,8 +274,6 @@ TEST(FibonacciTest, HandlesNegativeInput) {
 
 ```
 
-
-
 ### Summary
 In this chapter, we learnt about the basics of GoogleTest and how to use it to write tests in C++.
 
