@@ -115,6 +115,10 @@ $ g++ your_code.cpp -I path_to_your_gtest.h -L path_to_your_lgtest.a -lgtest -lp
 $ ./your_executable_name
 ```
 
+In the above cell, `lpthread` refers to `pthread` library which is an acronym for "POSIX Threads". It is a library in C and C++ that provides an interface for creating and managing threads in a multi-threaded program. It is based on the POSIX (Portable Operating System Interface) standard for thread management. 
+
+Although, we are not using any multi-threaded feature explicity in this course, we still need to link the progam with this library. This is because some of the function described in `lgtest` depends on `lpthread` and without it, linker will give an error. 
+
 If you do not want to write your main function, you can link against the one provided in the `libgtest_main.a` library by using the following instruction.
 
 ```bash
