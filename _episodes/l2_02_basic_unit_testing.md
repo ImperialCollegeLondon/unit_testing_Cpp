@@ -159,8 +159,6 @@ All assertion macros support streaming a custom failure message into them with t
 EXPECT_TRUE(my_condition) << "My condition is not true";
 ```
 
-
-<br> </br>
 ## 5. Anatomy of a Unit Test
 
 A Unit test in general follows a three step structure as mentioned below:-
