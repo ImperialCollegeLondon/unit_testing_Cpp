@@ -42,11 +42,10 @@ In this course, we will focus mainly on GoogleTest.
 Simply defining, GoogleTest is a testing framework developed by Google's testing technology team to develop and write C++ tests.  GoogleTest offers multiple advantages over other frameworks:-
 
 1. **Comprehensive Features**: GoogleTest provides a rich set of features, including a wide range of assertion macros, test fixtures, parameterized tests, test discovery, test filtering, and powerful mocking capabilities. It offers a complete testing framework that can handle various testing scenarios.
-2. **Integration with GoogleTest ecosystem**: GoogleTest integrates well with other tools and libraries in the GoogleTest ecosystem. For example, it can be seamlessly used with GoogleMock for creating mock objects and behaviours. This integration enhances the testing capabilities and flexibility.
-3. **Large and Active Community**: GoogleTest has a large and active community of developers. This means that there is ample support available in terms of documentation, tutorials, forums, and online resources. 
-4. **Mature and Stable**: It is a mature and stable framework that has been used extensively in industry projects and open-source software. 
-5. **Wide Platform Support**: GoogleTest supports multiple platforms, including Windows, Linux, macOS, and various compilers. It is compatible with popular development environments and build systems, making it suitable for a wide range of C++ projects.
-6. **Flexible and Extensible**: GoogleTest provides flexibility in test organization and customization. It allows you to structure your tests using test cases and test suites. You can also define custom test fixtures and customise test execution and reporting. Additionally, GoogleTest can be extended with custom assertion macros and utilities to suit your specific testing needs.
+2. **Large and Active Community**: GoogleTest has a large and active community of developers. This means that there is ample support available in terms of documentation, tutorials, forums, and online resources. 
+3. **Mature and Stable**: It is a mature and stable framework that has been used extensively in industry projects and open-source software. 
+4. **Wide Platform Support**: GoogleTest supports multiple platforms, including Windows, Linux, macOS, and various compilers. It is compatible with popular development environments and build systems, making it suitable for a wide range of C++ projects.
+5. **Flexible and Extensible**: GoogleTest provides flexibility in test organization and customization. It allows you to structure your tests using test cases and test suites. You can also define custom test fixtures and customise test execution and reporting. Additionally, GoogleTest can be extended with custom assertion macros and utilities to suit your specific testing needs.
 
 ## 3. Writing Unit test using GoogleTest
 
