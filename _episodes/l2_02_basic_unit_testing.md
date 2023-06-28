@@ -142,8 +142,6 @@ ASSERT_FALSE(hasError);  // Verify that the hasError flag is false
 ASSERT_THROW(throwException(), std::runtime_error);  // Verify that throwException() throws a std::runtime_error
 ```
 
-
-<br> </br>
 **4. String Assertions**: String assertions are used to compare string values. Google Test provides various string assertions, such as `ASSERT_STREQ`, `ASSERT_STRNE`, `ASSERT_STRCASEEQ`, and `ASSERT_STRCASENE`. These assertions allow you to compare strings for equality, inequality, or case-insensitive equality.
 
 ```
