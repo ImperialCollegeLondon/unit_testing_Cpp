@@ -182,3 +182,32 @@ void Employee::calcNetSalary()
 }
 ```
 With this code, we now have the necessary fragments to test our `employee` class. Let us see this in action.
+## 3. Unit tests for our employee class without test fixture
+In order to cleary demonstrate why a test fixture would be needed, we first write some tests for our employee class without using a fixture. This will help us to understand why does a fixture is useful and how to use it.
+
+For this subsection, let us assume that we are checking two functionalities of our employee class (for code, please see [1_employeetest.cpp](../code/Chapter3/1_employeetest.cpp)) which are:-
+
+1. We can set the name of employee correctly.
+2. We can set the age correctly.
+
+The code for these two tests (which is entirely based on what we learn in second module of this course) is given below.
+
+```cpp
+// Test if we can set the name of an employee.
+TEST(EmployeeTest, CanSetName) {
+    Employee employee{"John", 25, 10000, 5, 1000};
+    employee.setName("John Doe");
+    EXPECT_EQ(employee.getName(), "John Doe");
+}
+
+// Test if we can set the age of an employee.
+TEST(EmployeeTest, CanSetAge) {
+    Employee employee{"John", 25, 10000, 5, 1000};
+    employee.setAge(30);
+    EXPECT_EQ(employee.getAge(), 30);
+}
+``` 
+While the above test solve our problem, there is a problem of code duplication and object creation for each test. As we can see in each test that we have to create an instance of employee class by using the statement `Employee employee{"John", 25, 10000, 5, 1000};`. This is against the `DRY (Don't Repeat Yourself)' https://en.wikipedia.org/wiki/Don%27t_repeat_yourself. 
+
+Morover, all our tests depend on the same `employee` class. Therefore, it makes sense to create an instance of `employee` at one place and let the GoogleTest manage the creation of the instance for each test case. Let us see this in action in next section.
+
