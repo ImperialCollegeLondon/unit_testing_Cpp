@@ -42,7 +42,7 @@ In this course, we will use GoogleTest, as it is popular and easy to use, though
 
 ## 2. A brief about GoogleTest
 
-Simply defining, GoogleTest is a testing framework developed by Google's testing technology team to develop and write C++ tests.  GoogleTest offers multiple advantages over other frameworks:-
+Simply defined, GoogleTest is a testing framework developed by Google's testing technology team to develop and write C++ tests. GoogleTest offers multiple advantages over other frameworks:-
 
 1. **Comprehensive Features**: GoogleTest provides a rich set of features, including a wide range of assertion macros, test fixtures, parameterized tests, test discovery, test filtering, and powerful mocking capabilities. It offers a complete testing framework that can handle various testing scenarios.
 2. **Large and Active Community**: GoogleTest has a large and active community of developers. This means that there is ample support available in terms of documentation, tutorials, forums, and online resources. 
