@@ -84,7 +84,7 @@ The different parts in the above cell have the following meaning
 
 - `TEST`: This is the macro provided by the GoogleTest framework to define a test case. (For more details about macros, see [Macros in C++](https://gcc.gnu.org/onlinedocs/cpp/Macros.html))
 - `TestSuiteName`: This is the name of the test suite or test fixture. It groups related tests together. It should be a valid C++ identifier.
-- `TestName`: It is the name of the individual test case within the test suite. It should also be a valid C++ identifier.
+- `TestName`: This is the name of the individual test case within the test suite. It should also be a valid C++ identifier.
 - `Test logic and assertions`: This is the body of the test case where you write the actual test code, including any necessary assertions to verify the expected behaviour. The section `Test Assertions` describes more about various assertions available in GoogleTest.
 
 ### 3.3. Initialise GoogleTest framework in your main
