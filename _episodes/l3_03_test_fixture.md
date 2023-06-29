@@ -285,4 +285,74 @@ TEST_F(EmployeeTestFixture, NetSalaryIsCorrect) {
 ## 5. Why do we need setup and teardown in test fixture?
 So far, our test fixture class only creates an instance of object for the class under test. In many cases, we often want some common action for all our tests such as adding an entry, connection to a database, response from a site etc. Let us try to understand this with example which will set the background for the `setup` and `teardown` functions.
 
-Let us consider that we are creating a table which will store the details of various employees. The table allows us to add new entries.
+Let us consider that we are creating a table which will store the details of various employees. The table allows us to add new entries, remove employee from the table, get the number of entries in the table etc. The declaration of table class is given in [employee_table.h](../code/Chapter3/employee_table.h). The defintions of table class is present in [employee_table.cpp](../code/Chapter3/employee_table.cpp). We give the definition of table class below for refernce.
+
+```cpp
+void EmployeeTable::addEmployee(const Employee& employee) {
+    employees.push_back(employee);
+}
+
+void EmployeeTable::removeEmployee(const std::string& employeeName) {
+    for (auto it = employees.begin(); it != employees.end(); ++it) {
+        if (it->getName() == employeeName) {
+            employees.erase(it);
+            break;
+        }
+    }
+}
+
+void EmployeeTable::displayEmployeesName() const {
+    cout << "-------------------------------------------------- " << endl;
+    for (const auto& employee : employees) {
+        std::cout << employee.getName() << std::endl;
+    }
+    cout << "-------------------------------------------------- " << endl;
+}
+
+bool EmployeeTable::isEmpty() const {
+    return employees.empty();
+}
+
+int EmployeeTable::getEntryCount() const {
+    return employees.size();
+}
+```
+
+We want to test our table class. In particular, we are interested in testing the following:-
+1. Table is not empty after adding an employee.
+2. Number of entries is one after adding an employee.
+3. Number of enries in table reduces by one after removing an employee (assuming that there was at least one entry in the table).
+
+Using our knowledge of test fixtures learnt in previous subsection, we can write the tests as shown below. Please see the file [3_emp_table_test.cpp](../code/Chapter3/3_emp_table_test.cpp) for more details.
+
+```cpp
+// Test fixture for EmployeeTable class.
+class EmployeeTableTest : public testing::Test {
+    public:
+        EmployeeTable table;
+};
+
+// Test that the table is not empty after adding an employee.
+TEST_F(EmployeeTableTest, TableIsNotEmptyAfterAddingEmployee) {
+    Employee new_employee("John Doe", 30, 5000, 5, 1000);
+    table.addEmployee(new_employee);
+    EXPECT_FALSE(table.isEmpty());
+}
+
+// Test that number of entries is one after adding an employee.
+TEST_F(EmployeeTableTest, NumberOfEntriesIsOneAfterAddingEmployee) {
+    Employee new_employee("John Doe", 30, 5000, 5, 1000);
+    table.addEmployee(new_employee);
+    EXPECT_EQ(table.getEntryCount(), 1);
+}
+
+// Test that number of enries in table reduces by one after removing an employee.
+TEST_F(EmployeeTableTest, NumberOfEntriesIsOneLessAfterRemovingEmployee) {
+    Employee new_employee("John Doe", 30, 5000, 5, 1000);
+    table.addEmployee(new_employee);
+    table.removeEmployee("John Doe");
+    EXPECT_EQ(table.getEntryCount(), 0);
+}
+```
+
+As we can see from above, that all creating an instance of `employee` first by using the statement like `Employee new_employee` followed by adding an entry to the table `table.addEmployee(new_employee)`. Thus, we can see that our tests need some setup which is common for all and hence `Setup` functionc comes to rescue for exactly such scenarios.
