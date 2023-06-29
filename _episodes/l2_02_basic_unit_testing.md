@@ -137,7 +137,7 @@ GoogleTest offers many types of assertions as described in [GoogleTest Assertion
 
 ```cpp
 ASSERT_EQ(expected_value, your_function(function_arguments));  
-// Verify that the expexted value is equal to the value returned by your function.
+// Verify that the expected value is equal to the value returned by your function.
 
 // You can alo change the order if you prefer.
 ASSERT_EQ(your_function(function_arguments), expected_value);
