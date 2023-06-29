@@ -87,7 +87,7 @@ The different parts in the above cell have the following meaning
 - `TestName`: This is the name of the individual test case within the test suite. It should also be a valid C++ identifier.
 - `Test logic and assertions`: This is the body of the test case where you write the actual test code, including any necessary assertions to verify the expected behaviour. The section `Test Assertions` describes more about various assertions available in GoogleTest.
 
-### 3.3. Initialise GoogleTest framework in your main
+### 3.3. Initialise GoogleTest framework in your main function
 
 When you install GoogleTest you would get two libraries namely `libgtest.a` and `libgtest_main.a` (The extension `.a` means it is a static library and is applicable for Linux based system) . The first one i.e. `libgtest.a` is the library which provides all the necessary testing features such as assertions, test discovery, collection of results etc. The second library i.e. `libgtest_main.a` provides a main function so that you do not need to write your own main function for testing. For more details, refer to https://stackoverflow.com/questions/6457856/whats-the-difference-between-gtest-lib-and-gtest-main-lib.  
 
