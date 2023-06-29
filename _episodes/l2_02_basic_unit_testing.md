@@ -50,7 +50,7 @@ Simply defined, GoogleTest is a testing framework developed by Google's testing 
 4. **Wide Platform Support**: GoogleTest supports multiple platforms, including Windows, Linux, macOS, and various compilers. It is compatible with popular development environments and build systems, making it suitable for a wide range of C++ projects.
 5. **Flexible and Extensible**: GoogleTest provides flexibility in test organization and customization. It allows you to structure your tests using test cases and test suites. You can also define custom test fixtures and customise test execution and reporting. Additionally, GoogleTest can be extended with custom assertion macros and utilities to suit your specific testing needs.
 
-## 3. Writing Unit test using GoogleTest
+## 3. Writing unit tests using GoogleTest
 
 For this episode, we will consider the same example `fibonacci.cpp` that we used previously. There we identified 3 possible cases when using the `recursive_fibonacci` function for which we wrote some manual tests:
 
