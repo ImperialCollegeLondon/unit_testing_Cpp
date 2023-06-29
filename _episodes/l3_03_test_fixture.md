@@ -356,3 +356,60 @@ TEST_F(EmployeeTableTest, NumberOfEntriesIsOneLessAfterRemovingEmployee) {
 ```
 
 As we can see from above, that all creating an instance of `employee` first by using the statement like `Employee new_employee` followed by adding an entry to the table `table.addEmployee(new_employee)`. Thus, we can see that our tests need some setup which is common for all and hence `Setup` functionc comes to rescue for exactly such scenarios.
+
+## 6. Setup and Teardown function in test fixture
+A `Setup()` function in a test fixture is responsible for providing and executing the necessary setup instructions for our tests. While a `Teardown()` function is responsible for cleaning up operations such as deleting the memory allocated, closing the database connection etc.
+
+To create a `Setup()` function, we just define this function in our fixture class which will [override](https://en.cppreference.com/w/cpp/language/override) the [virtual function](https://en.cppreference.com/w/cpp/language/virtual) in `testing::Test` class in GoogleTest.
+
+For our table class, we can create the `Setup()` and `Teardown()` functions as shown below. For more details, please see [4_table_test_with_setup.cpp](../code/Chapter3/4_table_test_with_setup.cpp).
+
+```cpp
+// Test fixture for EmployeeTable class.
+class EmployeeTableTest : public testing::Test {
+    public:
+        EmployeeTable table;
+};
+
+TEST_F(EmployeeTableTest, TableIsEmptyWhenCreated) {
+    EXPECT_TRUE(table.isEmpty());
+}
+
+TEST_F(EmployeeTableTest, TableHasSizeZeroWhenCreated) {
+    EXPECT_EQ(table.getEntryCount(), 0);
+}
+
+class EmployeeTableWithOneEmployee : public testing::Test {
+    public:
+        EmployeeTable table;
+        Employee* employee;
+
+        void SetUp() override {
+            employee = new Employee("John Doe", 30, 5000, 5, 1000);
+            table.addEmployee(*employee);
+        }
+
+        void TearDown() override {
+            delete employee;
+            employee = nullptr;
+        }
+};
+
+
+TEST_F(EmployeeTableWithOneEmployee, TableIsNotEmptyWhenCreatedWithOneEmployee) {
+    EXPECT_FALSE(table.isEmpty());
+}
+
+
+TEST_F(EmployeeTableWithOneEmployee, NumberOfEntriesIsOneWhenCreatedWithOneEmployee) {
+    EXPECT_EQ(table.getEntryCount(), 1);
+}
+
+
+TEST_F(EmployeeTableWithOneEmployee, NumberOfEntriesIsOneLessAfterRemovingEmployee) {
+    table.removeEmployee("John Doe");
+    EXPECT_EQ(table.getEntryCount(), 0);
+}
+```
+
+As we can see from above, our test looks much cleaner with the setup and teardown function. The reason for creating another test fixture for writing `Setup()` and `Teardown()` is because the first two tests not require it.
