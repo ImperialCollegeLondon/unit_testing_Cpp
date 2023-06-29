@@ -412,4 +412,80 @@ TEST_F(EmployeeTableWithOneEmployee, NumberOfEntriesIsOneLessAfterRemovingEmploy
 }
 ```
 
-As we can see from above, our test looks much cleaner with the setup and teardown function. The reason for creating another test fixture for writing `Setup()` and `Teardown()` is because the first two tests not require it.
+As we can see from above, our test looks much cleaner with the setup and teardown function. The reason for creating another test fixture for writing `Setup()` and `Teardown()` is because the first two tests do not require it.
+
+## 7. Tests Filtering in GoogleTest
+Sometimes, we may have some tests that take a lot of time to run. In some other case, when we are developing and testing our code, we do not want to run our entire test suite and run only one of the test that we have recently added. 
+
+GoogleTest allows to filter test by command line parameter `--gtest_filter`. The general syntax to use `gtest_filter` is
+
+```bash
+$ ./your_executable --gtest_filter=Pattern[-Pattern]
+```
+
+where `Pattern` can be a valid string patterns. The `-Pattern` will run all tests except the pattern in the command. Instead of a pattern, we can also use full test name in the form `test_suite_name.test_name`.
+
+Let us run our table tests in the file [4_table_test_with_setup.cpp](../code/Chapter3/4_table_test_with_setup.cpp). Let us assume that the executable name is `my_test`. We get the follwing output.
+
+```bash
+[==========] Running 5 tests from 2 test suites.
+[----------] Global test environment set-up.
+[----------] 2 tests from EmployeeTableTest
+[ RUN      ] EmployeeTableTest.TableIsEmptyWhenCreated
+[       OK ] EmployeeTableTest.TableIsEmptyWhenCreated (0 ms)
+[ RUN      ] EmployeeTableTest.TableHasSizeZeroWhenCreated
+[       OK ] EmployeeTableTest.TableHasSizeZeroWhenCreated (0 ms)
+[----------] 2 tests from EmployeeTableTest (0 ms total)
+
+[----------] 3 tests from EmployeeTableWithOneEmployee
+[ RUN      ] EmployeeTableWithOneEmployee.TableIsNotEmptyWhenCreatedWithOneEmployee
+[       OK ] EmployeeTableWithOneEmployee.TableIsNotEmptyWhenCreatedWithOneEmployee (0 ms)
+[ RUN      ] EmployeeTableWithOneEmployee.NumberOfEntriesIsOneWhenCreatedWithOneEmployee
+[       OK ] EmployeeTableWithOneEmployee.NumberOfEntriesIsOneWhenCreatedWithOneEmployee (0 ms)
+[ RUN      ] EmployeeTableWithOneEmployee.NumberOfEntriesIsOneLessAfterRemovingEmployee
+[       OK ] EmployeeTableWithOneEmployee.NumberOfEntriesIsOneLessAfterRemovingEmployee (0 ms)
+[----------] 3 tests from EmployeeTableWithOneEmployee (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 5 tests from 2 test suites ran. (0 ms total)
+[  PASSED  ] 5 tests.
+```
+
+Since, we defined 5 test, all tests run if we run the exectuable. Now, let us filter the tests. We want to run only the tests associated with `EmployeeTableWithOneEmployee`. We use the follwing command
+
+```bash
+$ ./my_test --gtest_filter=*One
+```
+
+The Output is
+```bash
+Employee*
+Running main() from /home/lokesh/My_compiled_Libraries/test/googletest/googletest/src/gtest_main.cc
+Note: Google Test filter = *OneEmployee*
+[==========] Running 3 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 3 tests from EmployeeTableWithOneEmployee
+[ RUN      ] EmployeeTableWithOneEmployee.TableIsNotEmptyWhenCreatedWithOneEmployee
+[       OK ] EmployeeTableWithOneEmployee.TableIsNotEmptyWhenCreatedWithOneEmployee (0 ms)
+[ RUN      ] EmployeeTableWithOneEmployee.NumberOfEntriesIsOneWhenCreatedWithOneEmployee
+[       OK ] EmployeeTableWithOneEmployee.NumberOfEntriesIsOneWhenCreatedWithOneEmployee (0 ms)
+[ RUN      ] EmployeeTableWithOneEmployee.NumberOfEntriesIsOneLessAfterRemovingEmployee
+[       OK ] EmployeeTableWithOneEmployee.NumberOfEntriesIsOneLessAfterRemovingEmployee (0 ms)
+[----------] 3 tests from EmployeeTableWithOneEmployee (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 3 tests from 1 test suite ran. (0 ms total)
+[  PASSED  ] 3 tests.
+```
+
+Finally, let us assume that we want to run all tests except `EmployeeTableWithOneEmployee.NumberOfEntriesIsOneLessAfterRemovingEmployee`. We can use the follwing command
+
+```bash
+./my_test --gtest_filter=-EmployeeTableWithOneEmployee.NumberOfEntriesIsOneLessAfterRemovingEmployee
+```
+This will run all 4 tests except the one mentioned in the filter because of the negative sign.
+
+### Summary
+In this chapter, we learnt about the basics of test fixtures and how to use them to write tests. We also learnt the importance of `Setup()` and `Teardown()` function and saw example on how to write them. Finally, we also leartn about test filters.
+
+{% include links.md %}
