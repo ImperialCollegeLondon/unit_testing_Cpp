@@ -254,7 +254,7 @@ On compiling and running above program, we get the following output.
 ```
 ### 7.1 Exercise
 
-Modify the above program to throw an exception for the negative values and write a test for the same.
+Modify the above program to throw an exception for negative values and write a test for this.
 
 **Solution**
 
