@@ -199,7 +199,7 @@ For writing your Unit Tests, it is advisable to follow the guidelines given belo
 
 ## 7. Unit Test for the Fibonacci Sequence
 
-With the above guidelines in mind, we can write some of the unit tests for our `fibonacci.cpp` that we learnt in Chapter 1. The complete code is given below and can be found in [Chapter2](../code/Chapter2/fibonacci_test.cpp).
+With the above guidelines in mind, we can write some of the unit tests for our `fibonacci.cpp` that we learnt in Chapter 1. The complete code is given below and can be found in [Chapter2](../code/Chapter2/Fibonacci_test.cpp).
 
 ```cpp
 #include <iostream>
