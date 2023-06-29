@@ -258,7 +258,7 @@ Modify the above program to throw an exception for negative values and write a t
 
 **Solution**
 
-Add the following lines in your code. Full solution given in [Solution](../code/Chapter2/Exercise_solution).
+Add the following lines in your code. The full solution is given in [Solution](../code/Chapter2/Exercise_solution).
 
 ```cpp
 // Change the function as shown below.
