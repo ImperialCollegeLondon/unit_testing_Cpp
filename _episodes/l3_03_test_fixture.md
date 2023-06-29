@@ -210,4 +210,79 @@ TEST(EmployeeTest, CanSetAge) {
 While the above test solve our problem, there is a problem of code duplication and object creation for each test. As we can see in each test that we have to create an instance of employee class by using the statement `Employee employee{"John", 25, 10000, 5, 1000};`. This is against the `DRY (Don't Repeat Yourself)' https://en.wikipedia.org/wiki/Don%27t_repeat_yourself. 
 
 Morover, all our tests depend on the same `employee` class. Therefore, it makes sense to create an instance of `employee` at one place and let the GoogleTest manage the creation of the instance for each test case. Let us see this in action in next section.
+## 4. Test fixture for our employee class
 
+Now that we know why do we need a test fixture, let us fist learn about the basic syntax of the test fixture in GoogleTest and then write the code for it.
+
+In GooglTest, a test fixture is created by writing another class which is derived from `::testing::Test` using `public` [access specifier](https://en.cppreference.com/w/cpp/language/access). The genreal syntax is as shown below
+
+```cpp
+
+class Your_test_fixture_class_name : public::testing::Test {
+    public:
+        ClassUnderTest publicInstance;
+
+    protected:
+        ClassUnderTest protectedInstance;
+
+    private:
+        ClassUnderTest privateInstance;
+};
+```
+
+Please note that you do not need to use all three access specifiers `public`, `private` and `protected`  defined above. The choice would depend on the following:-
+
+1. **public**: This is the most commonly used access specifier in test fixtures. It allows the test fixture class and its members (including the instance of the class we want to test) to be accessed from anywhere, including test cases defined outside the fixture class.
+
+2. **protected**: This access specifier restricts the visibility of the test fixture class and its members to derived classes and other classes within the same hierarchy. It can be useful if we have derived test fixture classes that need access to the class under test or if we want to limit the accessibility of the test fixture within a certain scope.
+
+3. **private**: This access specifier restricts the visibility of the test fixture class and its members only to the test fixture class itself. It can be useful if we want to encapsulate the test logic within the test fixture class and prevent external access or if we want to limit the scope of the test fixture.
+
+For our course, we will be usig the `public` access specifier. Once we have the test fixture class, we use the `TEST_F` macro avaialable in GoogleTest to write our tests instead of the `TEST` macro we have been using so far. The general syntax is given below.
+
+```cpp
+TEST_F(Your_test_fixture_class_name, Your_test_name) {
+    // Test logic goes here
+}
+```
+Since we now have all the basic tools to create our own test fixtures, let us rewrite the above tests by using a fixture. The code is present in this [2_employeetest.cpp](../code/Chapter3/2_employeetest.cpp). For reference, the tests are shown in the cell below.
+
+```cpp
+// Create a test fixture.
+class EmployeeTestFixture : public::testing::Test {
+    public:
+        Employee employee{"John", 25, 45000, 12, 5000};
+
+};
+
+// Test if we can set the name of an employee.
+TEST_F(EmployeeTestFixture, CanSetName) {
+    employee.setName("John Doe");
+    EXPECT_EQ(employee.getName(), "John Doe");
+}
+
+// Test that the name cannot be empty.
+TEST_F(EmployeeTestFixture, NameCannotBeEmpty) {
+    EXPECT_THROW(employee.setName(""), invalid_argument);
+}
+
+// Test if we can set the age of an employee.
+TEST_F(EmployeeTestFixture, CanSetAge) {
+    employee.setAge(30);
+    EXPECT_EQ(employee.getAge(), 30);
+}
+
+//Test that the tax calculation is correct.
+TEST_F(EmployeeTestFixture, TaxCalculationIsCorrect) {
+    EXPECT_EQ(employee.getTaxAmount(), 7500);
+}
+
+// Check that the net salary is correct.
+TEST_F(EmployeeTestFixture, NetSalaryIsCorrect) {
+    EXPECT_EQ(employee.getNetSalary(), 43500);
+}
+```
+## 5. Why do we need setup and teardown in test fixture?
+So far, our test fixture class only creates an instance of object for the class under test. In many cases, we often want some common action for all our tests such as adding an entry, connection to a database, response from a site etc. Let us try to understand this with example which will set the background for the `setup` and `teardown` functions.
+
+Let us consider that we are creating a table which will store the details of various employees. The table allows us to add new entries.
