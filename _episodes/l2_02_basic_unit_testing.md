@@ -174,7 +174,7 @@ EXPECT_TRUE(my_condition) << "My condition is not true";
 
 ## 5. Anatomy of a Unit Test
 
-A Unit test in general follows a three step structure as mentioned below:-
+A unit test in general follows a three step structure:
 
 1. **Setup**: In the setup phase, we prepare the necessary preconditions for the unit test. This involves creating any required objects, initialising variables, and setting up the environment to mimic the desired test scenario. The setup step ensures that the unit being tested has the necessary dependencies and context to execute successfully.
 2. **Execution**: The execution step involves invoking the unit under test with the specified inputs or parameters. This is the actual execution of the code being tested. The unit is executed with the predetermined inputs, and its output or behavior is observed.
