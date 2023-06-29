@@ -89,7 +89,7 @@ The different parts in the above cell have the following meaning
 
 ### 3.3. Initialise GoogleTest framework in your main function
 
-When you install GoogleTest you would get two libraries namely `libgtest.a` and `libgtest_main.a` (The extension `.a` means it is a static library and is applicable for Linux based system) . The first one i.e. `libgtest.a` is the library which provides all the necessary testing features such as assertions, test discovery, collection of results etc. The second library i.e. `libgtest_main.a` provides a main function so that you do not need to write your own main function for testing. For more details, refer to https://stackoverflow.com/questions/6457856/whats-the-difference-between-gtest-lib-and-gtest-main-lib.  
+When you install GoogleTest you would get two libraries namely `libgtest.a` and `libgtest_main.a` (The extension `.a` means it is a static library and is applicable for Linux based systems). The first one, i.e. `libgtest.a`, is the library which provides all the necessary testing features such as assertions, test discovery, collection of results etc. The second library, i.e. `libgtest_main.a`, provides a main function so that you do not need to write your own main function for testing. For more details, refer to https://stackoverflow.com/questions/6457856/whats-the-difference-between-gtest-lib-and-gtest-main-lib.  
 
 For this sub-section, we are assuming that you are writing your own main function while the next section describes how to  run your tests without your own main function by linking to the main function provided in `lgtest_main`. You would need to include the following lines in your main function as shown below.
 
