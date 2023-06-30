@@ -78,12 +78,12 @@ This is called [dependency injection](https://en.wikipedia.org/wiki/Dependency_i
 >
 > Do not disregard the value of dependency injection as an approach only useful in testing. If you design your code with dependency injection in mind, it will become more flexible and powerful. Here we have presented just one way of doing dependency injection, but there are other approaches that might be more suitable to your particular case.
 >
-> Having said that, **enabling dependency injection in your code is a must to be able to use any of the test doubles**, including the mocks we describe next, so make sure you fully understand what it means and how write your code *the right way*.
+> Having said that, **enabling dependency injection in your code is essential to be able to use test doubles**, including the mocks we describe next, so make sure you fully understand what it means and how to write your code *the right way*.
 {: .callout}
 
 ## Introducing Google Mock
 
-[Google Mock], or gMock, is a framework for creating mock **classes** and using them in C++. A mock object implements the same interface as a real object (so it can be used as one), but lets you specify at run time how it will be used and what it should do, setting expectations on these interactions.
+[Google Mock], or gMock, is a framework for creating mock **classes** and using them in C++. A mock class implements the same interface as the real class (so it can be used as one), but lets you specify how it will be used and what it should do at runtime, setting expectations on these interactions.
 
 It is worth emphasizing that gMock will let you mock **classes** and not top level functions.
 
@@ -118,15 +118,14 @@ Now let's write a test for the following function, which finds out if an animal 
 
 ```cpp
 bool is_alive_at_end_of_day(int steps, double carbs, Animal animal) {
-  double spent_carbs{animal::walk(steps)};
+  double spent_carbs{animal.walk(steps)};
   if (spent_carbs > carbs) {
-    animal::die();
+    animal.die();
     return false;
   }
-  animal::eat(carbs-spent_carbs);
+  animal.eat(carbs - spent_carbs);
   return true;
 }
-```
 
 If we were to use a real implementation of `Animal`, let's say a `Horse`, testing this function would be complicated because the result would depend on the specific metabolism of the animal, which might be quite complicated (and potentially time consuming to run). So we can use `MockAnimal` instead to ensure that the logic of the function is correct. A couple of tests for this would look as:
 
@@ -163,7 +162,7 @@ TEST(IsAliveTest, Dies) {
 
 > ### Mocking is not always the solution
 >
-> In the above example, it would have been tricky to test the logic of the function in full without mocks. However, they are not always the solution. Mocks do not work with  top level functions, only with classes and, depending on the complexity of the class, setting up the mock might be too complicated and not worth it for testing the function of interest. Very often, stubs, fakes and dummies will carry you a long way before you need to use mocks.
+> In the above example, it would have been tricky to test the logic of the function in full without mocks. However, they are not always the solution. Mocks do not work with  top level functions, only with classes. Depending on the complexity of the class, setting up the mock might be too complicated and not worth it for testing the function of interest. Very often, stubs, fakes and dummies will carry you a long way before you need to use mocks.
 {: .callout}
 
 ## Test doubles in action
