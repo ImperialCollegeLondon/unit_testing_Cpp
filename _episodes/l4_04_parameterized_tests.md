@@ -323,3 +323,18 @@ class EmployeeTestPameterisedFixture : public EmployeeTestFixture,
 ```
 
 In addition, we used a function `GetParam()` defined in `gtest.h`. This function can help us to get the input values passed via `ValuesIn()` function and use it in the test logic according to our requirements. In this case, it helps us to retrieve 4 values in the order `inp_salary`, `inp_bonus`, `inp_years_employed` and `out_tax` for each test case. Thus, `GetParam()` provides a convenient way to retrieve multiple values and use them in our test logic.
+## 4. Advantages of Parameteried tests
+From the above discusssion, we can see that the parameterised tests have the following advantages.
+
+1. **Code Reusability**: With parameterized tests, we can write a single test case that can be executed with different inputs or test data. This promotes code reusability by eliminating the need to duplicate similar test cases. Instead, we can define the test logic once and apply it to multiple scenarios, reducing code duplication and improving maintainability.
+
+2. **Increased Test Coverage**: Parameterized tests allows us to easily test a wide range of input values or test cases without writing separate test cases for each variation. This enables us to achieve better test coverage by covering various combinations, edge cases, and boundary values in a concise manner.
+
+3. **Simplified Test Maintenance**: When changes are required in the test logic, having parameterized tests simplifies the maintenance process. Instead of modifying multiple test cases individually, we only need to update the single test case, which will automatically be executed with the new test data. This saves time and effort in maintaining and updating the tests.
+
+4. **Simplified Test Reporting**: Parameterized tests provide a concise way to report test results for multiple test cases. Each instance of the parameterized test is reported individually, allowing us to identify which specific inputs or test data passed or failed. This facilitates quick identification and debugging of issues.
+
+### Summary
+In this chapter, we learnt about the basics of parameterized tests and how to use them in GoogleTest. We also learnt how to combine test fixture with parameterised tests. Finally, we learnt the advantages of parameterised tests.
+
+{% include links.md %}
