@@ -77,11 +77,94 @@ This is called [dependency injection](https://en.wikipedia.org/wiki/Dependency_i
 > ### Dependency injection is an important design pattern
 >
 > Do not disregard the value of dependency injection as an approach only useful in testing. If you design your code with dependency injection in mind, it will become more flexible and powerful. Here we have presented just one way of doing dependency injection, but there are other approaches that might be more suitable to your particular case.
+>
+> Having said that, **enabling dependency injection in your code is a must to be able to use any of the test doubles**, including the mocks we describe next, so make sure you fully understand what it means and how write your code *the right way*.
 {: .callout}
 
 ## Introducing Google Mock
 
-TBC
+[Google Mock], or gMock, is a framework for creating mock **classes** and using them in C++. A mock object implements the same interface as a real object (so it can be used as one), but lets you specify at run time how it will be used and what it should do, setting expectations on these interactions.
+
+It is worth emphasizing that gMock will let you mock **classes** and not top level functions.
+
+The process of using gMock is, in general, the same:
+
+1. You [create the mocked class using the `MOCK_METHOD` macro](https://google.github.io/googletest/gmock_cook_book.html#creating-mock-classes) to mock the methods that will be used in the test.
+2. When running the tests, you set the expectations of what should happen when each relevant mocked method is called [using the `EXPECT_CALL` macro](https://google.github.io/googletest/gmock_for_dummies.html#general-syntax). The expectations will be automatically checked at the end of the test.
+
+Here we give a simple example to illustrate the process, but read the gMock [Mocking Cookbook] for a more detailed description of the possibilities and the inputs these macros need. Let's assume we want to mock the following abstract class because one of its subclasses is being used in the function we want to test (mocking virtual classes is way, way easier):
+
+```cpp
+class Animal {
+  virtual ~Animal() {};
+  virtual double walk(int steps);
+  virtual void eat(double carbs);
+  virtual void die();
+};
+```
+
+The corresponding mocked class will be:
+
+```cpp
+class MockAnimal : public Animal {
+ public:
+  MOCK_METHOD(double, walk, (int), (override));
+  MOCK_METHOD(void, eat, (double), (override));
+  MOCK_METHOD(void, die, (), (override));
+};
+```
+
+Now let's write a test for the following function, which finds out if an animal is dead or alive at the end of the day depending on how much food it has taken and how much it has walked.
+
+```cpp
+bool is_alive_at_end_of_day(int steps, double carbs, Animal animal) {
+  double spent_carbs{animal::walk(steps)};
+  if (spent_carbs > carbs) {
+    animal::die();
+    return false;
+  }
+  animal::eat(carbs-spent_carbs);
+  return true;
+}
+```
+
+If we were to use a real implementation of `Animal`, let's say a `Horse`, testing this function would be complicated because the result would depend on the specific metabolism of the animal, which might be quite complicated (and potentially time consuming to run). So we can use `MockAnimal` instead to ensure that the logic of the function is correct. A couple of tests for this would look as:
+
+```cpp
+using ::testing::Return;
+
+TEST(IsAliveTest, Lives) {
+  Animal animal = MockAnimal();
+  int steps{400};
+  double carbs{2000.0};
+  double consumed{500.0};
+
+  EXPECT_CALL(animal, walk(steps)).Times(1).WillOnce(Return(consumed));
+  EXPECT_CALL(animal, eat(carbs-consumed)).Times(1);
+  EXPECT_CALL(animal, die()).Times(0);
+  ASSERT_TRUE(is_alive_at_end_of_day(steps, carbs, animal))
+}
+
+TEST(IsAliveTest, Dies) {
+  Animal animal = MockAnimal();
+  int steps{400};
+  double carbs{2000.0};
+  double consumed{5000.0};
+
+  EXPECT_CALL(animal, walk(steps)).Times(1).WillOnce(Return(consumed));
+  EXPECT_CALL(animal, eat(carbs-consumed)).Times(1);
+  EXPECT_CALL(animal, die()).Times(1);
+  ASSERT_FALSE(is_alive_at_end_of_day(steps, carbs, animal))
+}
+```
+
+[Google Mock]: https://google.github.io/googletest/gmock_for_dummies.html
+[Mocking Cookbook]: https://google.github.io/googletest/gmock_cook_book.html
+
+> ### Mocking is not always the solution
+>
+> In the above example, it would have been tricky to test the logic of the function in full without mocks. However, they are not always the solution. Mocks do not work with  top level functions, only with classes and, depending on the complexity of the class, setting up the mock might be too complicated and not worth it for testing the function of interest. Very often, stubs, fakes and dummies will carry you a long way before you need to use mocks.
+{: .callout}
 
 ## Test doubles in action
 
@@ -127,6 +210,27 @@ Keep in mind that there are often multiple ways of using test doubles for a part
 > {: .solution}
 {: .challenge}
 
+> ## A second exercise
+>
+> TBD
+>
+> > ## Solution
+> >
+> > With its solution
+> >
+> {: .solution}
+{: .challenge}
+
+> ## And a third exercise
+>
+> TBD
+>
+> > ## Solution
+> >
+> > With its solution
+> >
+> {: .solution}
+{: .challenge}
 
 ## Summary
 
