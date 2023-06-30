@@ -232,3 +232,94 @@ In this output, there are two things worth noting:-
 
 With this parameterised test, we were able to solve the issues that we were discussing above. However, in doing so, we changed the test fixture and converted it to use `TEST_P` macro. Our previous tests based on `TEST_F` macro will not work anymore as it has been replaced. The important question is: What shall we do so that we can still keep all our useful tests from test fixtures while still being able to add parameterised test. The solution is to combine test fixture with parameterised test and the next subsection explains that.
 
+## 3. Parameterised test based on test fixture
+In order to create a parametersied test from a test fixture, all we need to do is to create a parameterised test class which derives from both the test fixture class and `testing::WithParamInterface<T>` class (defined in GoogleTest) to create parameteried tests.
+
+```cpp
+// create a parameterised test class from the fixture defined above.
+class YourParameterisedClass : public YourFixtureClass, 
+                               public WithParamInterface<T> {
+};
+```
+
+For the demonstration purpose, let us assume that we now want to check our tax calculation function `getTaxAmount()` which has more branches as compared to bonus calculation. For complete code, see the file [4_param_test_based_fixture.cpp](../code/Chapter4/4_param_test_based_fixture.cpp). We give a small section of code below for reference.
+
+```cpp
+// Create a test fixture.
+class EmployeeTestFixture : public::testing::Test {
+    public:
+        Employee employee{"John", 25, 8000, 5, 1000};
+
+};
+
+// Test if we can set the name of an employee.
+TEST_F(EmployeeTestFixture, CanSetName) {
+    employee.setName("John Doe");
+    EXPECT_EQ(employee.getName(), "John Doe");
+}
+
+// Test that the name cannot be empty.
+TEST_F(EmployeeTestFixture, NameCannotBeEmpty) {
+    EXPECT_THROW(employee.setName(""), invalid_argument);
+}
+
+// Test if we can set the age of an employee.
+TEST_F(EmployeeTestFixture, CanSetAge) {
+    employee.setAge(30);
+    EXPECT_EQ(employee.getAge(), 30);
+}
+
+// Create a structure that holds the input and output values.
+// This structure is used to inject values into the test.
+struct TestValues{
+    double inp_salary;
+    double inp_bonus;
+    double inp_years_employed;
+    double out_tax;
+    
+    //construtor of values struct
+    TestValues(double salary, double bonus, double years_employed, double tax) 
+              : inp_salary(salary), 
+                inp_bonus(bonus), 
+                inp_years_employed(years_employed), 
+                out_tax(tax) {}
+};
+
+// create a parameterised test class from the fixture defined above.
+class EmployeeTestPameterisedFixture : public EmployeeTestFixture, 
+                                       public WithParamInterface<TestValues> {
+};
+
+// Create an array of values (of type TestValues) to be injected into the test.
+TestValues values[] = {
+    // value are in format: salary, basic_bonus, years_employed, tax
+    TestValues{8000, 2000, 3, 0},
+    TestValues{8000, 2000, 11, 100},
+    TestValues{15000, 3000, 4, 800},
+    TestValues{26000, 4000, 12, 3200},
+    TestValues{60000, 8000, 13, 16500}
+};
+
+// Test that the tax calculation is correct.
+TEST_P(EmployeeTestPameterisedFixture, TaxCalculationIsCorrect) {
+    TestValues current_test_case_value = GetParam();
+    employee.setBaseSalary(current_test_case_value.inp_salary);
+    employee.SetBasicBonus(current_test_case_value.inp_bonus);
+    employee.setNumberYearsEmployed(current_test_case_value.inp_years_employed);
+    EXPECT_EQ(employee.getTaxAmount(), current_test_case_value.out_tax);
+}
+
+// Instantiate the test case with the values array.
+INSTANTIATE_TEST_SUITE_P( CheckTaxCalculation, 
+                          EmployeeTestPameterisedFixture,
+                          ValuesIn(values));
+```
+
+The major change as compared to our previous example is shown in the cell belowe and this change is responsible to generate a paramaterised test using a test fixture.
+```cpp
+class EmployeeTestPameterisedFixture : public EmployeeTestFixture, 
+                                       public WithParamInterface<TestValues> {
+};
+```
+
+In addition, we used a function `GetParam()` defined in `gtest.h`. This function can help us to get the input values passed via `ValuesIn()` function and use it in the test logic according to our requirements. In this case, it helps us to retrieve 4 values in the order `inp_salary`, `inp_bonus`, `inp_years_employed` and `out_tax` for each test case. Thus, `GetParam()` provides a convenient way to retrieve multiple values and use them in our test logic.
