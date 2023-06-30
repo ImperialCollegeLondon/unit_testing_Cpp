@@ -12,7 +12,6 @@ class EmployeeTestFixture : public::testing::Test {
 
 };
 
-
 // Test net bonus works fine for different number of years.
 TEST_F(EmployeeTestFixture, NetBonusIsCorrectForDifferentYears) {
     auto input = vector<int>{5, 15};
