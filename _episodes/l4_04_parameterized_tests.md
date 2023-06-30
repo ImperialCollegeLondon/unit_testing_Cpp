@@ -323,7 +323,7 @@ class EmployeeTestPameterisedFixture : public EmployeeTestFixture,
 ```
 
 In addition, we used a function `GetParam()` defined in `gtest.h`. This function can help us to get the input values passed via `ValuesIn()` function and use it in the test logic according to our requirements. In this case, it helps us to retrieve 4 values in the order `inp_salary`, `inp_bonus`, `inp_years_employed` and `out_tax` for each test case. Thus, `GetParam()` provides a convenient way to retrieve multiple values and use them in our test logic.
-## 4. Advantages of Parameteried tests
+## 4. Advantages of Parameterised tests
 From the above discusssion, we can see that the parameterised tests have the following advantages.
 
 1. **Code Reusability**: With parameterized tests, we can write a single test case that can be executed with different inputs or test data. This promotes code reusability by eliminating the need to duplicate similar test cases. Instead, we can define the test logic once and apply it to multiple scenarios, reducing code duplication and improving maintainability.
