@@ -114,7 +114,121 @@ Expected equality of these values:
 ```
 From the output, we can clearly see that it results in complete failure of the test even though one of the conditions (or test) was right. Moreover, the output does not help much to figure out which test has exactly failed.
 
-The solution for above mentioned issues is to make use of parameterized tests and the next section describes that.
+The solution for above mentioned issues is to make use of parameterised tests and the next section describes that.
 
-In Google Test, parameterized tests are implemented using the `TEST_P` macro, where "P" stands for parameterized. You define a test class and then specify multiple sets of input data using the `INSTANTIATE_TEST_CASE_P` macro. Each set of input data represents a different instance of the test, and the test framework runs the test case for each instance (more details with example are given in subsequent sections).
+## 2. Parameterised tests in GoogleTest
+In Google Test, parameterised tests are implemented using the `TEST_P` macro, where "P" stands for parameterised. We define a test class and then specify multiple sets of input data using the `INSTANTIATE_TEST_CASE_P` macro. Each set of input data represents a different instance of the test, and the test framework runs the test case for each instance.
+
+A parameterized tests in GoogleTest requires the following compnents in general.
+
+1. **A parameterized test class**: Similar to the process of a test fixture, we need to create a class derived from `testing::TestWithParam<T>` where `T` could be any valid C++ type.
+
+```cpp
+class YourTestParameterisedClass : public::TestWithParam<T> {
+    public:
+        ClassUnderTest publicInstance;
+};
+```
+
+2. **Data structure to hold your values**: We need to create some data structure to store our values (both input and output). We can use a `struct` for this purpose as shown below.
+
+```cpp
+struct MyStruct{
+    int input;
+    int output;
+    
+    //construtor of values struct
+    MyStruct(int in, int out) : input(in), output(out) {}
+};
+```
+
+Once you have defined a structure to hold your values, you can create an instance of the same with the actual set of input and output values as shown below.
+
+```cpp
+MyStruct MyValues[] = {
+    MyStruct{InputVal1, OutputVal1},  //using constructor to create an instance of MyStruct.  
+    MyStruct{InputVal2, OutputVal2}
+};
+```
+
+3. **Create you test with TEST_P macro**: Instead of `TEST_F` macro that we used for test fixture, we use a `TEST_P` macro where `P` stands for `Parameterised` as shown below.
+
+```cpp
+TEST_P(YourTestParameterisedClass, NameofTest) {
+    // Test logic goes here.
+}
+```
+
+4. **Instantiate your test**: Finally, we instnatiate our test by using `INSTANTIATE_TEST_SUITE_P` macro. The general syntax of this macro is given below.
+
+```cpp
+INSTANTIATE_TEST_SUITE_P(SuitableNameTest, 
+                         YourTestParameterisedClass,
+                         ValuesIn(MyValues));
+```
+
+In above cell, the first argument to `INSTANTIATE_TEST_SUITE_P` could be any suitable name. GoogleTest will add this as a PREFIX to the testname when you wll run the test. The second argument is the name of the parameterised class that you have created which is also the first argument for `TEST_P` macro. Finally, the last argument is a `ValuesIn()` function which is defined in GoogleTest library. It helps to inject the test values into the parameterised test one by one.
+
+Let us see how we use the above concepts for an actual test that we have been writing in our previous subsections. For more details, please see [3_Parameterised_not_using_fixture.cpp](../code/Chapter4/3_Parameterised_not_using_fixture.cpp).
+
+```cpp
+// Create a structure that holds the input and output values.
+// This structure is used to inject values into the test.
+struct TestValues{
+    int input;
+    int output;
+    
+    //construtor of values struct
+    TestValues(int in, int out) : input(in), output(out) {}
+};
+
+// Create a parameterised class by deriving from testing::TestWithParam<T> where T could be any valid C++ type.
+class EmployeeTestParameterised : public::TestWithParam<TestValues> {
+    public:
+        Employee employee{"John", 25, 8000, 3, 2000};
+};
+
+// Create an array of values (of type TestValues) to be injected into the test.
+TestValues values[] = {
+    TestValues{5, 2000},
+    TestValues{15, 3000}
+};
+
+//Test net bonus works fine for different number of years.
+TEST_P(EmployeeTestParameterised, NetBonusIsCorrectForDifferentYears) {
+    TestValues current_test_case_value = GetParam();
+    employee.setNumberYearsEmployed(current_test_case_value.input);
+    EXPECT_EQ(employee.getNetBonus(), current_test_case_value.output);
+}
+
+// Instantiate the test case with the values array.
+INSTANTIATE_TEST_SUITE_P(NetBonusIsCorrectForDifferentYears, 
+                         EmployeeTestParameterised,
+                         ValuesIn(values));
+```
+On running the above file, we see the following output.
+```bash
+[==========] Running 2 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 2 tests from NetBonusIsCorrectForDifferentYears/EmployeeTestParameterised
+[ RUN      ] NetBonusIsCorrectForDifferentYears/EmployeeTestParameterised.NetBonusIsCorrectForDifferentYears/0
+[       OK ] NetBonusIsCorrectForDifferentYears/EmployeeTestParameterised.NetBonusIsCorrectForDifferentYears/0 (0 ms)
+[ RUN      ] NetBonusIsCorrectForDifferentYears/EmployeeTestParameterised.NetBonusIsCorrectForDifferentYears/1
+[       OK ] NetBonusIsCorrectForDifferentYears/EmployeeTestParameterised.NetBonusIsCorrectForDifferentYears/1 (0 ms)
+[----------] 2 tests from NetBonusIsCorrectForDifferentYears/EmployeeTestParameterised (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 2 tests from 1 test suite ran. (0 ms total)
+[  PASSED  ] 2 tests.
+```
+
+In this output, there are two things worth noting:-
+1. As expected, we are now running two tests as compared to just one in case of a for loop.
+2. The test name `NetBonusIsCorrectForDifferentYears/EmployeeTestParameterised.NetBonusIsCorrectForDifferentYears/0` is a combination of the following:-
+    - A Preifx `NetBonusIsCorrectForDifferentYears` coming from INSTANTIATE_TEST_SUITE_P.
+    - Parameterised class name `EmployeeTestParameterised` coming from the first argument of `TEST_P` macro.
+    - Test name `NetBonusIsCorrectForDifferentYears` coming from the second argument of `TEST_P` macro.
+    - Finally, the iteration number.
+
+With this parameterised test, we were able to solve the issues that we were discussing above. However, in doing so, we changed the test fixture and converted it to use `TEST_P` macro. Our previous tests based on `TEST_F` macro will not work anymore as it has been replaced. The important question is: What shall we do so that we can still keep all our useful tests from test fixtures while still being able to add parameterised test. The solution is to combine test fixture with parameterised test and the next subsection explains that.
 
