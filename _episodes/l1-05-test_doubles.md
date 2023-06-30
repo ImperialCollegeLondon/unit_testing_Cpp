@@ -12,21 +12,21 @@ keypoints:
 
 ## Testing untestable code
 
-Sooner or later you will face a piece of code that is not straight forward to write a test for. It might be because it calls a function that requests some data from a piece of hardware. Or because it needs to access a database that it is not available in the testing environment. Or simply because it triggers a complex and time consuming computation process that is only suited to run in a supercomputer. Whatever the reason, you will be in trouble. Moreover, you might want to test if some intermediate result of the calculation, and not just the final output, is a valid one.
+Sooner or later you will face a piece of code that is not straightforward to write a test for. It might be because it calls a function that requests some data from a piece of hardware, or because it needs to access a database that it is not available in the testing environment, or simply because it triggers a complex and time consuming computation process that is only suited to run in a supercomputer. Whatever the reason, you have a problem. Moreover, you might want to test if some intermediate result in the calculation is valid, and not just the final output.
 
 There is one possible solution: replace the problematic function by another one that, for the purposes of the test, behaves in a similar manner but without the problematic functionality of the original one. These replacements are called **test doubles**.
 
 ### Test doubles
 
-Test doubles are artificial replacements of functions or objects that prevent - or make more difficult - to test a particular part of the code. Depending exactly of what these replacements do, and also on the programming language, they receive different names. From the [Wikipedia], we have:
+Test doubles are artificial replacements of functions or objects that prevent - or hinder - testing a particular part of the code. Depending on what these replacements do, and also on the programming language, they receive different names. From the [Wikipedia], we have:
 
-- **Test stub**: used for providing the tested code with "indirect input", i.e canned answers so that the code can keep running.
+- **Test stub**: used for providing the tested code with "indirect input", i.e. canned answers so that the code can keep running.
 - **Mock object**: used for verifying "indirect output" of the tested code, by first defining the expectations before the tested code is executed.
 - **Test spy**: used for verifying "indirect output" of the tested code, by asserting the expectations afterwards, without having defined the expectations before the tested code is executed.
 - **Fake object**: used as a simpler implementation, e.g. using an in-memory database in the tests instead of doing real database access.
-- **Dummy object**: used when a parameter is needed for the tested method but without actually needing to use the parameter.
+- **Dummy object**: used when a parameter is needed for the tested method, but when we don't actually need to use the parameter.
 
-Which type of test double to use will depend on the specific code you want to test and what the double is meant to replace. Functions are often replaced with stubs or fakes while objects of more complex classes with multiple methods or attributes require more elaborate mocks.
+Which type of test double to use will depend on the specific code you want to test and what the double is meant to replace. Functions are often replaced with stubs or fakes, while objects of complex classes with multiple methods or attributes require more elaborate mocks.
 
 Now, the complexity becomes how to use them!
 
@@ -50,7 +50,7 @@ void normalize_v1(int array[], int length)
 
 You need to test it, but you do not want to have to calculate the norm along the way. How would you tell the `normalize` function to use a test double for `calculate_norm` and not the real one?
 
-Well, you cannot. `calculate_norm` is hardcoded in the definition of `normalize` so replacing it for another function is not possible, specially if we consider that `normalize` will be defined in a particular file within your code and you are testing it somewhere else.
+Well, you cannot. `calculate_norm` is hardcoded in the definition of `normalize` so replacing it for another function is not possible, especially if we consider that `normalize` will be defined in a particular file within your code, but you are testing it somewhere else.
 
 Now consider the following alternative version of the function `normalize`:
 
