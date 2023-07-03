@@ -17,13 +17,14 @@ keypoints:
 ---
 
 ## 1. Introduction to Parameterised Tests
+
 **Parameterized tests**, also known as **data-driven tests**, are a feature provided by testing frameworks like Google Test that allows us to write a single test case that can be executed with different sets of test data or inputs. Instead of duplicating similar test cases with slight variations, parameterized tests enable us to define a test once and run it with multiple inputs or test data.
 
 In order to understand the importance of parameterised tests and why do we need them, let us consider a very small example. For this chapter, we will be using our `Employee` class that we created in last chapter.
 
-Let us suppose that we want to test that net bonus calculation works fine for different number of years of expereince. Remember that our `Employee` class adds an additional bonus of $1000£$ when an employee has worked for more than 10 years. As a first approach, we might be tempted to write multiple tests for the same function using test fixtures in the same way we have been doing so far.
+Let us suppose that we want to test that net bonus calculation works fine for different number of years of experience. Remember that our `Employee` class adds an additional bonus of $1000£$ when an employee has worked for more than 10 years. As a first approach, we might be tempted to write multiple tests for the same function using test fixtures in the same way we have been doing so far.
 
-For example, we may write our tests simpley using test fixtures as shown below. Please see the code in file [1_Not_parameterised.cpp](../code/Chapter4/1_Not_parameterised.cpp).
+For example, we may write our tests simply using test fixtures as shown below. Please see the code in file [1_Not_parameterised.cpp](../code/Chapter4/1_Not_parameterised.cpp).
 
 ```cpp
 class EmployeeTestFixture : public::testing::Test {
@@ -42,6 +43,7 @@ TEST_F(EmployeeTestFixture, NetBonusIsCorrectWhenYearsGreaterThan10) {
     EXPECT_EQ(employee.getNetBonus(), 3000);
 }
 ```
+
 While the above solution works pretty well, it has a serious drawback. If we carefully look at the tests, we see that the test logic is repeated in both the tests. The only difference between the two tests are the input and output values. Moreover, managing such test will become problematic as the number of test conditions (or input/output) values increases.
 
 An immediate solution that comes to mind to solve this problem is to make use of a loop in C++. For each test, we may use a different input value and expect a different output. Let us see how we can use a loop to solve the same problem as described above. 
@@ -58,6 +60,7 @@ TEST_F(EmployeeTestFixture, NetBonusIsCorrectForDifferentYears) {
     }
 }
 ```
+
 Let us try to run this code and see if we get the desired output (shown below).
 
 ```bash
@@ -75,7 +78,7 @@ Let us try to run this code and see if we get the desired output (shown below).
 
 Although, the `for` loop served our purpose and we were able to run our test for multiple values, there is a big problem in this approach. If we carefully look at the output, we can see that both (or multiple values if present) the test cases were combined into a single test. This violates the general rule that we should test only one thing in a test or one assertion per test.
 
-Moroever, the problem gets worse when one of the test fails. In order to understand what happens during a test failure when using a for loop, let us intentionally change the expected output value to an incorrect value. In file, [2_Test_using_for_loop.cpp](../code/Chapter4/2_Test_using_for_loop.cpp), you can make the follwing change.
+Moreover, the problem gets worse when one of the test fails. In order to understand what happens during a test failure when using a for loop, let us intentionally change the expected output value to an incorrect value. In file, [2_Test_using_for_loop.cpp](../code/Chapter4/2_Test_using_for_loop.cpp), you can make the following change.
 
 ```cpp
 TEST_F(EmployeeTestFixture, NetBonusIsCorrectForDifferentYears) {
@@ -112,16 +115,18 @@ Expected equality of these values:
 
  1 FAILED TEST
 ```
+
 From the output, we can clearly see that it results in complete failure of the test even though one of the conditions (or test) was right. Moreover, the output does not help much to figure out which test has exactly failed.
 
 The solution for above mentioned issues is to make use of parameterised tests and the next section describes that.
 
 ## 2. Parameterised tests in GoogleTest
+
 In Google Test, parameterised tests are implemented using the `TEST_P` macro, where "P" stands for parameterised. We define a test class and then specify multiple sets of input data using the `INSTANTIATE_TEST_CASE_P` macro. Each set of input data represents a different instance of the test, and the test framework runs the test case for each instance.
 
-A parameterized tests in GoogleTest requires the following compnents in general.
+A parameterized tests in GoogleTest requires the following components in general.
 
-1. **A parameterized test class**: Similar to the process of a test fixture, we need to create a class derived from `testing::TestWithParam<T>` where `T` could be any valid C++ type.
+1. **A parameterised test class**: Similar to the process of a test fixture, we need to create a class derived from `testing::TestWithParam<T>` where `T` could be any valid C++ type.
 
 ```cpp
 class YourTestParameterisedClass : public::TestWithParam<T> {
@@ -159,7 +164,7 @@ TEST_P(YourTestParameterisedClass, NameofTest) {
 }
 ```
 
-4. **Instantiate your test**: Finally, we instnatiate our test by using `INSTANTIATE_TEST_SUITE_P` macro. The general syntax of this macro is given below.
+4. **Instantiate your test**: Finally, we instantiate our test by using `INSTANTIATE_TEST_SUITE_P` macro. The general syntax of this macro is given below.
 
 ```cpp
 INSTANTIATE_TEST_SUITE_P(SuitableNameTest, 
@@ -167,7 +172,7 @@ INSTANTIATE_TEST_SUITE_P(SuitableNameTest,
                          ValuesIn(MyValues));
 ```
 
-In above cell, the first argument to `INSTANTIATE_TEST_SUITE_P` could be any suitable name. GoogleTest will add this as a PREFIX to the testname when you wll run the test. The second argument is the name of the parameterised class that you have created which is also the first argument for `TEST_P` macro. Finally, the last argument is a `ValuesIn()` function which is defined in GoogleTest library. It helps to inject the test values into the parameterised test one by one.
+In above cell, the first argument to `INSTANTIATE_TEST_SUITE_P` could be any suitable name. GoogleTest will add this as a PREFIX to the test name when you will run the test. The second argument is the name of the parameterised class that you have created which is also the first argument for `TEST_P` macro. Finally, the last argument is a `ValuesIn()` function which is defined in GoogleTest library. It helps to inject the test values into the parameterised test one by one.
 
 Let us see how we use the above concepts for an actual test that we have been writing in our previous subsections. For more details, please see [3_Parameterised_not_using_fixture.cpp](../code/Chapter4/3_Parameterised_not_using_fixture.cpp).
 
@@ -206,7 +211,9 @@ INSTANTIATE_TEST_SUITE_P(NetBonusIsCorrectForDifferentYears,
                          EmployeeTestParameterised,
                          ValuesIn(values));
 ```
+
 On running the above file, we see the following output.
+
 ```bash
 [==========] Running 2 tests from 1 test suite.
 [----------] Global test environment set-up.
@@ -223,9 +230,10 @@ On running the above file, we see the following output.
 ```
 
 In this output, there are two things worth noting:-
+
 1. As expected, we are now running two tests as compared to just one in case of a for loop.
 2. The test name `NetBonusIsCorrectForDifferentYears/EmployeeTestParameterised.NetBonusIsCorrectForDifferentYears/0` is a combination of the following:-
-    - A Preifx `NetBonusIsCorrectForDifferentYears` coming from INSTANTIATE_TEST_SUITE_P.
+    - A Prefix `NetBonusIsCorrectForDifferentYears` coming from INSTANTIATE_TEST_SUITE_P.
     - Parameterised class name `EmployeeTestParameterised` coming from the first argument of `TEST_P` macro.
     - Test name `NetBonusIsCorrectForDifferentYears` coming from the second argument of `TEST_P` macro.
     - Finally, the iteration number.
@@ -233,7 +241,8 @@ In this output, there are two things worth noting:-
 With this parameterised test, we were able to solve the issues that we were discussing above. However, in doing so, we changed the test fixture and converted it to use `TEST_P` macro. Our previous tests based on `TEST_F` macro will not work anymore as it has been replaced. The important question is: What shall we do so that we can still keep all our useful tests from test fixtures while still being able to add parameterised test. The solution is to combine test fixture with parameterised test and the next subsection explains that.
 
 ## 3. Parameterised test based on test fixture
-In order to create a parametersied test from a test fixture, all we need to do is to create a parameterised test class which derives from both the test fixture class and `testing::WithParamInterface<T>` class (defined in GoogleTest) to create parameteried tests.
+
+In order to create a parameterised test from a test fixture, all we need to do is to create a parameterised test class which derives from both the test fixture class and `testing::WithParamInterface<T>` class (defined in GoogleTest) to create parameterised tests.
 
 ```cpp
 // create a parameterised test class from the fixture defined above.
@@ -277,7 +286,7 @@ struct TestValues{
     double inp_years_employed;
     double out_tax;
     
-    //construtor of values struct
+    //constructor of values struct
     TestValues(double salary, double bonus, double years_employed, double tax) 
               : inp_salary(salary), 
                 inp_bonus(bonus), 
@@ -286,8 +295,8 @@ struct TestValues{
 };
 
 // create a parameterised test class from the fixture defined above.
-class EmployeeTestPameterisedFixture : public EmployeeTestFixture, 
-                                       public WithParamInterface<TestValues> {
+class EmployeeTestParameterisedFixture : public EmployeeTestFixture, 
+                                         public WithParamInterface<TestValues> {
 };
 
 // Create an array of values (of type TestValues) to be injected into the test.
@@ -301,7 +310,7 @@ TestValues values[] = {
 };
 
 // Test that the tax calculation is correct.
-TEST_P(EmployeeTestPameterisedFixture, TaxCalculationIsCorrect) {
+TEST_P(EmployeeTestParameterisedFixture, TaxCalculationIsCorrect) {
     TestValues current_test_case_value = GetParam();
     employee.setBaseSalary(current_test_case_value.inp_salary);
     employee.SetBasicBonus(current_test_case_value.inp_bonus);
@@ -311,20 +320,23 @@ TEST_P(EmployeeTestPameterisedFixture, TaxCalculationIsCorrect) {
 
 // Instantiate the test case with the values array.
 INSTANTIATE_TEST_SUITE_P( CheckTaxCalculation, 
-                          EmployeeTestPameterisedFixture,
+                          EmployeeTestParameterisedFixture,
                           ValuesIn(values));
 ```
 
-The major change as compared to our previous example is shown in the cell belowe and this change is responsible to generate a paramaterised test using a test fixture.
+The major change as compared to our previous example is shown in the cell below and this change is responsible to generate a parameterised test using a test fixture.
+
 ```cpp
-class EmployeeTestPameterisedFixture : public EmployeeTestFixture, 
-                                       public WithParamInterface<TestValues> {
+class EmployeeTestParameterisedFixture : public EmployeeTestFixture, 
+                                         public WithParamInterface<TestValues> {
 };
 ```
 
 In addition, we used a function `GetParam()` defined in `gtest.h`. This function can help us to get the input values passed via `ValuesIn()` function and use it in the test logic according to our requirements. In this case, it helps us to retrieve 4 values in the order `inp_salary`, `inp_bonus`, `inp_years_employed` and `out_tax` for each test case. Thus, `GetParam()` provides a convenient way to retrieve multiple values and use them in our test logic.
+
 ## 4. Advantages of Parameterised tests
-From the above discusssion, we can see that the parameterised tests have the following advantages.
+
+From the above discussion, we can see that the parameterised tests have the following advantages.
 
 1. **Code Reusability**: With parameterized tests, we can write a single test case that can be executed with different inputs or test data. This promotes code reusability by eliminating the need to duplicate similar test cases. Instead, we can define the test logic once and apply it to multiple scenarios, reducing code duplication and improving maintainability.
 
@@ -335,6 +347,7 @@ From the above discusssion, we can see that the parameterised tests have the fol
 4. **Simplified Test Reporting**: Parameterized tests provide a concise way to report test results for multiple test cases. Each instance of the parameterized test is reported individually, allowing us to identify which specific inputs or test data passed or failed. This facilitates quick identification and debugging of issues.
 
 ### Summary
+
 In this chapter, we learnt about the basics of parameterized tests and how to use them in GoogleTest. We also learnt how to combine test fixture with parameterised tests. Finally, we learnt the advantages of parameterised tests.
 
 {% include links.md %}

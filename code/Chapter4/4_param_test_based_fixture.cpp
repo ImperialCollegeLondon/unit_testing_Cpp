@@ -46,7 +46,7 @@ struct TestValues{
 };
 
 // create a parameterised test class from the fixture defined above.
-class EmployeeTestPameterisedFixture : public EmployeeTestFixture, 
+class EmployeeTestParameterisedFixture : public EmployeeTestFixture, 
                                        public WithParamInterface<TestValues> {
 };
 
@@ -61,7 +61,7 @@ TestValues values[] = {
 };
 
 // Test that the tax calculation is correct.
-TEST_P(EmployeeTestPameterisedFixture, TaxCalculationIsCorrect) {
+TEST_P(EmployeeTestParameterisedFixture, TaxCalculationIsCorrect) {
     TestValues current_test_case_value = GetParam();
     employee.setBaseSalary(current_test_case_value.inp_salary);
     employee.SetBasicBonus(current_test_case_value.inp_bonus);
@@ -71,5 +71,5 @@ TEST_P(EmployeeTestPameterisedFixture, TaxCalculationIsCorrect) {
 
 // Instantiate the test case with the values array.
 INSTANTIATE_TEST_SUITE_P( CheckTaxCalculation, 
-                          EmployeeTestPameterisedFixture,
+                          EmployeeTestParameterisedFixture,
                           ValuesIn(values));
