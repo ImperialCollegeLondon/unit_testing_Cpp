@@ -24,6 +24,7 @@ keypoints:
 A test fixture, in the context of unit testing, refers to the preparation and configuration needed to run a set of test cases. It includes the setup of the test environment, the creation of necessary objects or resources, and the cleanup steps after the tests are executed. Test fixtures help ensure that the tests are performed in a controlled and consistent environment, providing reliable and reproducible results.
 
 In GoogleTest, a test fixture is implemented using a test fixture class. This class serves as a container for shared setup and cleanup logic, as well as any shared objects or resources required by the test cases within the fixture.
+
 ### 1.1 When is a Test Fixture Needed?
 A test fixture is typically used in the following scenarios:
 
@@ -34,10 +35,12 @@ A test fixture is typically used in the following scenarios:
 3. **Isolation and Independence**: Test fixtures provide a level of isolation and independence for each test case. Each test case within a fixture runs in its own instance of the fixture class, ensuring that changes made by one test case do not affect the others. This allows for parallel execution of test cases without interference.
 
 Let us understand how to create a test fixture, setup and teardown functions with examples.
+
 ## 2. Problem under consideration for testing
 In order to create our own test fixture, we will first explain the context or problem that we are trying to solve. We will be adding tests to check that our code works as intented by making use of test fixtures.
 
-Consider that you want to write a program to manage the details of an employee. The program should allow you to add basic detaisl of emplyee such as 
+Consider that you want to write a program to manage the details of an employee. The program should allow you to add basic details of employee such as:
+
 1. Name
 2. Age 
 3. Basic Salary
@@ -45,15 +48,15 @@ Consider that you want to write a program to manage the details of an employee. 
 5. Basic Bonus the employee has received in this year.
 
 The program should calculate the Net Bonus, Tax and Salary based on the following rules.
+
 1. Bonus Rule: An employee gets an additional 1000£ bonus if she or he has worked for more than 10 years.
 2. Tax Rule: Tax is calculated on a combination of basic salary and net bonus as shown below.
     
     * `0` if salary is less than `10k` GBP.
-    * `10%` for slar between `10K-20K` GBP.
+    * `10%` for salary between `10K-20K` GBP.
     * `20%` for salary between `20K-50K` GBP
-    * `50%` for slary greater than `50K` GBP 
+    * `50%` for salary greater than `50K` GBP 
 
-Please be advised that the purpose of above rules is to create functions which can have multiple branches and hence needs additional testing. We have tried our best to keep the example simple and realistic.
 
 Based on above, we can declare the employee class in `employee.h` as shown below ([Declaration of emloyee class](../code/Chapter3/employee.h)). 
 
@@ -106,7 +109,7 @@ public:
 };
 ```
 
-For the deifinition part, we include only a few functions here. You can find the complete definion of this class in [employee.cpp](../code/Chapter3/employee.cpp).
+For the definition part, we include only a few functions here. You can find the complete definition of this class in [employee.cpp](../code/Chapter3/employee.cpp).
 
 ```cpp
 // Constructor definition
@@ -207,9 +210,11 @@ TEST(EmployeeTest, CanSetAge) {
     EXPECT_EQ(employee.getAge(), 30);
 }
 ``` 
+
 While the above test solve our problem, there is a problem of code duplication and object creation for each test. As we can see in each test that we have to create an instance of employee class by using the statement `Employee employee{"John", 25, 10000, 5, 1000};`. This is against the `DRY (Don't Repeat Yourself)' https://en.wikipedia.org/wiki/Don%27t_repeat_yourself. 
 
 Morover, all our tests depend on the same `employee` class. Therefore, it makes sense to create an instance of `employee` at one place and let the GoogleTest manage the creation of the instance for each test case. Let us see this in action in next section.
+
 ## 4. Test fixture for our employee class
 
 Now that we know why do we need a test fixture, let us fist learn about the basic syntax of the test fixture in GoogleTest and then write the code for it.
@@ -217,7 +222,6 @@ Now that we know why do we need a test fixture, let us fist learn about the basi
 In GooglTest, a test fixture is created by writing another class which is derived from `::testing::Test` using `public` [access specifier](https://en.cppreference.com/w/cpp/language/access). The genreal syntax is as shown below
 
 ```cpp
-
 class Your_test_fixture_class_name : public::testing::Test {
     public:
         ClassUnderTest publicInstance;
@@ -318,7 +322,8 @@ int EmployeeTable::getEntryCount() const {
 }
 ```
 
-We want to test our table class. In particular, we are interested in testing the following:-
+We want to test our table class. In particular, we are interested in testing the following:
+
 1. Table is not empty after adding an employee.
 2. Number of entries is one after adding an employee.
 3. Number of enries in table reduces by one after removing an employee (assuming that there was at least one entry in the table).
@@ -358,6 +363,7 @@ TEST_F(EmployeeTableTest, NumberOfEntriesIsOneLessAfterRemovingEmployee) {
 As we can see from above, that all creating an instance of `employee` first by using the statement like `Employee new_employee` followed by adding an entry to the table `table.addEmployee(new_employee)`. Thus, we can see that our tests need some setup which is common for all and hence `Setup` functionc comes to rescue for exactly such scenarios.
 
 ## 6. Setup and Teardown function in test fixture
+
 A `Setup()` function in a test fixture is responsible for providing and executing the necessary setup instructions for our tests. While a `Teardown()` function is responsible for cleaning up operations such as deleting the memory allocated, closing the database connection etc.
 
 To create a `Setup()` function, we just define this function in our fixture class which will [override](https://en.cppreference.com/w/cpp/language/override) the [virtual function](https://en.cppreference.com/w/cpp/language/virtual) in `testing::Test` class in GoogleTest.
@@ -395,16 +401,13 @@ class EmployeeTableWithOneEmployee : public testing::Test {
         }
 };
 
-
 TEST_F(EmployeeTableWithOneEmployee, TableIsNotEmptyWhenCreatedWithOneEmployee) {
     EXPECT_FALSE(table.isEmpty());
 }
 
-
 TEST_F(EmployeeTableWithOneEmployee, NumberOfEntriesIsOneWhenCreatedWithOneEmployee) {
     EXPECT_EQ(table.getEntryCount(), 1);
 }
-
 
 TEST_F(EmployeeTableWithOneEmployee, NumberOfEntriesIsOneLessAfterRemovingEmployee) {
     table.removeEmployee("John Doe");
@@ -415,6 +418,7 @@ TEST_F(EmployeeTableWithOneEmployee, NumberOfEntriesIsOneLessAfterRemovingEmploy
 As we can see from above, our test looks much cleaner with the setup and teardown function. The reason for creating another test fixture for writing `Setup()` and `Teardown()` is because the first two tests do not require it.
 
 ## 7. Tests Filtering in GoogleTest
+
 Sometimes, we may have some tests that take a lot of time to run. In some other case, when we are developing and testing our code, we do not want to run our entire test suite and run only one of the test that we have recently added. 
 
 GoogleTest allows to filter test by command line parameter `--gtest_filter`. The general syntax to use `gtest_filter` is
