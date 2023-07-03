@@ -36,7 +36,7 @@ TEST_F(EmployeeTableTest, NumberOfEntriesIsOneAfterAddingEmployee) {
     EXPECT_EQ(table.getEntryCount(), 1);
 }
 
-// Test that number of enries in table reduces by one after removing an employee.
+// Test that number of entries in table reduces by one after removing an employee.
 TEST_F(EmployeeTableTest, NumberOfEntriesIsOneLessAfterRemovingEmployee) {
     Employee new_employee("John Doe", 30, 5000, 5, 1000);
     table.addEmployee(new_employee);

@@ -183,27 +183,3 @@ void Employee::displayInfo() const
 // Destructor
 Employee::~Employee() {
 }
-
-
-// int main() {
-//     Employee emp("John Doe", 30, 35000.0, 12, 4000);
-//     emp.displayInfo();
-
-//     emp.setName("Jane Smith");
-//     cout << "Name: " << emp.getName() << endl;
-
-//     emp.setAge(35);
-//     cout << "Age: " << emp.getAge() << endl;
-
-//     cout << "-----------------------------------------" << endl;
-//     emp.setBaseSalary(45000.0);
-//     cout << "Base_Salary: £" << emp.getBasicSalary() << endl;
-//     cout << "Tax to be paid: £ " << emp.getTaxAmount() << endl;
-//     cout << "Net_Salary: £" << emp.getNetSalary() << endl;
-
-//     cout << "-----------------------------------------" << endl;
-//     Employee emp2("LKR", 32, 30000, 5, 2000);
-//     emp2.displayInfo();
-
-//     return 0;
-// }
