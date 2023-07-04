@@ -12,7 +12,7 @@ keypoints:
 
 ## Testing untestable code
 
-Sooner or later you will face a piece of code that is not straightforward to write a test for. It might be because it calls a function that requests some data from a piece of hardware, or because it needs to access a database that it is not available in the testing environment, or simply because it triggers a complex and time consuming computation process that is only suited to run in a supercomputer. Whatever the reason, you have a problem. Moreover, you might want to test if some intermediate result in the calculation is valid, and not just the final output.
+Sooner or later you will face a piece of code that is not straightforward to write a test for. It might be because it calls a function that requests some data from a piece of hardware, or because it needs to access a database that is not available in the testing environment, or simply because it triggers a complex and time consuming computation process that is only suited to run in a supercomputer. Whatever the reason, you have a problem. Moreover, you might want to test if some intermediate result in the calculation is valid, and not just the final output.
 
 There is one possible solution: replace the problematic function by another one that, for the purposes of the test, behaves in a similar manner but without the problematic functionality of the original one. These replacements are called **test doubles**.
 
@@ -34,7 +34,7 @@ Now, the complexity becomes how to use them!
 
 ### Dependency injection
 
-Consider the following function that normalizes an array according to some definition of norm (ignore whether this is the most performing approach or not):
+Consider the following function that normalizes an array according to some definition of norm (ignore whether this is the most performant approach or not):
 
 ```cpp
 void normalize_v1(int array[], int length)
@@ -162,7 +162,7 @@ TEST(IsAliveTest, Dies) {
 
 > ### Mocking is not always the solution
 >
-> In the above example, it would have been tricky to test the logic of the function in full without mocks. However, they are not always the solution. Mocks do not work with  top level functions, only with classes. Depending on the complexity of the class, setting up the mock might be too complicated and not worth it for testing the function of interest. Very often, stubs, fakes and dummies will carry you a long way before you need to use mocks.
+> In the above example, it would have been tricky to test the logic of the function in full without mocks. However, they are not always the solution. Mocks do not work with top level functions, only with classes. Depending on the complexity of the class, setting up the mock might be too complicated and not worth it for testing the function of interest. Very often, stubs, fakes and dummies will carry you a long way before you need to use mocks.
 {: .callout}
 
 ## Test doubles in action
