@@ -4,14 +4,14 @@ teaching: TBC
 exercises: TBC
 questions:
 - "What is a test fixture?"
-- "How to create your own test fixture using GoogleTest?"
-- "What does Setup and Teardown mean while using test fixtures?"
+- "How can I create my own test fixture using GoogleTest?"
+- "What do Setup and Teardown mean while using test fixtures?"
 objectives:
-- "Understand the basics of test fixture."
-- "Understand how to create test fixture using GoogleTest."
+- "Understand the basics of test fixtures."
+- "Understand how to create test fixtures using GoogleTest."
 - "Understand the advantages of test fixtures."
 - "Understand the need of setup and teardown functions."
-- "Understand how to write your own setup and teardown function."
+- "Understand how to write your own setup and teardown functions."
 - "Understand how to run a subset of tests."
 keypoints:
 - "We learnt about test fixtures in GoogleTest."
@@ -30,7 +30,7 @@ In GoogleTest, a test fixture is implemented using a test fixture class. This cl
 
 A test fixture is typically used in the following scenarios:
 
-1. **Shared Setup and Teardown**: When multiple test cases require a common set of setup or teardown (which means cleaning in general and is the opposite of setup) steps, a test fixture is beneficial. Instead of duplicating the setup and teardown code in each test case, we can define it once in the test fixture and reuse it across all the tests.
+1. **Shared Setup and Teardown**: When multiple test cases require identical preparation and cleanup, a test fixture is beneficial. Instead of duplicating the setup and teardown code in each test case, we can define it once in the test fixture and reuse it across all the tests.
 
 2. **Reducing Code Duplication**: Test fixtures help in reducing code duplication. By encapsulating the common setup and teardown logic within a fixture, we avoid duplicating the same code in multiple test cases. This improves code maintainability and reduces the chances of errors due to inconsistent or incomplete setup/teardown.
 
@@ -42,7 +42,7 @@ Let us understand how to create a test fixture, setup and teardown functions wit
 
 In order to create our own test fixture, we will first explain the context or problem that we are trying to solve. We will be adding tests to check that our code works as intended by making use of test fixtures.
 
-Consider that you want to write a program to manage the details of an employee. The program should allow you to add basic details of employee such as:
+Consider that you want to write a program to manage the details of an employee. The program should allow you to add basic details of an employee such as:
 
 1. Name
 2. Age
@@ -50,9 +50,9 @@ Consider that you want to write a program to manage the details of an employee. 
 4. Number of years of employment
 5. Basic Bonus the employee has received in this year.
 
-The program should calculate the Net Bonus, Tax and Salary based on the following rules.
+The program should calculate the Net Bonus, Tax and Salary based on the following rules:
 
-1. Bonus Rule: An employee gets an additional 1000£ bonus if she or he has worked for more than 10 years.
+1. Bonus Rule: An employee gets an additional £1000 bonus if she or he has worked for more than 10 years.
 2. Tax Rule: Tax is calculated on a combination of basic salary and net bonus as shown below.
 
     * `0` if salary is less than `10k` GBP.
@@ -188,7 +188,7 @@ void Employee::calcNetSalary()
 ```
 With this code, we now have the necessary fragments to test our `Employee` class. Let us see this in action.
 
-## 3. Unit tests for our employee class without test fixture
+## 3. Unit tests for our employee class without test fixtures
 
 In order to clearly demonstrate why a test fixture would be needed, we first write some tests for our employee class without using a fixture. This will help us to understand why does a fixture is useful and how to use it.
 
@@ -215,15 +215,15 @@ TEST(EmployeeTest, CanSetAge) {
 }
 ```
 
-While the above test solve our problem, there is a problem of code duplication and object creation for each test. As we can see in each test that we have to create an instance of employee class by using the statement `Employee employee{"John", 25, 10000, 5, 1000};`. This is against the `DRY (Don't Repeat Yourself)' https://en.wikipedia.org/wiki/Don%27t_repeat_yourself.
+While the above test solve our problem, there is a problem of code duplication and object creation for each test. As we can see in each test that we have to create an instance of employee class by using the statement `Employee employee{"John", 25, 10000, 5, 1000};`. This is against the `DRY (Don't Repeat Yourself)' https://en.wikipedia.org/wiki/Don%27t_repeat_yourself principle.
 
-Moreover, all our tests depend on the same `employee` class. Therefore, it makes sense to create an instance of `employee` at one place and let the GoogleTest manage the creation of the instance for each test case. Let us see this in action in next section.
+Moreover, all our tests depend on the same `Employee` class. It therefore makes sense to create an instance of `Employee` once, and let the GoogleTest manage the creation of the instance for each test case. Let us see this in action in next section.
 
 ## 4. Test fixture for our employee class
 
 Now that we know why do we need a test fixture, let us fist learn about the basic syntax of the test fixture in GoogleTest and then write the code for it.
 
-In GooglTest, a test fixture is created by writing another class which is derived from `::testing::Test` using `public` [access specifier](https://en.cppreference.com/w/cpp/language/access). The general syntax is as shown below
+In GoogleTest, a test fixture is created by writing another class which is derived from `::testing::Test` using `public` [access specifier](https://en.cppreference.com/w/cpp/language/access). The general syntax is as shown below
 
 ```cpp
 class Your_test_fixture_class_name : public::testing::Test {
@@ -254,7 +254,7 @@ TEST_F(Your_test_fixture_class_name, Your_test_name) {
 }
 ```
 
-Since we now have all the basic tools to create our own test fixtures, let us rewrite the above tests by using a fixture. The code is present in this [2_employeetest.cpp](../code/Chapter3/2_employeetest.cpp). For reference, the tests are shown in the cell below.
+Since we now have all the basic tools to create our own test fixtures, let us rewrite the above tests using a fixture. The code is present in this [2_employeetest.cpp](../code/Chapter3/2_employeetest.cpp). For reference, the tests are shown in the cell below.
 
 ```cpp
 // Create a test fixture.
@@ -296,7 +296,7 @@ TEST_F(EmployeeTestFixture, NetSalaryIsCorrect) {
 
 So far, our test fixture class only creates an instance of object for the class under test. In many cases, we often want some common action for all our tests such as adding an entry, connection to a database, response from a site etc. Let us try to understand this with example which will set the background for the `setup` and `teardown` functions.
 
-Let us consider that we are creating a table which will store the details of various employees. The table allows us to add new entries, remove employee from the table, get the number of entries in the table etc. The declaration of table class is given in [employee_table.h](../code/Chapter3/employee_table.h). The definitions of table class is present in [employee_table.cpp](../code/Chapter3/employee_table.cpp). We give the definition of table class below for reference.
+Let us consider that we are creating a table which will store the details of various employees. The table allows us to add new entries, remove employees from the table, get the number of entries in the table etc. The declaration of table class is given in [employee_table.h](../code/Chapter3/employee_table.h). The definitions of table class is present in [employee_table.cpp](../code/Chapter3/employee_table.cpp). We give the definition of table class below for reference.
 
 ```cpp
 void EmployeeTable::addEmployee(const Employee& employee) {
@@ -371,7 +371,7 @@ As we can see from above, that all creating an instance of `employee` first by u
 
 ## 6. Setup and Teardown function in test fixture
 
-A `Setup()` function in a test fixture is responsible for providing and executing the necessary setup instructions for our tests. While a `Teardown()` function is responsible for cleaning up operations such as deleting the memory allocated, closing the database connection etc.
+A `Setup()` function in a test fixture is responsible for providing and executing the necessary setup instructions for our tests. Similarly, a `Teardown()` function is responsible for cleaning up operations such as deleting the memory allocated, closing the database connection etc.
 
 To create a `Setup()` function, we just define this function in our fixture class which will [override](https://en.cppreference.com/w/cpp/language/override) the [virtual function](https://en.cppreference.com/w/cpp/language/virtual) in `testing::Test` class in GoogleTest.
 
@@ -428,7 +428,7 @@ As we can see from above, our test looks much cleaner with the setup and teardow
 
 Sometimes, we may have some tests that take a lot of time to run. In some other case, when we are developing and testing our code, we do not want to run our entire test suite and run only one of the test that we have recently added.
 
-GoogleTest allows to filter test by command line parameter `--gtest_filter`. The general syntax to use `gtest_filter` is
+GoogleTest allows us to select or omit tests using the command line option `--gtest_filter`. The general syntax to use `gtest_filter` is
 
 ```bash
 $ ./your_executable --gtest_filter=Pattern[-Pattern]
@@ -436,7 +436,7 @@ $ ./your_executable --gtest_filter=Pattern[-Pattern]
 
 where `Pattern` can be a valid string patterns. The `-Pattern` will run all tests except the pattern in the command. Instead of a pattern, we can also use full test name in the form `test_suite_name.test_name`.
 
-Let us run our table tests in the file [4_table_test_with_setup.cpp](../code/Chapter3/4_table_test_with_setup.cpp). Let us assume that the executable name is `my_test`. We get the following output.
+Let us run our table tests in the file [4_table_test_with_setup.cpp](../code/Chapter3/4_table_test_with_setup.cpp). Let us assume that the executable name is `employee_table_tests`. We get the following output.
 
 ```bash
 [==========] Running 5 tests from 2 test suites.
@@ -462,7 +462,7 @@ Let us run our table tests in the file [4_table_test_with_setup.cpp](../code/Cha
 [  PASSED  ] 5 tests.
 ```
 
-Since, we defined 5 test, all tests run if we run the executable. Now, let us filter the tests. We want to run only the tests associated with `EmployeeTableWithOneEmployee`. We use the following command
+Since, we defined 5 tests, all tests run if we run the executable. Now, let us filter the tests. We want to run only the tests associated with `EmployeeTableWithOneEmployee`. We use the following command
 
 ```bash
 $ ./my_test --gtest_filter=*One
