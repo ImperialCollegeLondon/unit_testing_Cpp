@@ -23,11 +23,11 @@ Below, we share some of the best practices that should be followed while writing
     - Follow a consistent naming convention for test methods, such as prefixing them with "Test" or using a "should" or "can" style of naming.
 
 2. **Keep Tests Focused and Isolated**:
-
     - Ensure that each test case focuses on a single behaviour or scenario, testing one aspect of your code at a time.
     - Avoid writing tests that depend on the state or side effects of other tests. Each test case should be independent and self-contained.
     - Use test fixtures to encapsulate common setup and teardown logic, promoting code reusability and reducing code duplication.
     - In general follow the rule **ONE ASSERT PER TEST** as much as possible.
+    - Be cautious when using global variables or static state in tests, as they can introduce unwanted dependencies and make tests more fragile.
 
 3. **Write Clear and Readable Tests**:
     - Use comments to explain the purpose and expected behaviour of each test case, especially when dealing with complex or edge cases. A comment would enhance the readability of the test.
@@ -42,25 +42,20 @@ Below, we share some of the best practices that should be followed while writing
     - Regularly review your test suite to identify gaps in test coverage and update it accordingly. Periodically review and remove redundant or obsolete tests.
     - Use code coverage analysis tools to measure the effectiveness of your tests and identify areas that need additional testing.
 
-6. **Maintain Test Independence**:
-    - Avoid sharing mutable state between tests. Each test case should start with a clean and consistent state to ensure test independence.
-    - Reset any modified state or resources in the test teardown phase to leave the environment in a predictable state for subsequent tests.
-    - Be cautious when using global variables or static state in tests, as they can introduce unwanted dependencies and make tests more fragile.
-
-7. **Test Doubles and dependency injection**:
+6. **Test Doubles and dependency injection**:
     - Use dependency injection to decouple your functionality from external dependencies: your code will become more modular and reusable.
     - Dependency injection is essential to use test doubles, so make sure that you write your code in a way that facilitate testing.
     - There are several types of test doubles, like stubs, fakes, mocks or dummies, each useful in different contexts.
     - Use mocking frameworks, such as Google Mock, to create mock objects for dependencies that need a higher degree of control or isolation during testing.
 
-8. **Continuous Integration and Test Execution**:
+7. **Continuous Integration and Test Execution**:
     - Integrate your unit tests into your continuous integration (CI) process to ensure that tests are automatically executed with each code change.
     - Aim for fast and deterministic tests by minimising external dependencies, reducing I/O operations, and avoiding non-deterministic behaviours.
 
-9. **Test Failure Investigation**:
+8. **Test Failure Investigation**:
     - When a test fails, investigate and diagnose the failure by examining the failure message, log output, and any relevant debug information.
 
-10. **Ensure Repeatability**:
+9. **Ensure Repeatability**:
     - Ensure that the unit tests produce the same results when run at different times, different machines etc.
 
 ### Summary
