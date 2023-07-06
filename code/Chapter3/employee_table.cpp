@@ -20,7 +20,7 @@ void EmployeeTable::removeEmployee(const std::string& employeeName) {
 }
 
 void EmployeeTable::displayEmployeesName() const {
-    cout << "-------------------------------------------------- " << endl;
+    std::cout << "-------------------------------------------------- " << std::endl;
     for (const auto& employee : employees) {
         std::cout << employee.getName() << std::endl;
     }

@@ -3,7 +3,7 @@
 #include "employee.h"
 
 
-Employee:: Employee(const string& employee_name, float employee_age, 
+Employee::Employee(const string& employee_name, float employee_age, 
                     double employeeSalary, double employeeNumberYearsEmployed,
                     double employeeBonus)
                     : age(employee_age), 
@@ -40,7 +40,7 @@ void Employee::setBaseSalary(double employeeSalary)
 {
     base_salary = employeeSalary;
     
-    //Calculate new tex based on new base salary
+    // Calculate new tax based on new base salary
     calcTaxAmount();
 
     // Changing base salary will change net salary.
@@ -168,16 +168,16 @@ double Employee::getNetSalary() const
 
 void Employee::displayInfo() const
 {
-    cout << "Name: " << name << endl;
-    cout << "Age: " << age << endl;
-    cout << "Base_Salary: £" << base_salary << endl;
-    cout << "Number of Years Employed: " << number_years_employed << endl;
+    std::cout << "Name: " << name << std::endl;
+    std::cout << "Age: " << age << std::endl;
+    std::cout << "Base_Salary: £" << base_salary << std::endl;
+    std::cout << "Number of Years Employed: " << number_years_employed << std::endl;
     
-    cout << "Basic_Bonus: £" << basic_bonus << endl;
-    cout << "Net_Bonus: £" << net_bonus << endl;
+    std::cout << "Basic_Bonus: £" << basic_bonus << std::endl;
+    std::cout << "Net_Bonus: £" << net_bonus << std::endl;
     
-    cout << "Tax to be paid: £ " << tax_amount << endl;
-    cout << "Net_Salary: £" << net_salary << endl;
+    std::cout << "Tax to be paid: £" << tax_amount << std::endl;
+    std::cout << "Net_Salary: £" << net_salary << std::endl;
 }
 
 // Destructor

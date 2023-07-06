@@ -1,9 +1,6 @@
-#include <iostream>
 #include <gtest/gtest.h>
 #include "employee.h"
 
-using namespace :: testing;
-using namespace :: std;
 
 
 // Test if we can set the name of an employee.

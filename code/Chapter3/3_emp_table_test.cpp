@@ -1,9 +1,6 @@
-#include <iostream>
 #include <gtest/gtest.h>
 #include "employee_table.h"
 
-using namespace :: testing;
-using namespace :: std;
 
 // Test fixture for EmployeeTable class.
 class EmployeeTableTest : public testing::Test {
