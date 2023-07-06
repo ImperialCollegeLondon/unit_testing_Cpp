@@ -47,8 +47,11 @@ Below, we share some of the best practices that should be followed while writing
     - Reset any modified state or resources in the test teardown phase to leave the environment in a predictable state for subsequent tests.
     - Be cautious when using global variables or static state in tests, as they can introduce unwanted dependencies and make tests more fragile.
 
-7. **Mocking and Test Doubles**:
-    - Use mocking frameworks, such as Google Mock, to create test doubles (mock objects) for dependencies that need to be isolated or controlled during testing.
+7. **Test Doubles and dependency injection**:
+    - Use dependency injection to decouple your functionality from external dependencies: your code will become more modular and reusable.
+    - Dependency injection is essential to use test doubles, so make sure that you write your code in a way that facilitate testing.
+    - There are several types of test doubles, like stubs, fakes, mocks or dummies, each useful in different contexts.
+    - Use mocking frameworks, such as Google Mock, to create mock objects for dependencies that need a higher degree of control or isolation during testing.
 
 8. **Continuous Integration and Test Execution**:
     - Integrate your unit tests into your continuous integration (CI) process to ensure that tests are automatically executed with each code change.
