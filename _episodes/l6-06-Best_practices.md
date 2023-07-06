@@ -15,7 +15,7 @@ keypoints:
 
 ## 1. Best Practices for writing unit tests
 
-Below, we share some of the best practices that should be followed while writing unit tests. The suggestions below are general in nature and apply to all testing frameworks, not just C++. Some of the suggestions are from the book [Modern C++ programming with Test-Driven-Development](`https://www.amazon.co.uk/Modern-Programming-Test-Driven-Development-Better/dp/1937785483`) by *Jeff Langr*. We have also used some suggestions that came out from a simple Google search and those have not been explicitly cited.
+Below, we share some of the best practices that should be followed while writing unit tests. The suggestions below are general in nature and apply to all testing frameworks, not just C++. Some of the suggestions are from the book [Modern C++ programming with Test-Driven-Development](`https://www.amazon.co.uk/Modern-Programming-Test-Driven-Development-Better/dp/1937785483`) by *Jeff Langr*.
 
 1. **Test Organisation and Naming Conventions**:
     - Organise tests into logical groups using test suites and test case names that reflect the functionality or components being tested.
