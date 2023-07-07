@@ -10,8 +10,8 @@ objectives:
 - "Understand the basics of test fixtures."
 - "Understand how to create test fixtures using GoogleTest."
 - "Understand the advantages of test fixtures."
-- "Understand the need of setup and teardown functions."
-- "Understand how to write your own setup and teardown functions."
+- "Understand the need of Setup and Teardown functions."
+- "Understand how to write your own Setup and Teardown functions."
 - "Understand how to run a subset of tests."
 keypoints:
 - "We learnt about test fixtures in GoogleTest."
