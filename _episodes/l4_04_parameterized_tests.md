@@ -156,7 +156,7 @@ MyStruct MyValues[] = {
 };
 ```
 
-3. **Create you test with TEST_P macro**: Instead of `TEST_F` macro that we used for test fixture, we use a `TEST_P` macro where `P` stands for `Parameterised` as shown below.
+3. **Create your test with TEST_P macro**: Instead of `TEST_F` macro that we used for test fixture, we use a `TEST_P` macro where `P` stands for `Parameterised` as shown below.
 
 ```cpp
 TEST_P(YourTestParameterisedClass, NameofTest) {
@@ -164,7 +164,7 @@ TEST_P(YourTestParameterisedClass, NameofTest) {
 }
 ```
 
-4. **Instantiate your test**: Finally, we instantiate our test by using `INSTANTIATE_TEST_SUITE_P` macro. The general syntax of this macro is given below.
+4. **Instantiate your test**: Finally, we instantiate our test by using the `INSTANTIATE_TEST_SUITE_P` macro. The general syntax of this macro is given below.
 
 ```cpp
 INSTANTIATE_TEST_SUITE_P(SuitableNameTest, 
@@ -172,7 +172,7 @@ INSTANTIATE_TEST_SUITE_P(SuitableNameTest,
                          ValuesIn(MyValues));
 ```
 
-In above cell, the first argument to `INSTANTIATE_TEST_SUITE_P` could be any suitable name. GoogleTest will add this as a PREFIX to the test name when you will run the test. The second argument is the name of the parameterised class that you have created which is also the first argument for `TEST_P` macro. Finally, the last argument is a `ValuesIn()` function which is defined in GoogleTest library. It helps to inject the test values into the parameterised test one by one.
+In the above cell, the first argument to `INSTANTIATE_TEST_SUITE_P` could be any suitable name. GoogleTest will add this as a PREFIX to the test name when you will run the test. The second argument is the name of the parameterised class that you have created, which is also the first argument for `TEST_P` macro. Finally, the last argument is a `ValuesIn()` function which is defined in the GoogleTest library. It helps to inject the test values into the parameterised test one by one.
 
 Let us see how we use the above concepts for an actual test that we have been writing in our previous subsections. For more details, please see [3_Parameterised_not_using_fixture.cpp](../code/Chapter4/3_Parameterised_not_using_fixture.cpp).
 
@@ -231,14 +231,14 @@ On running the above file, we see the following output.
 
 In this output, there are two things worth noting:-
 
-1. As expected, we are now running two tests as compared to just one in case of a for loop.
+1. As expected, we are now running two tests as compared to just one in the case of a `for` loop.
 2. The test name `NetBonusIsCorrectForDifferentYears/EmployeeTestParameterised.NetBonusIsCorrectForDifferentYears/0` is a combination of the following:-
     - A Prefix `NetBonusIsCorrectForDifferentYears` coming from INSTANTIATE_TEST_SUITE_P.
     - Parameterised class name `EmployeeTestParameterised` coming from the first argument of `TEST_P` macro.
     - Test name `NetBonusIsCorrectForDifferentYears` coming from the second argument of `TEST_P` macro.
     - Finally, the iteration number.
 
-With this parameterised test, we were able to solve the issues that we were discussing above. However, in doing so, we changed the test fixture and converted it to use `TEST_P` macro. Our previous tests based on `TEST_F` macro will not work anymore as it has been replaced. The important question is: What shall we do so that we can still keep all our useful tests from test fixtures while still being able to add parameterised test. The solution is to combine test fixture with parameterised test and the next subsection explains that.
+With this parameterised test, we were able to solve the issues that we were discussing above. However, in doing so, we changed the test fixture and converted it to use `TEST_P` macro. Our previous tests based on `TEST_F` macro will not work anymore as it has been replaced. The important question is: What shall we do so that we can still keep all our useful tests from test fixtures while still being able to add parameterised test? The solution is to combine test fixtures with parameterised tests and the next subsection explains that.
 
 ## 3. Parameterised test based on test fixture
 
@@ -251,7 +251,7 @@ class YourParameterisedClass : public YourFixtureClass,
 };
 ```
 
-For the demonstration purpose, let us assume that we now want to check our tax calculation function `getTaxAmount()` which has more branches as compared to bonus calculation. For complete code, see the file [4_param_test_based_fixture.cpp](../code/Chapter4/4_param_test_based_fixture.cpp). We give a small section of code below for reference.
+For the purpose of demonstration, let us assume that we now want to check our tax calculation function `getTaxAmount()` which has more branches as compared to bonus calculation. For complete code, see the file [4_param_test_based_fixture.cpp](../code/Chapter4/4_param_test_based_fixture.cpp). We give a small section of code below for reference.
 
 ```cpp
 // Create a test fixture.
@@ -324,7 +324,7 @@ INSTANTIATE_TEST_SUITE_P( CheckTaxCalculation,
                           ValuesIn(values));
 ```
 
-The major change as compared to our previous example is shown in the cell below and this change is responsible to generate a parameterised test using a test fixture.
+The major change as compared to our previous example is shown in the cell below and this change is responsible for generating a parameterised test using a test fixture.
 
 ```cpp
 class EmployeeTestParameterisedFixture : public EmployeeTestFixture, 
