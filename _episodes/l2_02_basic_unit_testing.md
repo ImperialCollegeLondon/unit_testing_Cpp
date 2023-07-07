@@ -13,7 +13,7 @@ objectives:
 - "Understand some of the macros available in GoogleTest"
 keypoints:
 - "We learnt about some of the popular testing frameworks for C++."
-- "We learnt the baiscs of GoogleTest."
+- "We learnt the basics of GoogleTest."
 - "We learnt how to use GoogleTest to write our tests."
 - "We learnt about anatomy of a unit tests." 
 - "We learnt how to write effective unit tests."
@@ -21,6 +21,7 @@ keypoints:
 ---
 
 ## 1. Popular frameworks for testing in C++
+
 In C++, a framework refers to a pre-defined software structure or set of libraries that provides a foundation for developing applications or solving specific types of problems. It typically includes a collection of reusable code, tools, and guidelines that help developers build applications more efficiently. There can be different types of frameworks in C++ which include:
 
 1. Application Framework
@@ -46,7 +47,7 @@ Simply defined, GoogleTest is a testing framework developed by Google's testing 
 
 1. **Comprehensive Features**: GoogleTest provides a rich set of features, including a wide range of assertion macros, test fixtures, parameterized tests, test discovery, test filtering, and powerful mocking capabilities. It offers a complete testing framework that can handle various testing scenarios.
 2. **Large and Active Community**: GoogleTest has a large and active community of developers. This means that there is ample support available in terms of documentation, tutorials, forums, and online resources. 
-3. **Mature and Stable**: It is a mature and stable framework that has been used extensively in industry projects and open-source software. 
+3. **Mature and Stable**: It is a mature and stable framework that has been used extensively in industry projects and open-source software.
 4. **Wide Platform Support**: GoogleTest supports multiple platforms, including Windows, Linux, macOS, and various compilers. It is compatible with popular development environments and build systems, making it suitable for a wide range of C++ projects.
 5. **Flexible and Extensible**: GoogleTest provides flexibility in test organization and customization. It allows you to structure your tests using test cases and test suites. You can also define custom test fixtures and customise test execution and reporting. Additionally, GoogleTest can be extended with custom assertion macros and utilities to suit your specific testing needs.
 
@@ -89,7 +90,7 @@ The different parts in the above cell have the following meanings:
 
 ### 3.3. Initialise GoogleTest in your main function
 
-When you install GoogleTest you would get two libraries namely `libgtest.a` and `libgtest_main.a` (The extension `.a` means it is a static library and is applicable for Linux based systems). The first one, i.e. `libgtest.a`, is the library which provides all the necessary testing features such as assertions, test discovery, collection of results etc. The second library, i.e. `libgtest_main.a`, provides a main function so that you do not need to write your own main function for testing. For more details, refer to https://stackoverflow.com/questions/6457856/whats-the-difference-between-gtest-lib-and-gtest-main-lib.  
+When you install GoogleTest you would get two libraries namely `libgtest.a` and `libgtest_main.a` (The extension `.a` means it is a static library and is applicable for Linux based systems). The first one, i.e. `libgtest.a`, is the library which provides all the necessary testing features such as assertions, test discovery, collection of results etc. The second library, i.e. `libgtest_main.a`, provides a main function so that you do not need to write your own main function for testing. For more details, refer to [Difference between libgtest and libgtest-main](https://stackoverflow.com/questions/6457856/whats-the-difference-between-gtest-lib-and-gtest-main-lib).  
 
 For this sub-section, we are assuming that you are writing your own main function, while the next section describes how to run your tests without your own main function by linking to the main function provided in `lgtest_main`. You will need to include the following lines in your main function:
 
@@ -118,7 +119,7 @@ $ g++ your_code.cpp -I path_to_your_gtest.h -L path_to_your_lgtest.a -lgtest -lp
 $ ./your_executable_name
 ```
 
-In the above cell, `lpthread` refers to `pthread` library which is an acronym for "POSIX Threads". It is a library in C and C++ that provides an interface for creating and managing threads in a multi-threaded program. It is based on the POSIX (Portable Operating System Interface) standard for thread management. 
+In the above cell, `lpthread` refers to `pthread` library which is an acronym for "POSIX Threads". It is a library in C and C++ that provides an interface for creating and managing threads in a multi-threaded program. It is based on the POSIX (Portable Operating System Interface) standard for thread management.
 
 Although, we are not using any multi-threaded feature explicity in this course, we still need to link the progam with this library. This is because some of the function described in `lgtest` depends on `lpthread` and without it the linker will give an error. 
 
@@ -127,6 +128,7 @@ If you do not want to write your main function, you can link against the one pro
 ```bash
 $ g++ your_code.cpp -I path_to_your_gtest.h -L path_to_your_lgtest.a -lgtest_main -lgtest -lpthread -o your_executable_name
 ```
+
 ## 4. Test Assertions in GoogleTest
 
 [Assertions in C++](https://cplusplus.com/reference/cassert/assert/) are statements used to validate assumptions or conditions during program execution. They are primarily used for debugging and testing purposes to check if certain conditions are true. Assertions help detect programming errors and provide a mechanism to halt the program's execution or display an error message when a condition is not satisfied.
@@ -142,6 +144,7 @@ ASSERT_EQ(expected_value, your_function(function_arguments));
 // You can alo change the order if you prefer.
 ASSERT_EQ(your_function(function_arguments), expected_value);
 ```
+
 Other useful equality assertions include `ASSERT_NE`, `ASSERT_LT`, `ASSERT_LE`, `ASSERT_GT`, and `ASSERT_GE` for performing inequality comparisons.
 
 2. **Boolean Assertions**: Boolean assertions are used to verify boolean conditions. For example, `ASSERT_TRUE(condition)` checks that the `condition` is `true`, while `ASSERT_FALSE(condition)` ensures that the `condition` is `false`.
@@ -252,6 +255,7 @@ On compiling and running above program, we get the following output.
 [==========] 3 tests from 1 test suite ran. (0 ms total)
 [  PASSED  ] 3 tests.
 ```
+
 ### 7.1 Exercise
 
 Modify the above program to throw an exception for negative values and write a test for this.
@@ -280,6 +284,7 @@ TEST(FibonacciTest, ThrowsExceptionNegativeInput) {
 ```
 
 ### Summary
+
 In this chapter, we learnt about the basics of GoogleTest and how to use it to write tests in C++.
 
 {% include links.md %}
