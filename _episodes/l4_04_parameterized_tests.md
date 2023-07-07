@@ -11,8 +11,8 @@ objectives:
 - "Understand the advantages of parameterised tests."
 - "Understand how to combine a test fixtures with parameterised test."
 keypoints:
-- "We learnt about parameterised tests in GoogleTest."
-- "We learnt how to create our own parameterised tests."
+- "We learnt about parameterised tests and how to create them in GoogleTest."
+- "We learnt how parameterised tests are better as compared to using a loop for testing multiple values, conditions, branches etc."
 - "We learnt how to combine test fixture with parameterised test."
 ---
 
@@ -44,7 +44,7 @@ TEST_F(EmployeeTestFixture, NetBonusIsCorrectWhenYearsGreaterThan10) {
 }
 ```
 
-While the above solution works pretty well, it has a serious drawback. If we carefully look at the tests, we see that the test logic is repeated in both the tests. The only difference between the two tests are the input and output values. Moreover, managing such tests will become problematic as the number of test conditions (or input/output) values increases.
+While the above solution works pretty well, it has a serious drawback. If we carefully look at the tests, we see that the test logic is repeated in both the tests. The only difference between the two tests are the input and output values. Moreover, managing such tests will become problematic as the number of test conditions (or input/output) values increases. Imagine if bonus also depended on productivity, experience, age, etcetera? The number of input variations to test grows exponentially as the number and range of arguments grows.
 
 An immediate solution that comes to mind to solve this problem is to make use of a loop in C++. For each test, we may use a different input value and expect a different output. Let us see how we can use a loop to solve the same problem as described above. 
 
