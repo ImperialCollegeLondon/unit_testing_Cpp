@@ -1,7 +1,6 @@
 #include <gtest/gtest.h>
 #include "employee.h"
 
-
 // Create a test fixture.
 class EmployeeTestFixture : public::testing::Test {
     public:
@@ -17,7 +16,7 @@ TEST_F(EmployeeTestFixture, CanSetName) {
 
 // Test that the name cannot be empty.
 TEST_F(EmployeeTestFixture, NameCannotBeEmpty) {
-    EXPECT_THROW(employee.setName(""), invalid_argument);
+    EXPECT_THROW(employee.setName(""), std::invalid_argument);
 }
 
 // Test if we can set the age of an employee.

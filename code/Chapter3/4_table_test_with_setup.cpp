@@ -1,7 +1,6 @@
 #include <gtest/gtest.h>
 #include "employee_table.h"
 
-
 // Test fixture for EmployeeTable class.
 class EmployeeTableTest : public testing::Test {
     public:
@@ -11,7 +10,6 @@ class EmployeeTableTest : public testing::Test {
 TEST_F(EmployeeTableTest, TableIsEmptyWhenCreated) {
     EXPECT_TRUE(table.isEmpty());
 }
-
 
 TEST_F(EmployeeTableTest, TableHasSizeZeroWhenCreated) {
     EXPECT_EQ(table.getEntryCount(), 0);

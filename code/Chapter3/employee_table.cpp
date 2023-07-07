@@ -4,11 +4,9 @@
 #include "employee.h"
 #include "employee_table.h"
 
-
 void EmployeeTable::addEmployee(const Employee& employee) {
     employees.push_back(employee);
 }
-
 
 void EmployeeTable::removeEmployee(const std::string& employeeName) {
     for (auto it = employees.begin(); it != employees.end(); ++it) {
@@ -24,14 +22,12 @@ void EmployeeTable::displayEmployeesName() const {
     for (const auto& employee : employees) {
         std::cout << employee.getName() << std::endl;
     }
-    cout << "-------------------------------------------------- " << endl;
+    std::cout << "-------------------------------------------------- " << std::endl;
 }
-
 
 bool EmployeeTable::isEmpty() const {
     return employees.empty();
 }
-
 
 int EmployeeTable::getEntryCount() const {
     return employees.size();

@@ -1,8 +1,6 @@
 #include <gtest/gtest.h>
 #include "employee.h"
 
-
-
 // Test if we can set the name of an employee.
 TEST(EmployeeTest, CanSetName) {
     Employee employee{"John", 25, 10000, 5, 1000};

@@ -5,7 +5,6 @@
 #include <string>
 #include <stdexcept>
 
-
 const double extra_bonus = 1000.0;
 const int years_exp_for_extra_bonus = 10;
 

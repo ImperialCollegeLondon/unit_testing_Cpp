@@ -2,10 +2,9 @@
 #include <string>
 #include "employee.h"
 
-
-Employee::Employee(const string& employee_name, float employee_age, 
-                    double employeeSalary, double employeeNumberYearsEmployed,
-                    double employeeBonus)
+Employee::Employee(const std::string& employee_name, float employee_age, 
+                   double employeeSalary, double employeeNumberYearsEmployed,
+                   double employeeBonus)
                     : age(employee_age), 
                       base_salary(employeeSalary),
                       number_years_employed(employeeNumberYearsEmployed),
@@ -21,12 +20,11 @@ Employee::Employee(const string& employee_name, float employee_age,
 
 }
 
-
-void Employee::setName(const string& employee_name) 
+void Employee::setName(const std::string& employee_name) 
 {
     if(employee_name == "")
     {
-        throw invalid_argument("Name cannot be empty");
+        throw std::invalid_argument("Name cannot be empty");
     }
     name = employee_name;
 }
@@ -75,7 +73,6 @@ void Employee::SetBasicBonus(double employeeBonus)
     calcNetSalary();
 }
 
-
 // Employee gets additional £1000 bonus if they have been employed for more than 10 years.
 void Employee::calcNetBonus() 
 {   
@@ -88,7 +85,6 @@ void Employee::calcNetBonus()
         net_bonus = basic_bonus;
     }
 }
-
 
 void Employee::calcTaxAmount() 
 {
@@ -113,36 +109,30 @@ void Employee::calcTaxAmount()
     }
 }
 
-
 void Employee::calcNetSalary() 
 {
     net_salary = base_salary + net_bonus - tax_amount;
 }
 
-
-string Employee::getName() const
+std::string Employee::getName() const
 {
     return name;
 }
-
 
 float Employee::getAge() const
 {
     return age;
 }
 
-
 double Employee::getBasicSalary() const
 {
     return base_salary;
 }
 
-
 double Employee::getNumberYearsEmployed() const
 {
     return number_years_employed;
 }
-
 
 double Employee::getBasicBonus() const
 {
@@ -154,7 +144,6 @@ double Employee::getNetBonus() const
     return net_bonus;
 }
 
-
 double Employee::getTaxAmount() const
 {
     return tax_amount;
@@ -164,7 +153,6 @@ double Employee::getNetSalary() const
 {
     return net_salary;
 }
-
 
 void Employee::displayInfo() const
 {

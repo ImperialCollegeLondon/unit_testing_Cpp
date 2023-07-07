@@ -4,7 +4,6 @@
 #include <vector>
 #include "employee.h"
 
-
 class EmployeeTable {
 private:
     std::vector<Employee> employees;
