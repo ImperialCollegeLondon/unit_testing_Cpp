@@ -30,7 +30,7 @@ In GoogleTest, a test fixture is implemented using a test fixture class. This cl
 
 A test fixture is typically used in the following scenarios:
 
-1. **Shared Setup and Teardown**: When multiple test cases require identical preparation and cleanup, a test fixture is beneficial. Instead of duplicating the setup and teardown code in each test case, we can define it once in the test fixture and reuse it across all the tests.
+1. **Shared Setup and Teardown**: When multiple test cases require identical preparation (Setup) and cleanup (Teardown), a test fixture is beneficial. Instead of duplicating the setup and teardown code in each test case, we can define it once in the test fixture and reuse it across all the tests.
 
 2. **Reducing Code Duplication**: Test fixtures help in reducing code duplication. By encapsulating the common setup and teardown logic within a fixture, we avoid duplicating the same code in multiple test cases. This improves code maintainability and reduces the chances of errors due to inconsistent or incomplete setup/teardown.
 
