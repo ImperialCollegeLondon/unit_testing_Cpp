@@ -4,7 +4,7 @@ teaching: TBC
 exercises: TBC
 questions:
 - "What is a parameterised test?"
-- "How to write your own parameterised tests using GoogleTest?"
+- "How can I write my own parameterised tests using GoogleTest?"
 objectives:
 - "Understand why do we need a parameterised test."
 - "Understand how to create a parameterised test using GoogleTest."
@@ -18,9 +18,9 @@ keypoints:
 
 ## 1. Introduction to Parameterised Tests
 
-**Parameterized tests**, also known as **data-driven tests**, are a feature provided by testing frameworks like Google Test that allows us to write a single test case that can be executed with different sets of test data or inputs. Instead of duplicating similar test cases with slight variations, parameterized tests enable us to define a test once and run it with multiple inputs or test data.
+**Parameterised tests**, also known as **data-driven tests**, are a feature provided by testing frameworks like Google Test that allows us to write a single test case that can be executed with different sets of test data or inputs. Instead of duplicating similar test cases with slight variations, parameterised tests enable us to define a test once and run it with multiple inputs or test data.
 
-In order to understand the importance of parameterised tests and why do we need them, let us consider a very small example. For this chapter, we will be using our `Employee` class that we created in last chapter.
+In order to understand the importance of parameterised tests and why we need them, let us consider a very small example. For this chapter, we will be using our `Employee` class that we created in last chapter.
 
 Let us suppose that we want to test that net bonus calculation works fine for different number of years of experience. Remember that our `Employee` class adds an additional bonus of $1000£$ when an employee has worked for more than 10 years. As a first approach, we might be tempted to write multiple tests for the same function using test fixtures in the same way we have been doing so far.
 
