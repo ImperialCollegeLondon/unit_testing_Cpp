@@ -244,37 +244,23 @@ TEST_F(EmployeeTestFixture, CanSetAge) {
 
 So far, our test fixture class only creates an instance of object for the class under test. In many cases, we often want some common action for all our tests such as adding an entry, connection to a database, response from a site etc. Let us try to understand this with example which will set the background for the `setup` and `teardown` functions.
 
-Let us consider that we are creating a table which will store the details of various employees. The table allows us to add new entries, remove employees from the table, get the number of entries in the table etc. The declaration of table class is given in [employee_table.h](../code/Chapter3/employee_table.h). The definitions of table class is present in [employee_table.cpp](../code/Chapter3/employee_table.cpp). We give the definition of table class below for reference.
+Let us consider that we are creating a table which will store the details of various employees. The table allows us to add new entries, remove employees from the table, get the number of entries in the table etc. The declaration of table class is given in [employee_table.h](../code/Chapter3/employee_table.h). The definitions of table class is present in [employee_table.cpp](../code/Chapter3/employee_table.cpp). We give the list of functions in the table class for reference below.
 
 ```cpp
-void EmployeeTable::addEmployee(const Employee& employee) {
-    employees.push_back(employee);
-}
+// Member function to add employees into the table.
+void addEmployee(const Employee& employee);
 
-void EmployeeTable::removeEmployee(const std::string& employeeName) {
-    for (auto it = employees.begin(); it != employees.end(); ++it) {
-        if (it->getName() == employeeName) {
-            employees.erase(it);
-            break;
-        }
-    }
-}
+// Member function to remove employees into the table.
+void removeEmployee(const std::string& employeeName);
 
-void EmployeeTable::displayEmployeesName() const {
-    cout << "-------------------------------------------------- " << endl;
-    for (const auto& employee : employees) {
-        std::cout << employee.getName() << std::endl;
-    }
-    cout << "-------------------------------------------------- " << endl;
-}
+// Member function to display information (names) of all employees in the table.
+void displayEmployeesName() const;
 
-bool EmployeeTable::isEmpty() const {
-    return employees.empty();
-}
+// Function to check if the table is empty.
+bool isEmpty() const;
 
-int EmployeeTable::getEntryCount() const {
-    return employees.size();
-}
+// Function to get the number of entries in the table.
+int getEntryCount() const;
 ```
 
 We want to test our table class. In particular, we are interested in testing the following:

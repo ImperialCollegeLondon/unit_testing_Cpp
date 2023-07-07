@@ -9,10 +9,10 @@ private:
     std::vector<Employee> employees;
 
 public:
-    // Member functions to add employees into the table.
+    // Member function to add employees into the table.
     void addEmployee(const Employee& employee);
 
-    // Member functions to remove employees into the table.
+    // Member function to remove employees into the table.
     void removeEmployee(const std::string& employeeName);
 
     // Member function to display information (names) of all employees in the table.
