@@ -186,6 +186,7 @@ void Employee::calcNetSalary()
     net_salary = base_salary + net_bonus - tax_amount;
 }
 ```
+
 With this code, we now have the necessary fragments to test our `Employee` class. Let us see this in action.
 
 ## 3. Unit tests for our employee class without test fixtures
@@ -367,7 +368,7 @@ TEST_F(EmployeeTableTest, NumberOfEntriesIsOneLessAfterRemovingEmployee) {
 }
 ```
 
-As we can see from above, that all creating an instance of `employee` first by using the statement like `Employee new_employee` followed by adding an entry to the table `table.addEmployee(new_employee)`. Thus, we can see that our tests need some setup which is common for all and hence `Setup` function comes to rescue for exactly such scenarios.
+As we can see from above, that all tests required creating an instance of `Employee` first by using the statement like `Employee new_employee` followed by adding an entry to the table `table.addEmployee(new_employee)`. Thus, we can see that our tests need some setup which is common for all and hence `Setup()` function comes to rescue for exactly such scenarios.
 
 ## 6. Setup and Teardown function in test fixture
 
