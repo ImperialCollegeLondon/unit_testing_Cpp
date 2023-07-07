@@ -40,7 +40,7 @@ Testing frameworks help in writing and executing tests for code validation and q
 
 In this course, we will use GoogleTest, as it is popular and easy to use, though the concepts are the same as for other testing frameworks.
 
-## 2. A brief about GoogleTest
+## 2. A brief introduction to GoogleTest
 
 Simply defined, GoogleTest is a testing framework developed by Google's testing technology team to develop and write C++ tests. GoogleTest offers multiple advantages over other frameworks:-
 
