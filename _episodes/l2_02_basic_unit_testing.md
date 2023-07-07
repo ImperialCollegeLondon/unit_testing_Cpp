@@ -63,7 +63,7 @@ For using GoogleTest in your code, you need to follow the following steps in gen
 
 ### 3.1. Adding the required header files
 
-The first step would be to add the required header files in your program. For GoogleTest, you would need to add the following line in your code.
+The first step is to add the required header files in your program. For GoogleTest, you need to add the following line to your code:
 
 ```cpp
 #include "gtest/gtest.h"
@@ -71,7 +71,7 @@ The first step would be to add the required header files in your program. For Go
 
 ### 3.2. Create your tests
 
-The next step would be to to define your test. GoogleTest uses the following convention in naming various tests.
+The next step is to define your test. GoogleTest uses the following convention in naming various tests:
 
 ```cpp
 TEST(TestSuiteName, TestName)
@@ -80,14 +80,14 @@ TEST(TestSuiteName, TestName)
 }
 ```
 
-The different parts in the above cell have the following meaning
+The different parts in the above cell have the following meanings:
 
 - `TEST`: This is the macro provided by the GoogleTest framework to define a test case. (For more details about macros, see [Macros in C++](https://gcc.gnu.org/onlinedocs/cpp/Macros.html))
 - `TestSuiteName`: This is the name of the test suite or test fixture. It groups related tests together. It should be a valid C++ identifier.
 - `TestName`: This is the name of the individual test case within the test suite. It should also be a valid C++ identifier.
 - `Test logic and assertions`: This is the body of the test case where you write the actual test code, including any necessary assertions to verify the expected behaviour. The section `Test Assertions` describes more about various assertions available in GoogleTest.
 
-### 3.3. Initialise GoogleTest framework in your main function
+### 3.3. Initialise GoogleTest in your main function
 
 When you install GoogleTest you would get two libraries namely `libgtest.a` and `libgtest_main.a` (The extension `.a` means it is a static library and is applicable for Linux based systems). The first one, i.e. `libgtest.a`, is the library which provides all the necessary testing features such as assertions, test discovery, collection of results etc. The second library, i.e. `libgtest_main.a`, provides a main function so that you do not need to write your own main function for testing. For more details, refer to https://stackoverflow.com/questions/6457856/whats-the-difference-between-gtest-lib-and-gtest-main-lib.  
 
@@ -104,7 +104,7 @@ int main(int argc, char **argv)
 }
 ```
 
-The `RUN_ALL_TESTS()` is typically called from `main` and when it is invoked, it scans the program for all the test cases and test methods defined using the `test` macro. It then executes each test case and captures the results of each individual test method within the test case. After running all the tests, it provides a summary of the test results, including the number of tests run, passed, and failed.
+`RUN_ALL_TESTS()` is typically called from `main` and when it is invoked, it scans the program for all the test cases and test methods defined using the `TEST` macro. It then executes each test case and captures the results of each individual test method within the test case. After running all the tests, it provides a summary of the test results, including the number of tests run, passed, and failed.
 
 ### 3.4. Compile and run your program
 
