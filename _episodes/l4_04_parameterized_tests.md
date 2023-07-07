@@ -267,17 +267,6 @@ TEST_F(EmployeeTestFixture, CanSetName) {
     EXPECT_EQ(employee.getName(), "John Doe");
 }
 
-// Test that the name cannot be empty.
-TEST_F(EmployeeTestFixture, NameCannotBeEmpty) {
-    EXPECT_THROW(employee.setName(""), invalid_argument);
-}
-
-// Test if we can set the age of an employee.
-TEST_F(EmployeeTestFixture, CanSetAge) {
-    employee.setAge(30);
-    EXPECT_EQ(employee.getAge(), 30);
-}
-
 // Create a structure that holds the input and output values.
 // This structure is used to inject values into the test.
 struct TestValues{
@@ -304,8 +293,6 @@ TestValues values[] = {
     // value are in format: salary, basic_bonus, years_employed, tax
     TestValues{8000, 2000, 3, 0},
     TestValues{8000, 2000, 11, 100},
-    TestValues{15000, 3000, 4, 800},
-    TestValues{26000, 4000, 12, 3200},
     TestValues{60000, 8000, 13, 16500}
 };
 
