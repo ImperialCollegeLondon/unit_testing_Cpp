@@ -338,16 +338,16 @@ In addition, we used a function `GetParam()` defined in `gtest.h`. This function
 
 From the above discussion, we can see that the parameterised tests have the following advantages.
 
-1. **Code Reusability**: With parameterized tests, we can write a single test case that can be executed with different inputs or test data. This promotes code reusability by eliminating the need to duplicate similar test cases. Instead, we can define the test logic once and apply it to multiple scenarios, reducing code duplication and improving maintainability.
+1. **Code Reusability**: With parameterised tests, we can write a single test case that can be executed with different inputs or test data. This promotes code reusability by eliminating the need to duplicate similar test cases. Instead, we can define the test logic once and apply it to multiple scenarios, reducing code duplication and improving maintainability.
 
-2. **Increased Test Coverage**: Parameterized tests allows us to easily test a wide range of input values or test cases without writing separate test cases for each variation. This enables us to achieve better test coverage by covering various combinations, edge cases, and boundary values in a concise manner.
+2. **Increased Test Coverage**: Parameterised tests allow us to easily test a wide range of input values or test cases without writing separate test cases for each variation. This enables us to achieve better test coverage by covering various combinations, edge cases, and boundary values in a concise manner.
 
-3. **Simplified Test Maintenance**: When changes are required in the test logic, having parameterized tests simplifies the maintenance process. Instead of modifying multiple test cases individually, we only need to update the single test case, which will automatically be executed with the new test data. This saves time and effort in maintaining and updating the tests.
+3. **Simplified Test Maintenance**: When changes are required in the test logic, having parameterised tests simplifies the maintenance process. Instead of modifying multiple test cases individually, we only need to update the single test case, which will automatically be executed with the new test data. This saves time and effort in maintaining and updating the tests.
 
-4. **Simplified Test Reporting**: Parameterized tests provide a concise way to report test results for multiple test cases. Each instance of the parameterized test is reported individually, allowing us to identify which specific inputs or test data passed or failed. This facilitates quick identification and debugging of issues.
+4. **Simplified Test Reporting**: Parameterised tests provide a concise way to report test results for multiple test cases. Each instance of the parameterised test is reported individually, allowing us to identify which specific inputs or test data passed or failed. This facilitates quick identification and debugging of issues.
 
 ### Summary
 
-In this chapter, we learnt about the basics of parameterized tests and how to use them in GoogleTest. We also learnt how to combine test fixture with parameterised tests. Finally, we learnt the advantages of parameterised tests.
+In this chapter, we learnt about the basics of parameterised tests and how to use them in GoogleTest. We also learnt how to combine test fixture with parameterised tests. Finally, we learnt the advantages of parameterised tests.
 
 {% include links.md %}
