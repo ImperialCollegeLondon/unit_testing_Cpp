@@ -143,47 +143,9 @@ void Employee::setName(const string& employee_name)
     name = employee_name;
 }
 
-// Employee gets additional £1000 bonus if they have been employed for more than 10 years.
-void Employee::calcNetBonus() 
-{   
-    if(number_years_employed > years_exp_for_extra_bonus)
-    {
-        net_bonus = basic_bonus + extra_bonus;
-    }
-    else
-    {
-        net_bonus = basic_bonus;
-    }
-}
-
-// Function to calculate tex amount.
-void Employee::calcTaxAmount() 
+void Employee::setAge(float employee_age) 
 {
-    double salary_with_bonus = base_salary + net_bonus;
-    if(salary_with_bonus <= 10000)
-    {
-        tax_amount = 0.0;
-    }
-    else if(salary_with_bonus > 10000 && salary_with_bonus <= 20000)
-    {
-        tax_amount = 0.1*(salary_with_bonus-10000);
-    }
-    else if(salary_with_bonus > 20000 && salary_with_bonus <= 50000)
-    {
-        tax_amount = 0.1*10000 + 0.2*(salary_with_bonus-20000);
-    }
-    else if(salary_with_bonus > 50000)
-    {
-        tax_amount = 0.1*10000 + \
-                     0.2*30000 + \
-                     0.5*(salary_with_bonus-50000);
-    }
-}
-
-// Function to calculate the ney salary.
-void Employee::calcNetSalary() 
-{
-    net_salary = base_salary + net_bonus - tax_amount;
+    age = employee_age;
 }
 ```
 
@@ -271,25 +233,10 @@ TEST_F(EmployeeTestFixture, CanSetName) {
     EXPECT_EQ(employee.getName(), "John Doe");
 }
 
-// Test that the name cannot be empty.
-TEST_F(EmployeeTestFixture, NameCannotBeEmpty) {
-    EXPECT_THROW(employee.setName(""), invalid_argument);
-}
-
 // Test if we can set the age of an employee.
 TEST_F(EmployeeTestFixture, CanSetAge) {
     employee.setAge(30);
     EXPECT_EQ(employee.getAge(), 30);
-}
-
-//Test that the tax calculation is correct.
-TEST_F(EmployeeTestFixture, TaxCalculationIsCorrect) {
-    EXPECT_EQ(employee.getTaxAmount(), 7500);
-}
-
-// Check that the net salary is correct.
-TEST_F(EmployeeTestFixture, NetSalaryIsCorrect) {
-    EXPECT_EQ(employee.getNetSalary(), 43500);
 }
 ```
 
