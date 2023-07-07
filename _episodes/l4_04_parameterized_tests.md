@@ -22,7 +22,7 @@ keypoints:
 
 In order to understand the importance of parameterised tests and why we need them, let us consider a very small example. For this chapter, we will be using our `Employee` class that we created in last chapter.
 
-Let us suppose that we want to test that net bonus calculation works fine for different number of years of experience. Remember that our `Employee` class adds an additional bonus of $1000£$ when an employee has worked for more than 10 years. As a first approach, we might be tempted to write multiple tests for the same function using test fixtures in the same way we have been doing so far.
+Let us suppose that we want to test that net bonus calculation works fine for different number of years of experience. Remember that our `Employee` class adds an additional bonus of £1000 when an employee has worked for more than 10 years. As a first approach, we might be tempted to write multiple tests for the same function using test fixtures in the same way we have been doing so far.
 
 For example, we may write our tests simply using test fixtures as shown below. Please see the code in file [1_Not_parameterised.cpp](../code/Chapter4/1_Not_parameterised.cpp).
 
@@ -44,7 +44,7 @@ TEST_F(EmployeeTestFixture, NetBonusIsCorrectWhenYearsGreaterThan10) {
 }
 ```
 
-While the above solution works pretty well, it has a serious drawback. If we carefully look at the tests, we see that the test logic is repeated in both the tests. The only difference between the two tests are the input and output values. Moreover, managing such test will become problematic as the number of test conditions (or input/output) values increases.
+While the above solution works pretty well, it has a serious drawback. If we carefully look at the tests, we see that the test logic is repeated in both the tests. The only difference between the two tests are the input and output values. Moreover, managing such tests will become problematic as the number of test conditions (or input/output) values increases.
 
 An immediate solution that comes to mind to solve this problem is to make use of a loop in C++. For each test, we may use a different input value and expect a different output. Let us see how we can use a loop to solve the same problem as described above. 
 
@@ -78,7 +78,7 @@ Let us try to run this code and see if we get the desired output (shown below).
 
 Although, the `for` loop served our purpose and we were able to run our test for multiple values, there is a big problem in this approach. If we carefully look at the output, we can see that both (or multiple values if present) the test cases were combined into a single test. This violates the general rule that we should test only one thing in a test or one assertion per test.
 
-Moreover, the problem gets worse when one of the test fails. In order to understand what happens during a test failure when using a for loop, let us intentionally change the expected output value to an incorrect value. In file, [2_Test_using_for_loop.cpp](../code/Chapter4/2_Test_using_for_loop.cpp), you can make the following change.
+Moreover, the problem gets worse when one of the tests fails. In order to understand what happens during a test failure when using a for loop, let us intentionally change the expected output value to an incorrect value. In file, [2_Test_using_for_loop.cpp](../code/Chapter4/2_Test_using_for_loop.cpp), you can make the following change.
 
 ```cpp
 TEST_F(EmployeeTestFixture, NetBonusIsCorrectForDifferentYears) {
@@ -116,9 +116,9 @@ Expected equality of these values:
  1 FAILED TEST
 ```
 
-From the output, we can clearly see that it results in complete failure of the test even though one of the conditions (or test) was right. Moreover, the output does not help much to figure out which test has exactly failed.
+From the output, we can clearly see that it results in complete failure of the test even though one of the conditions (or tests) was right. Moreover, the output does not help much to figure out which test has failed.
 
-The solution for above mentioned issues is to make use of parameterised tests and the next section describes that.
+The solution to these issues is to make use of parameterised tests and the next section describes that.
 
 ## 2. Parameterised tests in GoogleTest
 
@@ -147,7 +147,7 @@ struct MyStruct{
 };
 ```
 
-Once you have defined a structure to hold your values, you can create an instance of the same with the actual set of input and output values as shown below.
+Once you have defined a structure to hold your values, you can create an instance of it with the actual set of input and output values as shown below.
 
 ```cpp
 MyStruct MyValues[] = {
