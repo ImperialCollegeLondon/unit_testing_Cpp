@@ -1,9 +1,5 @@
-#include <iostream>
 #include <gtest/gtest.h>
 #include "employee.h"
-
-using namespace :: testing;
-using namespace :: std;
 
 // Create a structure that holds the input and output values.
 // This structure is used to inject values into the test.
@@ -11,12 +7,12 @@ struct TestValues{
     int input;
     int output;
     
-    //construtor of values struct
+    //constructor of values struct
     TestValues(int in, int out) : input(in), output(out) {}
 };
 
 // Create a parameterised class by deriving from testing::TestWithParam<T> where T could be any valid C++ type.
-class EmployeeTestParameterised : public::TestWithParam<TestValues> {
+class EmployeeTestParameterised : public::testing::TestWithParam<TestValues> {
     public:
         Employee employee{"John", 25, 8000, 3, 2000};
 };
@@ -37,4 +33,4 @@ TEST_P(EmployeeTestParameterised, NetBonusIsCorrectForDifferentYears) {
 // Instantiate the test case with the values array.
 INSTANTIATE_TEST_SUITE_P( NetBonusIsCorrectForDifferentYears, 
                          EmployeeTestParameterised,
-                         ValuesIn(values));
+                         testing::ValuesIn(values));

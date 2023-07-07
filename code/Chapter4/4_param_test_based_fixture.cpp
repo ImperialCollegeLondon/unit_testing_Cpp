@@ -1,9 +1,5 @@
-#include <iostream>
 #include <gtest/gtest.h>
 #include "employee.h"
-
-using namespace :: testing;
-using namespace :: std;
 
 // Create a test fixture.
 class EmployeeTestFixture : public::testing::Test {
@@ -20,7 +16,7 @@ TEST_F(EmployeeTestFixture, CanSetName) {
 
 // Test that the name cannot be empty.
 TEST_F(EmployeeTestFixture, NameCannotBeEmpty) {
-    EXPECT_THROW(employee.setName(""), invalid_argument);
+    EXPECT_THROW(employee.setName(""), std::invalid_argument);
 }
 
 // Test if we can set the age of an employee.
@@ -37,7 +33,7 @@ struct TestValues{
     double inp_years_employed;
     double out_tax;
     
-    //construtor of values struct
+    //constructor of values struct
     TestValues(double salary, double bonus, double years_employed, double tax) 
               : inp_salary(salary), 
                 inp_bonus(bonus), 
@@ -47,7 +43,7 @@ struct TestValues{
 
 // create a parameterised test class from the fixture defined above.
 class EmployeeTestParameterisedFixture : public EmployeeTestFixture, 
-                                       public WithParamInterface<TestValues> {
+                                         public testing::WithParamInterface<TestValues> {
 };
 
 // Create an array of values (of type TestValues) to be injected into the test.
@@ -72,4 +68,4 @@ TEST_P(EmployeeTestParameterisedFixture, TaxCalculationIsCorrect) {
 // Instantiate the test case with the values array.
 INSTANTIATE_TEST_SUITE_P( CheckTaxCalculation, 
                           EmployeeTestParameterisedFixture,
-                          ValuesIn(values));
+                          testing::ValuesIn(values));

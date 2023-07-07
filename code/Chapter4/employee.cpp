@@ -2,10 +2,9 @@
 #include <string>
 #include "employee.h"
 
-
-Employee:: Employee(const string& employee_name, float employee_age, 
-                    double employeeSalary, double employeeNumberYearsEmployed,
-                    double employeeBonus)
+Employee::Employee(const std::string& employee_name, float employee_age, 
+                   double employeeSalary, double employeeNumberYearsEmployed,
+                   double employeeBonus)
                     : age(employee_age), 
                       base_salary(employeeSalary),
                       number_years_employed(employeeNumberYearsEmployed),
@@ -21,12 +20,11 @@ Employee:: Employee(const string& employee_name, float employee_age,
 
 }
 
-
-void Employee::setName(const string& employee_name) 
+void Employee::setName(const std::string& employee_name) 
 {
     if(employee_name == "")
     {
-        throw invalid_argument("Name cannot be empty");
+        throw std::invalid_argument("Name cannot be empty");
     }
     name = employee_name;
 }
@@ -40,7 +38,7 @@ void Employee::setBaseSalary(double employeeSalary)
 {
     base_salary = employeeSalary;
     
-    //Calculate new tex based on new base salary
+    // Calculate new tax based on new base salary
     calcTaxAmount();
 
     // Changing base salary will change net salary.
@@ -75,7 +73,6 @@ void Employee::SetBasicBonus(double employeeBonus)
     calcNetSalary();
 }
 
-
 // Employee gets additional £1000 bonus if they have been employed for more than 10 years.
 void Employee::calcNetBonus() 
 {   
@@ -88,7 +85,6 @@ void Employee::calcNetBonus()
         net_bonus = basic_bonus;
     }
 }
-
 
 void Employee::calcTaxAmount() 
 {
@@ -113,36 +109,30 @@ void Employee::calcTaxAmount()
     }
 }
 
-
 void Employee::calcNetSalary() 
 {
     net_salary = base_salary + net_bonus - tax_amount;
 }
 
-
-string Employee::getName() const
+std::string Employee::getName() const
 {
     return name;
 }
-
 
 float Employee::getAge() const
 {
     return age;
 }
 
-
 double Employee::getBasicSalary() const
 {
     return base_salary;
 }
 
-
 double Employee::getNumberYearsEmployed() const
 {
     return number_years_employed;
 }
-
 
 double Employee::getBasicBonus() const
 {
@@ -154,7 +144,6 @@ double Employee::getNetBonus() const
     return net_bonus;
 }
 
-
 double Employee::getTaxAmount() const
 {
     return tax_amount;
@@ -165,45 +154,20 @@ double Employee::getNetSalary() const
     return net_salary;
 }
 
-
 void Employee::displayInfo() const
 {
-    cout << "Name: " << name << endl;
-    cout << "Age: " << age << endl;
-    cout << "Base_Salary: £" << base_salary << endl;
-    cout << "Number of Years Employed: " << number_years_employed << endl;
+    std::cout << "Name: " << name << std::endl;
+    std::cout << "Age: " << age << std::endl;
+    std::cout << "Base_Salary: £" << base_salary << std::endl;
+    std::cout << "Number of Years Employed: " << number_years_employed << std::endl;
     
-    cout << "Basic_Bonus: £" << basic_bonus << endl;
-    cout << "Net_Bonus: £" << net_bonus << endl;
+    std::cout << "Basic_Bonus: £" << basic_bonus << std::endl;
+    std::cout << "Net_Bonus: £" << net_bonus << std::endl;
     
-    cout << "Tax to be paid: £ " << tax_amount << endl;
-    cout << "Net_Salary: £" << net_salary << endl;
+    std::cout << "Tax to be paid: £" << tax_amount << std::endl;
+    std::cout << "Net_Salary: £" << net_salary << std::endl;
 }
 
 // Destructor
 Employee::~Employee() {
 }
-
-
-// int main() {
-//     Employee emp("John Doe", 30, 35000.0, 12, 4000);
-//     emp.displayInfo();
-
-//     emp.setName("Jane Smith");
-//     cout << "Name: " << emp.getName() << endl;
-
-//     emp.setAge(35);
-//     cout << "Age: " << emp.getAge() << endl;
-
-//     cout << "-----------------------------------------" << endl;
-//     emp.setBaseSalary(45000.0);
-//     cout << "Base_Salary: £" << emp.getBasicSalary() << endl;
-//     cout << "Tax to be paid: £ " << emp.getTaxAmount() << endl;
-//     cout << "Net_Salary: £" << emp.getNetSalary() << endl;
-
-//     cout << "-----------------------------------------" << endl;
-//     Employee emp2("LKR", 32, 30000, 5, 2000);
-//     emp2.displayInfo();
-
-//     return 0;
-// }

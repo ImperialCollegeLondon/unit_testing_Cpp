@@ -1,9 +1,5 @@
-#include <iostream>
 #include <gtest/gtest.h>
 #include "employee.h"
-
-using namespace :: testing;
-using namespace :: std;
 
 // Create a test fixture.
 class EmployeeTestFixture : public::testing::Test {

@@ -5,15 +5,13 @@
 #include <string>
 #include <stdexcept>
 
-using namespace std;
-
 const double extra_bonus = 1000.0;
 const int years_exp_for_extra_bonus = 10;
 
 class Employee 
 {
 private:
-    string name;
+    std::string name;
     float age;
     double base_salary; //salary before calculating tax and adjusting bonus.
     double number_years_employed;
@@ -26,7 +24,7 @@ private:
 
 public:
     // Constructor.
-    Employee(const string& employee_name, float employee_age, 
+    Employee(const std::string& employee_name, float employee_age, 
              double employeeSalary, double employeeNumberYearsEmployed,
              double employeeBonus);
 
@@ -42,7 +40,7 @@ public:
     void calcNetSalary(); // To calculate net salary after adjusting tax and bonus.
 
     // Getter functions.
-    string getName() const;
+    std::string getName() const;
     float getAge() const;
     double getBasicSalary() const;
     double getNumberYearsEmployed() const;
