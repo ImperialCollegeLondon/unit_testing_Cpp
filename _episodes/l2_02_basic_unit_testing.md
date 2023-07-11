@@ -22,13 +22,6 @@ keypoints:
 
 ## 1. Popular frameworks for testing in C++
 
-In C++, a framework refers to a pre-defined software structure or set of libraries that provides a foundation for developing applications or solving specific types of problems. It typically includes a collection of reusable code, tools, and guidelines that help developers build applications more efficiently. There can be different types of frameworks in C++ which include:
-
-1. Application Framework
-2. Web Framework
-3. Game Development Framework
-4. Testing Framework
-
 Testing frameworks help in writing and executing tests for code validation and quality assurance. They provide structures and tools for creating test cases, running tests, and generating reports. There are a number of popular frameworks that can be used for testing in C++. A few of them are mentioned below:-
 
 - [GoogleTest](https://google.github.io/googletest/)
