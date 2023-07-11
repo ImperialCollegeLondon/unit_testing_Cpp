@@ -256,32 +256,36 @@ On compiling and running above program, we get the following output.
 [  PASSED  ] 3 tests.
 ```
 
-### 7.1 Exercise
-
-Modify the above program to throw an exception for negative values and write a test for this.
-
-**Solution**
-
-Add the following lines in your code. The full solution is given in [Solution](../code/Chapter2/Exercise_solution).
-
-```cpp
-// Change the function as shown below.
-int recursive_fibonacci(int n)
-{
-    if(n < 0)
-        throw std::invalid_argument("Input must be a non-negative number");
-    else if (n <= 1) {
-        return n;
-    } else {
-        return recursive_fibonacci(n - 1) + recursive_fibonacci(n - 2);
-    }
-}
-
-// Add the required test.
-TEST(FibonacciTest, ThrowsExceptionNegativeInput) {
-    EXPECT_THROW(recursive_fibonacci(-3), std::invalid_argument);
-}
-```
+> ## Exercise: Test for negative values
+> 
+> Modify the above program to throw an exception for negative values and write a test for this.
+>
+> > ## Solution
+> > 
+> > Add the following lines in your code. The full solution is given in [Solution](../code/Chapter2/Exercise_solution).
+> > 
+> > ```cpp
+> > // Change the function as shown below.
+> > int recursive_fibonacci(int n)
+> > {
+> >     if(n < 0)
+> >         throw std::invalid_argument("Input must be a non-negative number");
+> >     else if (n <= 1) {
+> >         return n;
+> >     } else {
+> >         return recursive_fibonacci(n - 1) + recursive_fibonacci(n - 2);
+> >     }
+> > }
+> > 
+> > // Add the required test.
+> > TEST(FibonacciTest, ThrowsExceptionNegativeInput) {
+> >     EXPECT_THROW(recursive_fibonacci(-3), std::invalid_argument);
+> > }
+> > ```
+> >
+> {: .solution}
+>
+{: .challenge}
 
 ### Summary
 
