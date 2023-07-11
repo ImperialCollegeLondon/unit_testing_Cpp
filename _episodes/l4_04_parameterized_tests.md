@@ -11,9 +11,9 @@ objectives:
 - "Understand the advantages of parameterised tests."
 - "Understand how to combine a test fixtures with parameterised test."
 keypoints:
-- "We learnt about parameterised tests and how to create them in GoogleTest."
-- "We learnt how parameterised tests are better as compared to using a loop for testing multiple values, conditions, branches etc."
-- "We learnt how to combine test fixture with parameterised test."
+- "Parameterised tests can be used to repeat a specific test with different inputs, reducing code duplication."
+- "Parameterised tests are individual tests, so they are more concise and easy to maintain than using a loop for testing multiple conditions"
+- "Fixtures can be combined with parameterised tests for maximum flexibility."
 ---
 
 ## 1. Introduction to Parameterised Tests
