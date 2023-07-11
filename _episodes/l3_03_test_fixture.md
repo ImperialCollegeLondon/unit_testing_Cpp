@@ -62,54 +62,7 @@ The program should calculate the Net Bonus, Tax and Salary based on the followin
 
 Based on above, we can declare the employee class in `employee.h` as shown below ([Declaration of Employee class](../code/Chapter3/employee.h)).
 
-```cpp
-class Employee 
-{
-private:
-    string name;
-    float age;
-    double base_salary; //salary before calculating tax and adjusting bonus.
-    double number_years_employed;
-
-    double basic_bonus; //bonus for current year.
-    double net_bonus; //bonus after adjusting for experience.
-    
-    double tax_amount;
-    double net_salary; //salary after calculating tax and adjusting bonus.
-
-public:
-    // Constructor.
-    Employee(const string& employee_name, float employee_age, 
-             double employeeSalary, double employeeNumberYearsEmployed,
-             double employeeBonus);
-
-    // Public member functions to set values.
-    void setName(const std::string& employee_name); 
-    void setAge(float employee_age) ;
-    void setBaseSalary(double employeeSalary); 
-    void setNumberYearsEmployed(double employeeNumberYearsEmployed); 
-    void SetBasicBonus(double employeeBonus);
-
-    void calcNetBonus(); //To calculate net bonus while considering experience.
-    void calcTaxAmount(); // To calculate tax to be paid based on salary with bonus
-    void calcNetSalary(); // To calculate net salary after adjusting tax and bonus.
-
-    // Getter functions.
-    string getName() const;
-    float getAge() const;
-    double getBasicSalary() const;
-    double getNumberYearsEmployed() const;
-    double getBasicBonus() const;
-    double getNetBonus() const;
-    double getTaxAmount() const;
-    double getNetSalary() const;
-
-    void displayInfo() const; 
-
-    // Destructor
-    ~Employee();
-};
-```
+https://github.com/ImperialCollegeLondon/lkr_unit_testing_forked/blob/df3743fc160148b0b6b2bd59cca4cd511b766008/code/Chapter3/employee.h#L11-L56
 
 For the definition part, we include only a few functions here. You can find the complete definition of this class in [employee.cpp](../code/Chapter3/employee.cpp).
 
