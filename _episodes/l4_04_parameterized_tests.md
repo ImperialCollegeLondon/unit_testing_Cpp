@@ -261,12 +261,6 @@ class EmployeeTestFixture : public::testing::Test {
 
 };
 
-// Test if we can set the name of an employee.
-TEST_F(EmployeeTestFixture, CanSetName) {
-    employee.setName("John Doe");
-    EXPECT_EQ(employee.getName(), "John Doe");
-}
-
 // Create a structure that holds the input and output values.
 // This structure is used to inject values into the test.
 struct TestValues{
