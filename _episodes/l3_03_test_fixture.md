@@ -8,17 +8,15 @@ questions:
 - "What do Setup and Teardown mean while using test fixtures?"
 objectives:
 - "Understand the basics of test fixtures."
-- "Understand how to create test fixtures using GoogleTest."
-- "Understand the advantages of test fixtures."
-- "Understand the need of Setup and Teardown functions."
-- "Understand how to write your own Setup and Teardown functions."
-- "Understand how to run a subset of tests."
+- "Write some test fixtures using GoogleTest."
+- "Analyze the advantages of test fixtures."
+- "Learn why do we do we need Setup and Teardown functions."
+- "Create your own Setup and Teardown functions."
+- "Learn how to run a subset of tests."
 keypoints:
-- "We learnt about test fixtures in GoogleTest."
-- "We learnt how to create our own test fixtures."
-- "We learnt about the setup and teardown functions."
-- "We learnt the advantages of test fixtures."
-- "We learnt how to run a subset of tests in GoogleTest."
+- "A test fixture is a useful tool while writing unit tests because it reduces the code duplication, maintains test independence and takes care of the common setup and teardown operations."
+- "Test fixture ensures that different tests do not interfere with each other by creating a new instance of its fixture class for every test."
+- "GoogleTest allows us to run a subset of tests which can be quite useful if our full test suite takes a long time to run or if we want to develop and check the functionality of a particular test."  
 ---
 ## 1. Brief Introduction of Test Fixtures
 
