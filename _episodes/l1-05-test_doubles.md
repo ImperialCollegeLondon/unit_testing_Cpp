@@ -87,12 +87,14 @@ This is called [dependency injection](https://en.wikipedia.org/wiki/Dependency_i
 
 It is worth emphasizing that gMock will let you mock **classes** and not top level functions.
 
-The process of using gMock is, in general, the same:
+The process of using gMock is, in general, always the same:
 
 1. You [create the mocked class using the `MOCK_METHOD` macro](https://google.github.io/googletest/gmock_cook_book.html#creating-mock-classes) to mock the methods that will be used in the test.
 2. When running the tests, you set the expectations of what should happen when each relevant mocked method is called [using the `EXPECT_CALL` macro](https://google.github.io/googletest/gmock_for_dummies.html#general-syntax). The expectations will be automatically checked at the end of the test.
 
-Here we give a simple example to illustrate the process, but read the gMock [Mocking Cookbook] for a more detailed description of the possibilities and the inputs these macros need. Let's assume we want to mock the following abstract class because one of its subclasses is being used in the function we want to test (mocking virtual classes is way, way easier):
+### Mocking virtual classes
+
+Here we give a simple example to illustrate the process, but read the gMock [Mocking Cookbook] for a more detailed description of the possibilities and the inputs these macros need. Let's assume we want to mock the following virtual class because one of its subclasses is being used in the function we want to test:
 
 ```cpp
 class Animal {
@@ -107,17 +109,17 @@ The corresponding mocked class will be:
 
 ```cpp
 class MockAnimal : public Animal {
- public:
-  MOCK_METHOD(double, walk, (int), (override));
-  MOCK_METHOD(void, eat, (double), (override));
-  MOCK_METHOD(void, die, (), (override));
+  public:
+    MOCK_METHOD(double, walk, (int), (override));
+    MOCK_METHOD(void, eat, (double), (override));
+    MOCK_METHOD(void, die, (), (override));
 };
 ```
 
 Now let's write a test for the following function, which finds out if an animal is dead or alive at the end of the day depending on how much food it has taken and how much it has walked.
 
 ```cpp
-bool is_alive_at_end_of_day(int steps, double carbs, Animal animal) {
+bool isAliveAtEndOfDay(int steps, double carbs, Animal animal) {
   double spent_carbs{animal.walk(steps)};
   if (spent_carbs > carbs) {
     animal.die();
@@ -126,8 +128,9 @@ bool is_alive_at_end_of_day(int steps, double carbs, Animal animal) {
   animal.eat(carbs - spent_carbs);
   return true;
 }
+```
 
-If we were to use a real implementation of `Animal`, let's say a `Horse`, testing this function would be complicated because the result would depend on the specific metabolism of the animal, which might be quite complicated (and potentially time consuming to run). So we can use `MockAnimal` instead to ensure that the logic of the function is correct. A couple of tests for this would look as:
+If we were to use a real implementation of `Animal`, let's say a `Horse`, testing this function would be complicated because the result would depend on the specific metabolism of the animal, which might be quite complicated (and potentially time consuming to run). So we can use `MockAnimal` instead to check that the logic of the function is correct. A couple of tests for this would look as:
 
 ```cpp
 using ::testing::Return;
@@ -141,7 +144,7 @@ TEST(IsAliveTest, Lives) {
   EXPECT_CALL(animal, walk(steps)).Times(1).WillOnce(Return(consumed));
   EXPECT_CALL(animal, eat(carbs-consumed)).Times(1);
   EXPECT_CALL(animal, die()).Times(0);
-  ASSERT_TRUE(is_alive_at_end_of_day(steps, carbs, animal))
+  ASSERT_TRUE(isAliveAtEndOfDay(steps, carbs, animal))
 }
 
 TEST(IsAliveTest, Dies) {
@@ -153,12 +156,76 @@ TEST(IsAliveTest, Dies) {
   EXPECT_CALL(animal, walk(steps)).Times(1).WillOnce(Return(consumed));
   EXPECT_CALL(animal, eat(carbs-consumed)).Times(1);
   EXPECT_CALL(animal, die()).Times(1);
-  ASSERT_FALSE(is_alive_at_end_of_day(steps, carbs, animal))
+  ASSERT_FALSE(isAliveAtEndOfDay(steps, carbs, animal))
 }
 ```
 
 [Google Mock]: https://google.github.io/googletest/gmock_for_dummies.html
 [Mocking Cookbook]: https://google.github.io/googletest/gmock_cook_book.html
+
+### Mocking non-virtual classes
+
+While the above situation is common enough, there will be cases when you just don't have a common virtual class to inherit from. In those cases, you can still use mocking but you will need to make your code flexible enough so your functions can accommodate unrelated classes as inputs. The way of doing this would be using templates.
+
+Following with the above example, let's assume that now we don't have an `Animal` abstract class, but rather a concrete `Horse` class with the same interface.
+
+```cpp
+class Horse {
+  public:
+    ~Horse() {};
+    double walk(int steps);
+    void eat(double carbs);
+    void die();
+};
+```
+
+Mocking the above will look very similar except that we will be creating a brand new class altogether, not be inheriting from any other class, and we will omit the `override` parameter. Contrary to the case of virtual classes, here we only need to indicate the methods that will actually be used in the tests.
+
+```cpp
+class MockHorse {
+  public:
+    MOCK_METHOD(double, walk, (int));
+    MOCK_METHOD(void, eat, (double));
+    MOCK_METHOD(void, die, ());
+};
+```
+
+The function we want to test is the same, except that now only accept `Horse` as input:
+
+```cpp
+bool isAliveAtEndOfDay(int steps, double carbs, Horse animal) {
+  // as above
+};
+```
+
+How do we test this? Well, we will need to modify our function to use templates, and indicate when the function is supposed to use a `Horse` instance and when a `MockHorse` instance. Contrary to the case of virtual classes above, this is fixed at compilation time rather than at runtime:
+
+```cpp
+template <class GenericHorse>
+bool isAliveAtEndOfDay(int steps, double carbs, GenericHorse animal) {
+  // as above
+};
+```
+
+In production code, we will use this function as `isAliveAtEndOfDay<Horse>(..., horse_instance)` while in the tests we will call this as `isAliveAtEndOfDay<MockHorse>(..., mock_horse_instance)`.
+
+And that's all! The construction of the tests is otherwise the same, for example:
+
+```cpp
+TEST(IsAliveTest, Lives) {
+  MockHorse animal = MockHorse();
+  int steps{400};
+  double carbs{2000.0};
+  double consumed{500.0};
+
+  EXPECT_CALL(animal, walk(steps)).Times(1).WillOnce(Return(consumed));
+  EXPECT_CALL(animal, eat(carbs-consumed)).Times(1);
+  EXPECT_CALL(animal, die()).Times(0);
+  ASSERT_TRUE(isAliveAtEndOfDay<MockHorse>(steps, carbs, animal))
+};
+```
+
+As it can be seen, it involves more steps that the case of having a virtual class to start with, and it might require from you to modify your code in order to be able to use mocks. But, on the bright side, it might also make your code more reusable and flexible and, ultimately, powerful as it was the case when you enable dependency injection.
 
 > ### Mocking is not always the solution
 >
@@ -173,7 +240,7 @@ Keep in mind that there are often multiple ways of using test doubles for a part
 
 > ## Test `normalize_v2`
 >
-> Write a test using the Google Tests tools described in previous chapters to check that `normalize` behaves as it should.
+> Write a test using the Google Tests tools described in previous chapters to check that `normalize_v2`, as defined above, behaves as it should.
 >
 > > ## Solution
 > >
@@ -183,7 +250,7 @@ Keep in mind that there are often multiple ways of using test doubles for a part
 > > double norm_stub(int array[])
 > > {
 > >     return 10.0;
-> > }
+> > };
 > > ```
 > >
 > > And then we write the test as:
@@ -201,8 +268,8 @@ Keep in mind that there are often multiple ways of using test doubles for a part
 > >     for (int i{0}; i < length; ++i)
 > >     {
 > >         EXPECT_EQ(input[i] * factor, copy[i]);
-> >     }
-> > }
+> >     };
+> > };
 > > ```
 > >
 > > Here we have used a specific array for the test, but we could have explored a larger space of options and edge cases using parametric testing, as described in a previous episode. The test written this way, with a stub for the norm, lets you test only what `normalize_v2` is doing - i.e. a true unit test -, without influence from the process of calculating the norm.
@@ -233,6 +300,6 @@ Keep in mind that there are often multiple ways of using test doubles for a part
 
 ## Summary
 
-TBC
+Test doubles let you test your functions in isolation, decoupling them from other parts of your code or from external dependencies. There are several approaches that you can use, like stubs, fakes or mocks, but the basis for most of them to work is to write your code in such a way that is testable, using dependency injection and templates. These will make your code also more modular and reusable.
 
 {% include links.md %}
