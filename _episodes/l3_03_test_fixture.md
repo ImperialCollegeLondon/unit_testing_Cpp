@@ -5,7 +5,7 @@ exercises: TBC
 questions:
 - "What is a test fixture?"
 - "How can I create my own test fixture using GoogleTest?"
-- "What do Setup and Teardown mean while using test fixtures?"
+- "What do Setup and Teardown mean in relation to test fixtures?"
 objectives:
 - "Understand the basics of test fixtures."
 - "Write some test fixtures using GoogleTest."
