@@ -240,6 +240,44 @@ In this output, there are two things worth noting:-
 
 With this parameterised test, we were able to solve the issues that we were discussing above. However, in doing so, we changed the test fixture and converted it to use `TEST_P` macro. Our previous tests based on `TEST_F` macro will not work anymore as it has been replaced. The important question is: What shall we do so that we can still keep all our useful tests from test fixtures while still being able to add parameterised test? The solution is to combine test fixtures with parameterised tests and the next subsection explains that.
 
+> ## Exercise: Parameterised tests for Non member functions (i.e. functions which are not part of any class)
+>
+> Consider that you have a simple function `int Sum(int a, int b)` that takes in two integer values `a` and `b` and returns their sum. Write a parameterised test for this function using GoogleTest. Please feel free to use Google to search how to write parameterised tests for non member functions.
+>
+> > ## Solution
+> >
+> > The full solution is given in [Solution](../code/Chapter4/Exercise_solutions/a_param_test_normal_function.cpp). We present some important parts of the solution below.
+> >
+> > ```cpp
+> > // Define a test fixture class
+> > class ParameterizedTest : public testing::TestWithParam<std::pair<int, int>> {
+> > };
+> > 
+> > // Define the test case with the parameterized test
+> > TEST_P(ParameterizedTest, TestSum) {
+> >     // Get the parameter values
+> >     int a = GetParam().first;
+> >     int b = GetParam().second;
+> > 
+> >     // Call your normal function
+> >     int result = Sum(a, b);
+> > 
+> >     // Perform assertion
+> >     ASSERT_EQ(a + b, result);
+> > }
+> > 
+> > // Define the test data
+> > INSTANTIATE_TEST_SUITE_P(Default, ParameterizedTest, testing::Values(
+> >     std::make_pair(1, 1),
+> >     std::make_pair(2, 3),
+> >     std::make_pair(-5, 10)
+> > ));
+> > ```
+> >
+> {: .solution}
+>
+{: .challenge}
+
 ## 3. Parameterised test based on test fixture
 
 In order to create a parameterised test from a test fixture, all we need to do is to create a parameterised test class which derives from both the test fixture class and `testing::WithParamInterface<T>` class (defined in GoogleTest) to create parameterised tests.
