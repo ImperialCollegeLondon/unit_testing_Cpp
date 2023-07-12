@@ -356,6 +356,46 @@ TEST_F(EmployeeTableWithOneEmployee, NumberOfEntriesIsOneLessAfterRemovingEmploy
 
 As we can see from above, our test looks much cleaner with the setup and teardown function. The reason for creating another test fixture for writing `Setup()` and `Teardown()` is because the first two tests do not require it.
 
+> ## Exercise: Write a test function to check the display on screen.
+>
+> In some cases, we may need to check that the output or the message displayed on screen is correct. For example, we may want to check that the name of employee is displayed correctly on screen. We have a function named `displayEmployeesName` in our class `EmployeeTable` which displays the name of all employees in the table. The purpose of this exercise is to write a test function to see if it works correctly or not.  
+>
+> We will be making use of [`std::stringstream`](https://cplusplus.com/reference/sstream/stringstream/) to capture the output of `displayEmployeesName` function. If you are interested to know why a `stringstream` class is required, you can read this article [Check my output is correct](https://stackoverflow.com/questions/40297782/c-unit-testing-check-output-is-correct).
+> 
+> > ## Solution
+> >
+> > The full solution is given in [Solution](../code/Chapter3/Exercise_Solutions/a_test_display_function.cpp). We present some important parts of the solution below.
+> >
+> > ```cpp
+> > // Check the display function work correctly.
+> > TEST_F(EmployeeTableWithOneEmployee, DisplayFunctionWorksCorrectly) {
+> > 
+> >     // STEP 1: ARRANGE
+> >     std::stringstream s_input;
+> > 
+> >     // STEP 2: ACT
+> >     // You would use the following line in your application (production use) to display the employees' names on the screen.
+> >     // However, this line is not necessary for the test and has been introduced only for the demonstration purpose.
+> >     table.displayEmployeesName(std::cout); 
+> > 
+> >     // Pass a string stream object to the function under test instead of std::cout. 
+> >     // Later we will use it to compare with the expected output.
+> >     table.displayEmployeesName(s_input);    
+> >     
+> >     // Store expected output in a string.
+> >     std::string expected_output = "-------------------------------------------------- \n"
+> >                                   "John Doe\n"
+> >                                   "-------------------------------------------------- \n";
+> > 
+> >     // STEP 3: ASSERT
+> >     EXPECT_EQ(s_input.str(), expected_output);
+> > }
+> > ```
+> >
+> {: .solution}
+>
+{: .challenge}
+
 ## 7. Tests Filtering in GoogleTest
 
 Sometimes, we may have some tests that take a lot of time to run. In some other case, when we are developing and testing our code, we do not want to run our entire test suite and run only one of the test that we have recently added.
