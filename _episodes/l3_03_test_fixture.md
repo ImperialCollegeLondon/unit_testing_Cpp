@@ -410,7 +410,7 @@ where `Pattern` can be a valid string patterns. The `-Pattern` will run all test
 
 Let us run our table tests in the file [4_table_test_with_setup.cpp](../code/Chapter3/4_table_test_with_setup.cpp). Let us assume that the executable name is `employee_table_tests`. We get the following output.
 
-```bash
+~~~
 [==========] Running 5 tests from 2 test suites.
 [----------] Global test environment set-up.
 [----------] 2 tests from EmployeeTableTest
@@ -432,7 +432,8 @@ Let us run our table tests in the file [4_table_test_with_setup.cpp](../code/Cha
 [----------] Global test environment tear-down
 [==========] 5 tests from 2 test suites ran. (0 ms total)
 [  PASSED  ] 5 tests.
-```
+~~~
+{: .output}
 
 Since, we defined 5 tests, all tests run if we run the executable. Now, let us filter the tests. We want to run only the tests associated with `EmployeeTableWithOneEmployee`. We use the following command
 
@@ -442,7 +443,7 @@ $ ./my_test --gtest_filter=*One
 
 The Output is
 
-```bash
+~~~
 Employee*
 Running main() from /home/lokesh/My_compiled_Libraries/test/googletest/googletest/src/gtest_main.cc
 Note: Google Test filter = *OneEmployee*
@@ -460,9 +461,10 @@ Note: Google Test filter = *OneEmployee*
 [----------] Global test environment tear-down
 [==========] 3 tests from 1 test suite ran. (0 ms total)
 [  PASSED  ] 3 tests.
-```
+~~~
+{: .output}
 
-Finally, let us assume that we want to run all tests except `EmployeeTableWithOneEmployee.NumberOfEntriesIsOneLessAfterRemovingEmployee`. We can use the follwing command
+Finally, let us assume that we want to run all tests except `EmployeeTableWithOneEmployee.NumberOfEntriesIsOneLessAfterRemovingEmployee`. We can use the following command
 
 ```bash
 ./my_test --gtest_filter=-EmployeeTableWithOneEmployee.NumberOfEntriesIsOneLessAfterRemovingEmployee
