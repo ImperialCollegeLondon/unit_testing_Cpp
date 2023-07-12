@@ -63,7 +63,7 @@ TEST_F(EmployeeTestFixture, NetBonusIsCorrectForDifferentYears) {
 
 Let us try to run this code and see if we get the desired output (shown below).
 
-```bash
+~~~
 [==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from EmployeeTestFixture
@@ -74,7 +74,8 @@ Let us try to run this code and see if we get the desired output (shown below).
 [----------] Global test environment tear-down
 [==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
-```
+~~~
+{: .output}
 
 Although, the `for` loop served our purpose and we were able to run our test for multiple values, there is a big problem in this approach. If we carefully look at the output, we can see that both (or multiple values if present) the test cases were combined into a single test. This violates the general rule that we should test only one thing in a test or one assertion per test.
 
@@ -93,7 +94,7 @@ TEST_F(EmployeeTestFixture, NetBonusIsCorrectForDifferentYears) {
 
 On running the code with this change, we get the following output.
 
-```bash
+~~~
 [==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from EmployeeTestFixture
@@ -114,7 +115,8 @@ Expected equality of these values:
 [  FAILED  ] EmployeeTestFixture.NetBonusIsCorrectForDifferentYears
 
  1 FAILED TEST
-```
+~~~
+{: .output}
 
 From the output, we can clearly see that it results in complete failure of the test even though one of the conditions (or tests) was right. Moreover, the output does not help much to figure out which test has failed.
 
@@ -214,7 +216,7 @@ INSTANTIATE_TEST_SUITE_P(NetBonusIsCorrectForDifferentYears,
 
 On running the above file, we see the following output.
 
-```bash
+~~~
 [==========] Running 2 tests from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 2 tests from NetBonusIsCorrectForDifferentYears/EmployeeTestParameterised
@@ -227,7 +229,8 @@ On running the above file, we see the following output.
 [----------] Global test environment tear-down
 [==========] 2 tests from 1 test suite ran. (0 ms total)
 [  PASSED  ] 2 tests.
-```
+~~~
+{: .output}
 
 In this output, there are two things worth noting:-
 
