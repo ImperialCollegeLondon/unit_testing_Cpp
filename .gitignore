@@ -10,4 +10,4 @@ _site
 .Rhistory
 .RData
 *.out
-
+.vscode/

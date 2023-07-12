@@ -52,8 +52,8 @@ The code given below is present in [2_Test_using_for_loop.cpp](../code/Chapter4/
 
 ```cpp
 TEST_F(EmployeeTestFixture, NetBonusIsCorrectForDifferentYears) {
-    auto input = vector<int>{5, 15};
-    auto expected_output = vector<int>{2000, 3000};
+    auto input = std::vector<int>{5, 15};
+    auto expected_output = std::vector<int>{2000, 3000};
     for (int i = 0; i < input.size(); i++) {
         employee.setNumberYearsEmployed(input[i]);
         EXPECT_EQ(employee.getNetBonus(), expected_output[i]);
@@ -83,8 +83,8 @@ Moreover, the problem gets worse when one of the tests fails. In order to unders
 
 ```cpp
 TEST_F(EmployeeTestFixture, NetBonusIsCorrectForDifferentYears) {
-    auto input = vector<int>{5, 15};
-    auto expected_output = vector<int>{2000, 7000};
+    auto input = std::vector<int>{5, 15};
+    auto expected_output = std::vector<int>{2000, 7000};
     for (int i = 0; i < input.size(); i++) {
         employee.setNumberYearsEmployed(input[i]);
         EXPECT_EQ(employee.getNetBonus(), expected_output[i]);
@@ -185,12 +185,12 @@ struct TestValues{
     int input;
     int output;
     
-    //construtor of values struct
+    //constructor of values struct
     TestValues(int in, int out) : input(in), output(out) {}
 };
 
 // Create a parameterised class by deriving from testing::TestWithParam<T> where T could be any valid C++ type.
-class EmployeeTestParameterised : public::TestWithParam<TestValues> {
+class EmployeeTestParameterised : public::testing::TestWithParam<TestValues> {
     public:
         Employee employee{"John", 25, 8000, 3, 2000};
 };
@@ -209,9 +209,9 @@ TEST_P(EmployeeTestParameterised, NetBonusIsCorrectForDifferentYears) {
 }
 
 // Instantiate the test case with the values array.
-INSTANTIATE_TEST_SUITE_P(NetBonusIsCorrectForDifferentYears, 
+INSTANTIATE_TEST_SUITE_P( NetBonusIsCorrectForDifferentYears, 
                          EmployeeTestParameterised,
-                         ValuesIn(values));
+                         testing::ValuesIn(values));
 ```
 
 On running the above file, we see the following output.
@@ -320,7 +320,7 @@ struct TestValues{
 
 // create a parameterised test class from the fixture defined above.
 class EmployeeTestParameterisedFixture : public EmployeeTestFixture, 
-                                         public WithParamInterface<TestValues> {
+                                         public testing::WithParamInterface<TestValues> {
 };
 
 // Create an array of values (of type TestValues) to be injected into the test.
@@ -343,7 +343,7 @@ TEST_P(EmployeeTestParameterisedFixture, TaxCalculationIsCorrect) {
 // Instantiate the test case with the values array.
 INSTANTIATE_TEST_SUITE_P( CheckTaxCalculation, 
                           EmployeeTestParameterisedFixture,
-                          ValuesIn(values));
+                          testing::ValuesIn(values));
 ```
 
 The major change as compared to our previous example is shown in the cell below and this change is responsible for generating a parameterised test using a test fixture.
