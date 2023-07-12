@@ -229,7 +229,7 @@ As it can be seen, it involves more steps that the case of having a virtual clas
 
 > ### Mocking is not always the solution
 >
-> In the above example, it would have been tricky to test the logic of the function in full without mocks. However, they are not always the solution. Mocks do not work with top level functions, only with classes. Depending on the complexity of the class, setting up the mock might be too complicated and not worth it for testing the function of interest. Very often, stubs, fakes and dummies will carry you a long way before you need to use mocks.
+> In the above examples, it would have been tricky to test the logic of the function in full without mocks. However, they are not always the solution. Mocks do not work with top level functions, only with classes. Depending on the complexity of the class, setting up the mock might be too complicated and not worth it for testing the function of interest. Very often, stubs, fakes and dummies will carry you a long way before you need to use mocks.
 {: .callout}
 
 ## Test doubles in action
@@ -244,7 +244,7 @@ Keep in mind that there are often multiple ways of using test doubles for a part
 >
 > > ## Solution
 > >
-> > In this case, a simple stub will solve our problem. Let's define or fake function as:
+> > In this case, a simple fake will solve our problem. Let's define our fake function as:
 > >
 > > ```cpp
 > > double norm_stub(int array[])
@@ -272,7 +272,7 @@ Keep in mind that there are often multiple ways of using test doubles for a part
 > > };
 > > ```
 > >
-> > Here we have used a specific array for the test, but we could have explored a larger space of options and edge cases using parametric testing, as described in a previous episode. The test written this way, with a stub for the norm, lets you test only what `normalize_v2` is doing - i.e. a true unit test -, without influence from the process of calculating the norm.
+> > Here we have used a specific array for the test, but we could have explored a larger space of options and edge cases using parametric testing, as described in a previous episode. The test written this way, with a fake for the norm, lets you test only what `normalize_v2` is doing - i.e. a true unit test -, without influence from the process of calculating the norm.
 > {: .solution}
 {: .challenge}
 
