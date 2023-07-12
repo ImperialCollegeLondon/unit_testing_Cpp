@@ -5,7 +5,7 @@ exercises: TBC
 questions:
 - "What framework/libraries can be used for unit testing in C++?"
 - "What is GoogleTest?"
-- "How to write unit tests with GoogleTest?"
+- "How can I write and run unit tests with GoogleTest?"
 objectives:
 - "Understand the basic components of a unit test"
 - "Understand how to write a unit test using GoogleTest"
@@ -38,7 +38,7 @@ In this course, we will use GoogleTest, as it is popular and easy to use, though
 
 Simply defined, GoogleTest is a testing framework developed by Google's testing technology team to develop and write C++ tests. GoogleTest offers multiple advantages over other frameworks:-
 
-1. **Comprehensive Features**: GoogleTest provides a rich set of features, including a wide range of assertion macros, test fixtures, parameterized tests, test discovery, test filtering, and powerful mocking capabilities. It offers a complete testing framework that can handle various testing scenarios.
+1. **Comprehensive Features**: GoogleTest provides a rich set of features, including a wide range of assertion macros, test fixtures, parameterised tests, test discovery, test filtering, and powerful mocking capabilities. It offers a complete testing framework that can handle various testing scenarios.
 2. **Large and Active Community**: GoogleTest has a large and active community of developers. This means that there is ample support available in terms of documentation, tutorials, forums, and online resources. 
 3. **Mature and Stable**: It is a mature and stable framework that has been used extensively in industry projects and open-source software.
 4. **Wide Platform Support**: GoogleTest supports multiple platforms, including Windows, Linux, macOS, and various compilers. It is compatible with popular development environments and build systems, making it suitable for a wide range of C++ projects.
@@ -46,7 +46,7 @@ Simply defined, GoogleTest is a testing framework developed by Google's testing 
 
 ## 3. Writing unit tests using GoogleTest
 
-For this episode, we will consider the same example `fibonacci.cpp` that we used previously. There we identified 3 possible cases when using the `recursive_fibonacci` function for which we wrote some manual tests:
+For this episode, we will consider the same example `fibonacci.cpp` that we used previously. There we identified 3 possible cases when using the `recursive_fibonacci` function for which we wrote some manual tests for when:
 
 - `n` is equal to 0 or 1
 - `n` is a negative number
@@ -85,7 +85,7 @@ The different parts in the above cell have the following meanings:
 
 When you install GoogleTest you would get two libraries namely `libgtest.a` and `libgtest_main.a` (The extension `.a` means it is a static library and is applicable for Linux based systems). The first one, i.e. `libgtest.a`, is the library which provides all the necessary testing features such as assertions, test discovery, collection of results etc. The second library, i.e. `libgtest_main.a`, provides a main function so that you do not need to write your own main function for testing. For more details, refer to [Difference between libgtest and libgtest-main](https://stackoverflow.com/questions/6457856/whats-the-difference-between-gtest-lib-and-gtest-main-lib).  
 
-For this sub-section, we are assuming that you are writing your own main function, while the next section describes how to run your tests without your own main function by linking to the main function provided in `lgtest_main`. You will need to include the following lines in your main function:
+For this sub-section, we are assuming that you are writing your own main function, while the next section describes how to run your tests without your own main function by linking to the main function provided in `lgtest_main`. You will need to use the following as your main function:
 
 ```cpp
 int main(int argc, char **argv)
@@ -232,7 +232,7 @@ int main(int argc, char **argv)
 
 On compiling and running above program, we get the following output.
 
-```bash
+~~~
 [==========] Running 3 tests from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 3 tests from FibonacciTest
@@ -247,7 +247,8 @@ On compiling and running above program, we get the following output.
 [----------] Global test environment tear-down
 [==========] 3 tests from 1 test suite ran. (0 ms total)
 [  PASSED  ] 3 tests.
-```
+~~~
+{: .output}
 
 > ## Exercise: Test for negative values
 > 
