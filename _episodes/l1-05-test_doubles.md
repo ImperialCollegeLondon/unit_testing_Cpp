@@ -198,7 +198,7 @@ bool isAliveAtEndOfDay(int steps, double carbs, Horse animal) {
 };
 ```
 
-How do we test this? Well, we will need to modify our function to use templates, and indicate when the function is supposed to use a `Horse` instance and when a `MockHorse` instance. Contrary to the case of virtual classes above, this is fixed at compilation time rather than at runtime:
+How do we test this? Well, we will need to modify our function to use templates, and indicate when the function is supposed to use a `Horse` instance or a `MockHorse` instance. Contrary to the case of virtual classes above, this is fixed at compilation time rather than at runtime:
 
 ```cpp
 template <class GenericHorse>
