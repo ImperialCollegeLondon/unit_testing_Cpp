@@ -2,16 +2,8 @@
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
 
-class Animal
-{
-public:
-    virtual ~Animal() = default;
-    virtual double walk(int steps) = 0;
-    virtual void eat(double carbs) = 0;
-    virtual void die() = 0;
-};
-
-bool isAliveAtEndOfDay(int steps, double carbs, Animal *animal)
+template <class GenericHorse>
+bool isAliveAtEndOfDay(int steps, double carbs, GenericHorse *animal)
 {
     double spent_carbs{animal->walk(steps)};
     if (spent_carbs > carbs)
@@ -23,17 +15,17 @@ bool isAliveAtEndOfDay(int steps, double carbs, Animal *animal)
     return true;
 };
 
-class MockAnimal : public Animal
+class MockHorse
 {
 public:
-    MOCK_METHOD(double, walk, (int), (override));
-    MOCK_METHOD(void, eat, (double), (override));
-    MOCK_METHOD(void, die, (), (override));
+    MOCK_METHOD(double, walk, (int));
+    MOCK_METHOD(void, eat, (double));
+    MOCK_METHOD(void, die, ());
 };
 
 TEST(IsAliveTest, Lives)
 {
-    MockAnimal animal = MockAnimal();
+    MockHorse animal = MockHorse();
     int steps{400};
     double carbs{2000.0};
     double consumed{500.0};
@@ -41,12 +33,12 @@ TEST(IsAliveTest, Lives)
     EXPECT_CALL(animal, walk(steps)).Times(1).WillOnce(::testing::Return(consumed));
     EXPECT_CALL(animal, eat(carbs - consumed)).Times(1);
     EXPECT_CALL(animal, die()).Times(0);
-    ASSERT_TRUE(isAliveAtEndOfDay(steps, carbs, &animal));
+    ASSERT_TRUE(isAliveAtEndOfDay<MockHorse>(steps, carbs, &animal));
 };
 
 TEST(IsAliveTest, Dies)
 {
-    MockAnimal animal = MockAnimal();
+    MockHorse animal = MockHorse();
     int steps{400};
     double carbs{2000.0};
     double consumed{5000.0};
@@ -54,5 +46,5 @@ TEST(IsAliveTest, Dies)
     EXPECT_CALL(animal, walk(steps)).Times(1).WillOnce(::testing::Return(consumed));
     EXPECT_CALL(animal, eat(carbs - consumed)).Times(0);
     EXPECT_CALL(animal, die()).Times(1);
-    ASSERT_FALSE(isAliveAtEndOfDay(steps, carbs, &animal));
+    ASSERT_FALSE(isAliveAtEndOfDay<MockHorse>(steps, carbs, &animal));
 };
