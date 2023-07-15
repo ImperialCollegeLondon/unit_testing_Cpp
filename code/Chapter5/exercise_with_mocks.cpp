@@ -13,8 +13,8 @@ TEST(EmployeeTableTest, SetBasicBonusForEveryone)
 {
     EmployeeTable<MockEmployee> table{EmployeeTable<MockEmployee>()};
     double newBonus{2000};
-    MockEmployee employee1{MockEmployee{}};
-    MockEmployee employee2{MockEmployee{}};
+    MockEmployee employee1{MockEmployee()};
+    MockEmployee employee2{MockEmployee()};
 
     EXPECT_CALL(employee1, setBasicBonus(newBonus)).Times(1);
     EXPECT_CALL(employee2, setBasicBonus(newBonus)).Times(1);
