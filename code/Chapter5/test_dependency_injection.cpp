@@ -57,13 +57,13 @@ TEST(NormalizeTest, WithoutDependencyInjection)
   // We need the exact value of the norm in order to check that
   // the calculation is correct.
   double factor{calculate_norm(input)};
-  std::vector<double> copy{1 / factor, 2 / factor, 3 / factor};
+  std::vector<double> copy{1, 2, 3};
 
   normalize_v2(input);
 
   for (int i{0}; i < input.size(); ++i)
   {
-    EXPECT_EQ(input[i] / factor, copy[i]);
+    EXPECT_EQ(input[i] / factor, copy[i] / factor);
   }
 }
 
@@ -73,12 +73,12 @@ TEST(NormalizeTest, WithDependencyInjection)
 
   // Here the exact value of the norm is meaningless as we control it.
   double factor{norm_stub({})};
-  std::vector<double> copy{1 / factor, 2 / factor, 3 / factor};
+  std::vector<double> copy{1, 2, 3};
 
   normalize_v2(input, norm_stub);
 
   for (int i{0}; i < input.size(); ++i)
   {
-    EXPECT_EQ(input[i] / factor, copy[i]);
+    EXPECT_EQ(input[i] / factor, copy[i] / factor);
   }
 }
