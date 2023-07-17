@@ -52,8 +52,8 @@ The code given below is present in [2_Test_using_for_loop.cpp](../code/Chapter4/
 
 ```cpp
 TEST_F(EmployeeTestFixture, NetBonusIsCorrectForDifferentYears) {
-    auto input = vector<int>{5, 15};
-    auto expected_output = vector<int>{2000, 3000};
+    auto input = std::vector<int>{5, 15};
+    auto expected_output = std::vector<int>{2000, 3000};
     for (int i = 0; i < input.size(); i++) {
         employee.setNumberYearsEmployed(input[i]);
         EXPECT_EQ(employee.getNetBonus(), expected_output[i]);
@@ -63,7 +63,7 @@ TEST_F(EmployeeTestFixture, NetBonusIsCorrectForDifferentYears) {
 
 Let us try to run this code and see if we get the desired output (shown below).
 
-```bash
+~~~
 [==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from EmployeeTestFixture
@@ -74,7 +74,8 @@ Let us try to run this code and see if we get the desired output (shown below).
 [----------] Global test environment tear-down
 [==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
-```
+~~~
+{: .output}
 
 Although, the `for` loop served our purpose and we were able to run our test for multiple values, there is a big problem in this approach. If we carefully look at the output, we can see that both (or multiple values if present) the test cases were combined into a single test. This violates the general rule that we should test only one thing in a test or one assertion per test.
 
@@ -82,8 +83,8 @@ Moreover, the problem gets worse when one of the tests fails. In order to unders
 
 ```cpp
 TEST_F(EmployeeTestFixture, NetBonusIsCorrectForDifferentYears) {
-    auto input = vector<int>{5, 15};
-    auto expected_output = vector<int>{2000, 7000};
+    auto input = std::vector<int>{5, 15};
+    auto expected_output = std::vector<int>{2000, 7000};
     for (int i = 0; i < input.size(); i++) {
         employee.setNumberYearsEmployed(input[i]);
         EXPECT_EQ(employee.getNetBonus(), expected_output[i]);
@@ -93,7 +94,7 @@ TEST_F(EmployeeTestFixture, NetBonusIsCorrectForDifferentYears) {
 
 On running the code with this change, we get the following output.
 
-```bash
+~~~
 [==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from EmployeeTestFixture
@@ -114,7 +115,8 @@ Expected equality of these values:
 [  FAILED  ] EmployeeTestFixture.NetBonusIsCorrectForDifferentYears
 
  1 FAILED TEST
-```
+~~~
+{: .output}
 
 From the output, we can clearly see that it results in complete failure of the test even though one of the conditions (or tests) was right. Moreover, the output does not help much to figure out which test has failed.
 
@@ -183,12 +185,12 @@ struct TestValues{
     int input;
     int output;
     
-    //construtor of values struct
+    //constructor of values struct
     TestValues(int in, int out) : input(in), output(out) {}
 };
 
 // Create a parameterised class by deriving from testing::TestWithParam<T> where T could be any valid C++ type.
-class EmployeeTestParameterised : public::TestWithParam<TestValues> {
+class EmployeeTestParameterised : public::testing::TestWithParam<TestValues> {
     public:
         Employee employee{"John", 25, 8000, 3, 2000};
 };
@@ -207,14 +209,14 @@ TEST_P(EmployeeTestParameterised, NetBonusIsCorrectForDifferentYears) {
 }
 
 // Instantiate the test case with the values array.
-INSTANTIATE_TEST_SUITE_P(NetBonusIsCorrectForDifferentYears, 
+INSTANTIATE_TEST_SUITE_P( NetBonusIsCorrectForDifferentYears, 
                          EmployeeTestParameterised,
-                         ValuesIn(values));
+                         testing::ValuesIn(values));
 ```
 
 On running the above file, we see the following output.
 
-```bash
+~~~
 [==========] Running 2 tests from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 2 tests from NetBonusIsCorrectForDifferentYears/EmployeeTestParameterised
@@ -227,7 +229,8 @@ On running the above file, we see the following output.
 [----------] Global test environment tear-down
 [==========] 2 tests from 1 test suite ran. (0 ms total)
 [  PASSED  ] 2 tests.
-```
+~~~
+{: .output}
 
 In this output, there are two things worth noting:-
 
@@ -239,6 +242,44 @@ In this output, there are two things worth noting:-
     - Finally, the iteration number.
 
 With this parameterised test, we were able to solve the issues that we were discussing above. However, in doing so, we changed the test fixture and converted it to use `TEST_P` macro. Our previous tests based on `TEST_F` macro will not work anymore as it has been replaced. The important question is: What shall we do so that we can still keep all our useful tests from test fixtures while still being able to add parameterised test? The solution is to combine test fixtures with parameterised tests and the next subsection explains that.
+
+> ## Exercise: Parameterised tests for Non member functions (i.e. functions which are not part of any class)
+>
+> Consider that you have a simple function `int Sum(int a, int b)` that takes in two integer values `a` and `b` and returns their sum. Write a parameterised test for this function using GoogleTest. Please feel free to use Google to search how to write parameterised tests for non member functions.
+>
+> > ## Solution
+> >
+> > The full solution is given in [Solution](../code/Chapter4/Exercise_solutions/a_param_test_normal_function.cpp). We present some important parts of the solution below.
+> >
+> > ```cpp
+> > // Define a test fixture class
+> > class ParameterizedTest : public testing::TestWithParam<std::pair<int, int>> {
+> > };
+> > 
+> > // Define the test case with the parameterized test
+> > TEST_P(ParameterizedTest, TestSum) {
+> >     // Get the parameter values
+> >     int a = GetParam().first;
+> >     int b = GetParam().second;
+> > 
+> >     // Call your normal function
+> >     int result = Sum(a, b);
+> > 
+> >     // Perform assertion
+> >     ASSERT_EQ(a + b, result);
+> > }
+> > 
+> > // Define the test data
+> > INSTANTIATE_TEST_SUITE_P(Default, ParameterizedTest, testing::Values(
+> >     std::make_pair(1, 1),
+> >     std::make_pair(2, 3),
+> >     std::make_pair(-5, 10)
+> > ));
+> > ```
+> >
+> {: .solution}
+>
+{: .challenge}
 
 ## 3. Parameterised test based on test fixture
 
@@ -279,7 +320,7 @@ struct TestValues{
 
 // create a parameterised test class from the fixture defined above.
 class EmployeeTestParameterisedFixture : public EmployeeTestFixture, 
-                                         public WithParamInterface<TestValues> {
+                                         public testing::WithParamInterface<TestValues> {
 };
 
 // Create an array of values (of type TestValues) to be injected into the test.
@@ -302,7 +343,7 @@ TEST_P(EmployeeTestParameterisedFixture, TaxCalculationIsCorrect) {
 // Instantiate the test case with the values array.
 INSTANTIATE_TEST_SUITE_P( CheckTaxCalculation, 
                           EmployeeTestParameterisedFixture,
-                          ValuesIn(values));
+                          testing::ValuesIn(values));
 ```
 
 The major change as compared to our previous example is shown in the cell below and this change is responsible for generating a parameterised test using a test fixture.
