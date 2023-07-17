@@ -63,7 +63,7 @@ TEST(NormalizeTest, WithoutDependencyInjection)
   // We need the exact value of the norm in order to check that
   // the calculation is correct.
   double factor{calculate_norm(input)};
-  std::vector<double> output = normalize_v2(input);
+  std::vector<double> output = normalize_v1(input);
 
   for (int i{0}; i < input.size(); ++i)
   {
