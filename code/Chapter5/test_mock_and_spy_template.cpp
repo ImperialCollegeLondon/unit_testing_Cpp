@@ -23,9 +23,9 @@ public:
     MOCK_METHOD(void, die, ());
 };
 
-TEST(IsAliveTest, Lives)
+TEST(IsAliveTestTemplate, Lives)
 {
-    MockHorse animal = MockHorse();
+    MockHorse animal;
     int steps{400};
     double carbs{2000.0};
     double consumed{500.0};
@@ -36,9 +36,9 @@ TEST(IsAliveTest, Lives)
     ASSERT_TRUE(isAliveAtEndOfDay<MockHorse>(steps, carbs, &animal));
 };
 
-TEST(IsAliveTest, Dies)
+TEST(IsAliveTestTemplate, Dies)
 {
-    MockHorse animal = MockHorse();
+    MockHorse animal;
     int steps{400};
     double carbs{2000.0};
     double consumed{5000.0};
