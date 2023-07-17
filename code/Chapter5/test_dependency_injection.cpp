@@ -10,7 +10,7 @@ double calculate_norm(std::vector<int> array)
   double output{0};
   for (int i{0}; i < array.size(); ++i)
   {
-    output = array[i] * array[i];
+    output += array[i] * array[i];
   }
   return std::sqrt(output);
 }
