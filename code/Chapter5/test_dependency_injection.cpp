@@ -5,7 +5,7 @@
 /// @brief A "complex" calculation of the norm.
 /// @param array The vector to calculate the norm for.
 /// @return The actual norm of the vector.
-double calculate_norm(std::vector<int> array)
+double calculate_norm(std::vector<double> array)
 {
   double output{0};
   for (int i{0}; i < array.size(); ++i)
@@ -18,14 +18,14 @@ double calculate_norm(std::vector<int> array)
 /// @brief Just a stub, so we can get a simple value to test things with.
 /// @param array The vector to calculate the norm for.
 /// @return The norm, a dummy value in this case.
-double norm_stub(std::vector<int> array)
+double norm_stub(std::vector<double> array)
 {
   return 10.0;
 }
 
 /// @brief We cannot do dependency injection, so the result depends on what calculate_norm is doing
 /// @param array The vector to normalize.
-void normalize_v1(std::vector<int> array)
+void normalize_v1(std::vector<double> array)
 {
   double norm{calculate_norm(array)};
 
@@ -39,8 +39,8 @@ void normalize_v1(std::vector<int> array)
 /// @param array The vector to normalize.
 /// @param func The function used to calculate the norm.
 void normalize_v2(
-    std::vector<int> array,
-    std::function<double(std::vector<int>)> func = calculate_norm)
+    std::vector<double> array,
+    std::function<double(std::vector<double>)> func = calculate_norm)
 {
   double norm{func(array)};
 
@@ -52,7 +52,7 @@ void normalize_v2(
 
 TEST(NormalizeTest, WithoutDependencyInjection)
 {
-  std::vector<int> input{1, 2, 3};
+  std::vector<double> input{1, 2, 3};
 
   // We need the exact value of the norm in order to check that
   // the calculation is correct.
@@ -69,7 +69,7 @@ TEST(NormalizeTest, WithoutDependencyInjection)
 
 TEST(NormalizeTest, WithDependencyInjection)
 {
-  std::vector<int> input{1, 2, 3};
+  std::vector<double> input{1, 2, 3};
 
   // Here the exact value of the norm is meaningless as we control it.
   double factor{norm_stub({})};
