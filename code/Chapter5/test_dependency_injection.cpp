@@ -5,7 +5,7 @@
 /// @brief A "complex" calculation of the norm.
 /// @param array The vector to calculate the norm for.
 /// @return The actual norm of the vector.
-double calculate_norm(std::vector<double> array)
+double calculate_norm(std::vector<double> &array)
 {
   double output{0};
   for (int i{0}; i < array.size(); ++i)
@@ -18,14 +18,14 @@ double calculate_norm(std::vector<double> array)
 /// @brief Just a stub, so we can get a simple value to test things with.
 /// @param array The vector to calculate the norm for.
 /// @return The norm, a dummy value in this case.
-double norm_stub(std::vector<double> array)
+double norm_stub(std::vector<double> &array)
 {
   return 10.0;
 }
 
 /// @brief We cannot do dependency injection, so the result depends on what calculate_norm is doing
 /// @param array The vector to normalize.
-void normalize_v1(std::vector<double> array)
+void normalize_v1(std::vector<double> &array)
 {
   double norm{calculate_norm(array)};
 
@@ -39,8 +39,8 @@ void normalize_v1(std::vector<double> array)
 /// @param array The vector to normalize.
 /// @param func The function used to calculate the norm.
 void normalize_v2(
-    std::vector<double> array,
-    std::function<double(std::vector<double>)> func = calculate_norm)
+    std::vector<double> &array,
+    std::function<double(std::vector<double> &)> func = calculate_norm)
 {
   double norm{func(array)};
 
@@ -63,7 +63,7 @@ TEST(NormalizeTest, WithoutDependencyInjection)
 
   for (int i{0}; i < input.size(); ++i)
   {
-    EXPECT_EQ(input[i] / factor, copy[i] / factor);
+    EXPECT_EQ(input[i], copy[i] / factor);
   }
 }
 
@@ -72,13 +72,13 @@ TEST(NormalizeTest, WithDependencyInjection)
   std::vector<double> input{1, 2, 3};
 
   // Here the exact value of the norm is meaningless as we control it.
-  double factor{norm_stub({})};
+  double factor{norm_stub(input)};
   std::vector<double> copy{1, 2, 3};
 
   normalize_v2(input, norm_stub);
 
   for (int i{0}; i < input.size(); ++i)
   {
-    EXPECT_EQ(input[i] / factor, copy[i] / factor);
+    EXPECT_EQ(input[i], copy[i] / factor);
   }
 }
