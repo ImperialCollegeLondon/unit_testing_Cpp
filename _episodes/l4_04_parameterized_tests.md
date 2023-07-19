@@ -244,7 +244,7 @@ In this output, there are two things worth noting:-
 
 With this parameterised test, we were able to solve the issues that we were discussing above. However, in doing so, we changed the test fixture and converted it to use `TEST_P` macro. Our previous tests based on `TEST_F` macro will not work anymore as it has been replaced. The important question is: What shall we do so that we can still keep all our useful tests from test fixtures while still being able to add parameterised test? The solution is to combine test fixtures with parameterised tests and the next subsection explains that.
 
-> ## Exercise: Parameterised tests for Non member functions (i.e. functions which are not part of any class)
+> ## Exercise 1: Parameterised tests for Non member functions (i.e. functions which are not part of any class)
 >
 > Consider that you have a simple function `int Sum(int a, int b)` that takes in two integer values `a` and `b` and returns their sum. Write a parameterised test for this function using GoogleTest. Please feel free to use Google to search how to write parameterised tests for non member functions.
 >
@@ -275,6 +275,58 @@ With this parameterised test, we were able to solve the issues that we were disc
 > >     std::make_pair(1, 1),
 > >     std::make_pair(2, 3),
 > >     std::make_pair(-5, 10)
+> > ));
+> > ```
+> >
+> {: .solution}
+>
+{: .challenge}
+
+> ## Exercise 2: Multiple parameterised tests
+>
+> Suppose you have the following 3 functions that you want to test using parameterised tests:-
+>
+> 1. `int Sum(int a, int b)` as defined in the previous exercise,
+>
+> 2. `double Multiply(double a, double b)` function which multiples the two numbers and
+>
+> 3. `Power(double a, int b)` function which raises a number `a` to an integer power `b`.
+>
+> For the sake of simplicity, assume that you can use the same parameters for your `Multiply` function as you have used in your `Sum` function. However, for the `Power` function, the parameters are different. Write a parameterised test for all the three functions.
+>  
+> > Although we are testing 3 parameterised functions, we do not have to add 3 `INSTANTIATE_TEST_SUITE_P` macros in our code. This is because an `INSTANTIATE_TEST_SUITE_P` macro looks for the test suite name (2nd argument) and if it is same, it will instantiate the tests for all of them.  Therefore, in our current exercise, we can use the same `INSTANTIATE_TEST_SUITE_P` for `Add` and `Multiply` functions while we can use a different `INSTANTIATE_TEST_SUITE_P` for the `Power` function.
+> >
+> > We provide some portion of solution code below. Full code can be found in [Solution](../code/Chapter4/Exercise_solutions/b_multiple_test_p_instant.cpp)
+> >
+> > ```cpp
+> > // Define the test case with the parameterized test for multiply function.
+> > TEST_P(ParameterizedTest, TestMultiply) {
+>>     // Your test logic goes here.
+> > }
+> > 
+> > // Define a test fixture class
+> > class ParameterizedTest_Power : public testing::TestWithParam<std::tuple<double, int, double>> {
+> > };
+> > 
+> > //Check if the power function works fine for different values of a and b
+> > TEST_P(ParameterizedTest_Power, TestPowerFun){
+> >     // Get the parameter values
+> >     double a = std::get<0>(GetParam());
+> >     int b = std::get<1>(GetParam());
+> >     double answer = std::get<2>(GetParam());
+> > 
+> >     // Call your normal function
+> >     double result = Power(a, b);
+> > 
+> >     // Perform assertion
+> >     ASSERT_EQ(answer, result);
+> > }
+> > 
+> > // Define the test data
+> > INSTANTIATE_TEST_SUITE_P(PowTest, ParameterizedTest_Power, testing::Values(
+> >     std::make_tuple(1, 1, 1),
+> >     std::make_tuple(2, 3, 8),
+> >     std::make_tuple(2.5, 2, 6.25)
 > > ));
 > > ```
 > >
