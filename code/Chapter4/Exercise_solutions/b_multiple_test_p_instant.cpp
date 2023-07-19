@@ -76,8 +76,9 @@ TEST_P(ParameterizedTest_Power, TestPowerFun)
     // Call your normal function
     double result = Power(a, b);
 
-    // Perform assertion
-    ASSERT_EQ(answer, result);
+    // Perform assertion (Since floating point values are being compared, use `ASSERT_DOUBLE_EQ`).
+    // For more details, please see:- https://google.github.io/googletest/reference/assertions.html#floating-point
+    ASSERT_DOUBLE_EQ(answer, result);
 }
 
 // Define the test data
