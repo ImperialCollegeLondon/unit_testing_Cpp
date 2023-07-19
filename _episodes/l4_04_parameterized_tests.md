@@ -319,7 +319,7 @@ With this parameterised test, we were able to solve the issues that we were disc
 > >     double result = Power(a, b);
 > > 
 > >     // Perform assertion
-> >     ASSERT_EQ(answer, result);
+> >     ASSERT_DOUBLE_EQ(answer, result);
 > > }
 > > 
 > > // Define the test data
