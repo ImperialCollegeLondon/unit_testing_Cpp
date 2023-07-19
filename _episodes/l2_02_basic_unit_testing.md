@@ -8,16 +8,13 @@ questions:
 - "How can I write and run unit tests with GoogleTest?"
 objectives:
 - "Understand the basic components of a unit test"
-- "Understand how to write a unit test using GoogleTest"
-- "Understand how to compile and run the tests"
-- "Understand some of the macros available in GoogleTest"
+- "Learn how to write, compile and run a unit test based on GoogleTest"
+- "Explain some of the commonly used macros in a unit test based on GoogleTest"
 keypoints:
-- "We learnt about some of the popular testing frameworks for C++."
-- "We learnt the basics of GoogleTest."
-- "We learnt how to use GoogleTest to write our tests."
-- "We learnt about anatomy of a unit tests." 
-- "We learnt how to write effective unit tests."
-- "Finally, we saw an example to demonstrate the above concepts."
+- "Amongst the various libraries available for testing in C++, GoogleTest is one of the most popular and easy to use library."
+- "GoogleTest offers various macros such as equality assertions, boolean assertions, exception assertions etc. to write your unit tests."
+- "A unit test typically follows a three step structure: Setup, Execution and Verification also widely termed as Arrange, Act and Assert (AAA) technique."
+- "GoogleTest allows you to write your tests with and without your own main function. In case you do not want to write your own main function, you can link against the one provided in the `libgtest_main.a` library."
 ---
 
 ## 1. Popular frameworks for testing in C++
