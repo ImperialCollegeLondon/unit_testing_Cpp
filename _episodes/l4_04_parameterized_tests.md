@@ -290,7 +290,7 @@ With this parameterised test, we were able to solve the issues that we were disc
 >
 > 2. `double Multiply(double a, double b)` function which multiples the two numbers and
 >
-> 3. `Power(double a, int b)` function which raises a number `a` to an integer power `b`.
+> 3. `double Power(double a, int b)` function which raises a number `a` to an integer power `b`.
 >
 > For the sake of simplicity, assume that you can use the same parameters for your `Multiply` function as you have used in your `Sum` function. However, for the `Power` function, the parameters are different. Write a parameterised test for all the three functions.
 >  

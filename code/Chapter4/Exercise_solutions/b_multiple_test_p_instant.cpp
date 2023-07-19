@@ -66,9 +66,12 @@ class ParameterizedTest_Power : public testing::TestWithParam<std::tuple<double,
 TEST_P(ParameterizedTest_Power, TestPowerFun)
 {
     // Get the parameter values
-    double a = std::get<0>(GetParam());
-    int b = std::get<1>(GetParam());
-    double answer = std::get<2>(GetParam());
+    double a, answer;
+    int b;
+    std::tie(a, b, answer) = GetParam();
+
+    // For C++ 17, you can comment the above 3 lines and uncomment the below one.
+    //auto [a, b, answer] = GetParam();
 
     // Call your normal function
     double result = Power(a, b);
