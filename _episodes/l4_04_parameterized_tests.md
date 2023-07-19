@@ -5,11 +5,12 @@ exercises: TBC
 questions:
 - "What is a parameterised test?"
 - "How can I write my own parameterised tests using GoogleTest?"
+- "How to use test fixtures with parameterised tests?"
 objectives:
-- "Understand why do we need a parameterised test."
-- "Understand how to create a parameterised test using GoogleTest."
-- "Understand the advantages of parameterised tests."
-- "Understand how to combine a test fixtures with parameterised test."
+- "Understand the need of a parameterised test."
+- "Learn how to create a parameterised test using GoogleTest."
+- "Appreciate the advantages of parameterised tests."
+- "Create a parameterised test based on test fixture to combine the advantages of both."
 keypoints:
 - "Parameterised tests can be used to repeat a specific test with different inputs, reducing code duplication."
 - "Parameterised tests are individual tests, so they are more concise and easy to maintain than using a loop for testing multiple conditions"
