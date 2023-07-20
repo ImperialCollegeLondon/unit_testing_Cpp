@@ -293,7 +293,9 @@ With this parameterised test, we were able to solve the issues that we were disc
 > 3. `double Power(double a, int b)` function which raises a number `a` to an integer power `b`.
 >
 > For the sake of simplicity, assume that you can use the same parameters for your `Multiply` function as you have used in your `Sum` function. However, for the `Power` function, the parameters are different. Write a parameterised test for all the three functions.
->  
+>
+> > ## Solution
+> >  
 > > Although we are testing 3 parameterised functions, we do not have to add 3 `INSTANTIATE_TEST_SUITE_P` macros in our code. This is because an `INSTANTIATE_TEST_SUITE_P` macro looks for the test suite name (2nd argument) and if it is same, it will instantiate the tests for all of them.  Therefore, in our current exercise, we can use the same `INSTANTIATE_TEST_SUITE_P` for `Add` and `Multiply` functions while we can use a different `INSTANTIATE_TEST_SUITE_P` for the `Power` function.
 > >
 > > We provide some portion of solution code below. Full code can be found in [Solution](../code/Chapter4/Exercise_solutions/b_multiple_test_p_instant.cpp)
