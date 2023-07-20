@@ -7,26 +7,27 @@ template <class GenericEmployee>
 class EmployeeTable
 {
 private:
-    std::vector<GenericEmployee> employees;
+    // See the note number 2 given in exercise_with_mocks on why we are using pointers here.
+    std::vector<GenericEmployee*> employees;
 
 public:
     // Member function to add employees into the table.
-    void addEmployee(const GenericEmployee &employee);
+    void addEmployee(GenericEmployee* employee)
+    {
+        employees.push_back(employee);
+    }
 
-    // Member function to remove employees into the table.
-    void removeEmployee(const std::string &employeeName);
-
-    // Member function to display information (names) of all employees in the table.
-    void displayEmployeesName() const;
-
-    // Function to check if the table is empty.
-    bool isEmpty() const;
-
-    // Function to get the number of entries in the table.
-    int getEntryCount() const;
+    // Other functions may or may not require changes.
+    // For brevity, we are using only two functions.
 
     // Member function to change the bonus to all employees.
-    void bumpSalaryBonus(const double newBonus);
+    void bumpSalaryBonus(const double newBonus)
+    {
+        for (auto& employee : employees)
+        {
+            employee->setIncreasedBasicBonus(newBonus);
+        }
+    }
 };
 
 #endif /* employee_table_h */
