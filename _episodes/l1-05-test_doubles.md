@@ -286,25 +286,67 @@ Keep in mind that there are often multiple ways of using test doubles for a part
 > {: .solution}
 {: .challenge}
 
-> ## A second exercise
+> ## An exercise with mocks
 >
-> TBD
+> A company wants to bump the basic bonus of all employees due to the increase cost of life. They have the employee data stored in a `EmployeeTable`, as described in previoous chapters. They have added the following method to the Table to perform the bump in the bonus:
 >
+> ```cpp
+>    void bumpSalaryBonus(const double newBonus){
+>        for (auto& employee : employees){
+>            employee->setIncreasedBasicBonus(newBonus);
+>        }
+>    }
+> ```
+>
+> Write a test that uses mocked employees with the appropriate methods that checks that all employees in the table receive a bump in bonus. *Tip*: You will need to modify `EmployeeTable` as a template. 
 > > ## Solution
 > >
-> > With its solution
-> >
-> {: .solution}
-{: .challenge}
-
-> ## And a third exercise
->
-> TBD
->
-> > ## Solution
-> >
-> > With its solution
-> >
+> > The solution has three steps. The first step will be to modify the existing implementation of `EmployeeTable` to accept a generic `employee`, i.e. transforming it into a template. For this to work, the new definition will need to be included in the header file `employee_table.h`. The following code shows just the bit relevant for this exercise:
+> > 
+> > ```cpp
+> > template <class GenericEmployee>
+> > class EmployeeTable {
+> > private:
+> >     std::vector<GenericEmployee*> employees;
+> > 
+> > public:
+> >     void addEmployee(GenericEmployee* employee){
+> >         employees.push_back(employee);
+> >     }
+> > 
+> >     // And all the other methods
+> >     // ...
+> > }
+> > ```
+> > The second step is to create a mocked employee. We just need the `setIncreasedBasicBonus` method, so we create a class with that mocked method only:
+> > 
+> > ```cpp
+> > class MockEmployee{
+> > public:
+> >     MOCK_METHOD(void, setIncreasedBasicBonus, (double));
+> > };
+> > ```
+> > 
+> > Finally, we write the test using the `MockEmployee` instead of real employees. 
+> > 
+> > ```cpp
+> > TEST(EmployeeTableTest, SetBasicBonusForEveryone)
+> > {
+> >     EmployeeTable<MockEmployee> table; 
+> >     double newBonus{2000};
+> >     
+> >     MockEmployee employee1;
+> >     MockEmployee employee2;
+> > 
+> >     EXPECT_CALL(employee1, setIncreasedBasicBonus(newBonus)).Times(1);
+> >     EXPECT_CALL(employee2, setIncreasedBasicBonus(newBonus)).Times(1);
+> > 
+> >     table.addEmployee(&employee1);
+> >     table.addEmployee(&employee2);
+> > 
+> >     table.bumpSalaryBonus(newBonus);
+> > };
+> > ```
 > {: .solution}
 {: .challenge}
 
