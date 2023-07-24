@@ -1,13 +1,23 @@
 ---
 title: "Tests doubles and dependency injection"
-teaching: TBC
-exercises: TBC
+teaching: 30
+exercises: 30
 questions:
-- "TBC"
+- "What are test doubles?"
+- "What types of test doubles are there?"
+- "How do I configure and run tests with Google Mocks?"
 objectives:
-- "TBC"
+- "Understand the different types of test doubles and when to use them"
+- "Understand the value of dependency injection"
+- "Re-write code enabling dependency injection"
+- "Apply test doubles in different use cases"
+- "Apply mocking in different use cases"
 keypoints:
-- "TBC"
+- "Test doubles let you write unit tests in isolation from other bits of code"
+- "Test doubles require dependency injection to be able to replace real parts of your code with fake ones"
+- "Stubs provide canned, simple values as indirect inputs to the function under test."
+- "Mocks let you check indirect outputs (i.e. intermediate results) and also can provide stubs."
+- "Google Mock provides the tools to implement mocks"
 ---
 
 ## Testing untestable code
