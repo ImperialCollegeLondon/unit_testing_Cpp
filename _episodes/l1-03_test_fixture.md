@@ -58,10 +58,10 @@ The program should calculate the Net Bonus, Tax and Salary based on the followin
     * `20%` for salary between `20K-50K` GBP
     * `50%` for salary greater than `50K` GBP
 
-Based on above, we can declare the employee class in `employee.h` as shown below ([Declaration of Employee class](../code/Chapter3/employee.h)).
+Based on above, we can declare the employee class in `employee.h` as shown below ([Declaration of Employee class](https://github.com/ImperialCollegeLondon/unit_testing_Cpp_exercises/tree/main/src/Chapter3/employee.h)).
 
 ```cpp
-class Employee 
+class Employee
 {
 private:
     std::string name;
@@ -102,20 +102,20 @@ public:
     double getTaxAmount() const;
     double getNetSalary() const;
 
-    void displayInfo() const; 
+    void displayInfo() const;
 
     // Destructor
     ~Employee();
 };
 ```
 
-For the definition part, we include only a few functions here. You can find the complete definition of this class in [employee.cpp](../code/Chapter3/employee.cpp).
+For the definition part, we include only a few functions here. You can find the complete definition of this class in [employee.cpp](https://github.com/ImperialCollegeLondon/unit_testing_Cpp_exercises/tree/main/src/Chapter3/employee.cpp).
 
 ```cpp
-Employee::Employee(const std::string& employee_name, float employee_age, 
+Employee::Employee(const std::string& employee_name, float employee_age,
                    double employeeSalary, double employeeNumberYearsEmployed,
                    double employeeBonus)
-                    : age(employee_age), 
+                    : age(employee_age),
                       base_salary(employeeSalary),
                       number_years_employed(employeeNumberYearsEmployed),
                       basic_bonus(employeeBonus),
@@ -151,7 +151,7 @@ With this code, we now have the necessary fragments to test our `Employee` class
 
 In order to clearly demonstrate why a test fixture would be needed, we first write some tests for our employee class without using a fixture. This will help us to understand why does a fixture is useful and how to use it.
 
-For this subsection, let us assume that we are checking two functionalities of our employee class (for code, please see [1_employeetest.cpp](../code/Chapter3/1_employeetest.cpp)) which are:-
+For this subsection, let us assume that we are checking two functionalities of our employee class (for code, please see [1_employeetest.cpp](https://github.com/ImperialCollegeLondon/unit_testing_Cpp_exercises/tree/main/src/Chapter3/1_employeetest.cpp)) which are:-
 
 1. We can set the name of employee correctly.
 2. We can set the age correctly.
@@ -213,7 +213,7 @@ TEST_F(Your_test_fixture_class_name, Your_test_name) {
 }
 ```
 
-Since we now have all the basic tools to create our own test fixtures, let us rewrite the above tests using a fixture. The code is present in this [2_employeetest.cpp](../code/Chapter3/2_employeetest.cpp). For reference, the tests are shown in the cell below.
+Since we now have all the basic tools to create our own test fixtures, let us rewrite the above tests using a fixture. The code is present in this [2_employeetest.cpp](https://github.com/ImperialCollegeLondon/unit_testing_Cpp_exercises/tree/main/src/Chapter3/2_employeetest.cpp). For reference, the tests are shown in the cell below.
 
 ```cpp
 // Create a test fixture.
@@ -240,7 +240,7 @@ TEST_F(EmployeeTestFixture, CanSetAge) {
 
 So far, our test fixture class only creates an instance of object for the class under test. In many cases, we often want some common action for all our tests such as adding an entry, connection to a database, response from a site etc. Let us try to understand this with example which will set the background for the `setup` and `teardown` functions.
 
-Let us consider that we are creating a table which will store the details of various employees. The table allows us to add new entries, remove employees from the table, get the number of entries in the table etc. The declaration of table class is given in [employee_table.h](../code/Chapter3/employee_table.h). The definitions of table class is present in [employee_table.cpp](../code/Chapter3/employee_table.cpp). We give the list of functions in the table class for reference below.
+Let us consider that we are creating a table which will store the details of various employees. The table allows us to add new entries, remove employees from the table, get the number of entries in the table etc. The declaration of table class is given in [employee_table.h](https://github.com/ImperialCollegeLondon/unit_testing_Cpp_exercises/tree/main/src/Chapter3/employee_table.h). The definitions of table class is present in [employee_table.cpp](https://github.com/ImperialCollegeLondon/unit_testing_Cpp_exercises/tree/main/src/Chapter3/employee_table.cpp). We give the list of functions in the table class for reference below.
 
 ```cpp
 // Member function to add employees into the table.
@@ -265,7 +265,7 @@ We want to test our table class. In particular, we are interested in testing the
 2. Number of entries is one after adding an employee.
 3. Number of entries in table reduces by one after removing an employee (assuming that there was at least one entry in the table).
 
-Using our knowledge of test fixtures learnt in previous subsection, we can write the tests as shown below. Please see the file [3_emp_table_test.cpp](../code/Chapter3/3_emp_table_test.cpp) for more details.
+Using our knowledge of test fixtures learnt in previous subsection, we can write the tests as shown below. Please see the file [3_emp_table_test.cpp](https://github.com/ImperialCollegeLondon/unit_testing_Cpp_exercises/tree/main/src/Chapter3/3_emp_table_test.cpp) for more details.
 
 ```cpp
 // Test fixture for EmployeeTable class.
@@ -305,7 +305,7 @@ A `Setup()` function in a test fixture is responsible for providing and executin
 
 To create a `Setup()` function, we just define this function in our fixture class which will [override](https://en.cppreference.com/w/cpp/language/override) the [virtual function](https://en.cppreference.com/w/cpp/language/virtual) in `testing::Test` class in GoogleTest.
 
-For our table class, we can create the `Setup()` and `Teardown()` functions as shown below. For more details, please see [4_table_test_with_setup.cpp](../code/Chapter3/4_table_test_with_setup.cpp).
+For our table class, we can create the `Setup()` and `Teardown()` functions as shown below. For more details, please see [4_table_test_with_setup.cpp](https://github.com/ImperialCollegeLondon/unit_testing_Cpp_exercises/tree/main/src/Chapter3/4_table_test_with_setup.cpp).
 
 ```cpp
 // Test fixture for EmployeeTable class.
@@ -356,35 +356,35 @@ As we can see from above, our test looks much cleaner with the setup and teardow
 
 > ## Exercise: Write a test function to check the display on screen.
 >
-> In some cases, we may need to check that the output or the message displayed on screen is correct. For example, we may want to check that the name of employee is displayed correctly on screen. We have a function named `displayEmployeesName` in our class `EmployeeTable` which displays the name of all employees in the table. The purpose of this exercise is to write a test function to see if it works correctly or not.  
+> In some cases, we may need to check that the output or the message displayed on screen is correct. For example, we may want to check that the name of employee is displayed correctly on screen. We have a function named `displayEmployeesName` in our class `EmployeeTable` which displays the name of all employees in the table. The purpose of this exercise is to write a test function to see if it works correctly or not.
 >
 > We will be making use of [`std::stringstream`](https://cplusplus.com/reference/sstream/stringstream/) to capture the output of `displayEmployeesName` function. If you are interested to know why a `stringstream` class is required, you can read this article [Check my output is correct](https://stackoverflow.com/questions/40297782/c-unit-testing-check-output-is-correct).
-> 
+>
 > > ## Solution
 > >
-> > The full solution is given in [Solution](../code/Chapter3/Exercise_Solutions/a_test_display_function.cpp). We present some important parts of the solution below.
+> > The full solution is given in [Solution](https://github.com/ImperialCollegeLondon/unit_testing_Cpp_exercises/tree/main/src/Chapter3/Exercise_solutions/a_test_display_function.cpp). We present some important parts of the solution below.
 > >
 > > ```cpp
 > > // Check the display function work correctly.
 > > TEST_F(EmployeeTableWithOneEmployee, DisplayFunctionWorksCorrectly) {
-> > 
+> >
 > >     // STEP 1: ARRANGE
 > >     std::stringstream s_input;
-> > 
+> >
 > >     // STEP 2: ACT
 > >     // You would use the following line in your application (production use) to display the employees' names on the screen.
 > >     // However, this line is not necessary for the test and has been introduced only for the demonstration purpose.
-> >     table.displayEmployeesName(std::cout); 
-> > 
-> >     // Pass a string stream object to the function under test instead of std::cout. 
+> >     table.displayEmployeesName(std::cout);
+> >
+> >     // Pass a string stream object to the function under test instead of std::cout.
 > >     // Later we will use it to compare with the expected output.
-> >     table.displayEmployeesName(s_input);    
-> >     
+> >     table.displayEmployeesName(s_input);
+> >
 > >     // Store expected output in a string.
 > >     std::string expected_output = "-------------------------------------------------- \n"
 > >                                   "John Doe\n"
 > >                                   "-------------------------------------------------- \n";
-> > 
+> >
 > >     // STEP 3: ASSERT
 > >     EXPECT_EQ(s_input.str(), expected_output);
 > > }
@@ -406,7 +406,7 @@ $ ./your_executable --gtest_filter=Pattern[-Pattern]
 
 where `Pattern` can be a valid string patterns. The `-Pattern` will run all tests except the pattern in the command. Instead of a pattern, we can also use full test name in the form `test_suite_name.test_name`.
 
-Let us run our table tests in the file [4_table_test_with_setup.cpp](../code/Chapter3/4_table_test_with_setup.cpp). Let us assume that the executable name is `employee_table_tests`. We get the following output.
+Let us run our table tests in the file [4_table_test_with_setup.cpp](https://github.com/ImperialCollegeLondon/unit_testing_Cpp_exercises/tree/main/src/Chapter3/4_table_test_with_setup.cpp). Let us assume that the executable name is `employee_table_tests`. We get the following output.
 
 ~~~
 [==========] Running 5 tests from 2 test suites.
