@@ -25,7 +25,7 @@ In order to understand the importance of parameterised tests and why we need the
 
 Let us suppose that we want to test that net bonus calculation works fine for different number of years of experience. Remember that our `Employee` class adds an additional bonus of £1000 when an employee has worked for more than 10 years. As a first approach, we might be tempted to write multiple tests for the same function using test fixtures in the same way we have been doing so far.
 
-For example, we may write our tests simply using test fixtures as shown below. Please see the code in file [1_Not_parameterised.cpp](../code/Chapter4/1_Not_parameterised.cpp).
+For example, we may write our tests simply using test fixtures as shown below. Please see the code in file [1_not_parameterised.cpp](https://github.com/ImperialCollegeLondon/unit_testing_Cpp_exercises/tree/main/src/Chapter4/1_not_parameterised.cpp).
 
 ```cpp
 class EmployeeTestFixture : public::testing::Test {
@@ -47,9 +47,9 @@ TEST_F(EmployeeTestFixture, NetBonusIsCorrectWhenYearsGreaterThan10) {
 
 While the above solution works pretty well, it has a serious drawback. If we carefully look at the tests, we see that the test logic is repeated in both the tests. The only difference between the two tests are the input and output values. Moreover, managing such tests will become problematic as the number of test conditions (or input/output) values increases. Imagine if bonus also depended on productivity, experience, age, etcetera? The number of input variations to test grows exponentially as the number and range of arguments grows.
 
-An immediate solution that comes to mind to solve this problem is to make use of a loop in C++. For each test, we may use a different input value and expect a different output. Let us see how we can use a loop to solve the same problem as described above. 
+An immediate solution that comes to mind to solve this problem is to make use of a loop in C++. For each test, we may use a different input value and expect a different output. Let us see how we can use a loop to solve the same problem as described above.
 
-The code given below is present in [2_Test_using_for_loop.cpp](../code/Chapter4/2_Test_using_for_loop.cpp).
+The code given below is present in [2_test_using_for_loop.cpp](https://github.com/ImperialCollegeLondon/unit_testing_Cpp_exercises/tree/main/src/Chapter4/2_test_using_for_loop.cpp).
 
 ```cpp
 TEST_F(EmployeeTestFixture, NetBonusIsCorrectForDifferentYears) {
@@ -80,7 +80,7 @@ Let us try to run this code and see if we get the desired output (shown below).
 
 Although, the `for` loop served our purpose and we were able to run our test for multiple values, there is a big problem in this approach. If we carefully look at the output, we can see that both (or multiple values if present) the test cases were combined into a single test. This violates the general rule that we should test only one thing in a test or one assertion per test.
 
-Moreover, the problem gets worse when one of the tests fails. In order to understand what happens during a test failure when using a for loop, let us intentionally change the expected output value to an incorrect value. In file, [2_Test_using_for_loop.cpp](../code/Chapter4/2_Test_using_for_loop.cpp), you can make the following change.
+Moreover, the problem gets worse when one of the tests fails. In order to understand what happens during a test failure when using a for loop, let us intentionally change the expected output value to an incorrect value. In file, [2_test_using_for_loop.cpp](https://github.com/ImperialCollegeLondon/unit_testing_Cpp_exercises/tree/main/src/Chapter4/2_test_using_for_loop.cpp), you can make the following change.
 
 ```cpp
 TEST_F(EmployeeTestFixture, NetBonusIsCorrectForDifferentYears) {
@@ -170,14 +170,14 @@ TEST_P(YourTestParameterisedClass, NameofTest) {
 4. **Instantiate your test**: Finally, we instantiate our test by using the `INSTANTIATE_TEST_SUITE_P` macro. The general syntax of this macro is given below.
 
 ```cpp
-INSTANTIATE_TEST_SUITE_P(SuitableNameTest, 
+INSTANTIATE_TEST_SUITE_P(SuitableNameTest,
                          YourTestParameterisedClass,
                          ValuesIn(MyValues));
 ```
 
 In the above cell, the first argument to `INSTANTIATE_TEST_SUITE_P` could be any suitable name. GoogleTest will add this as a PREFIX to the test name when you will run the test. The second argument is the name of the parameterised class that you have created, which is also the first argument for `TEST_P` macro. Finally, the last argument is a `ValuesIn()` function which is defined in the GoogleTest library. It helps to inject the test values into the parameterised test one by one.
 
-Let us see how we use the above concepts for an actual test that we have been writing in our previous subsections. For more details, please see [3_Parameterised_not_using_fixture.cpp](../code/Chapter4/3_Parameterised_not_using_fixture.cpp).
+Let us see how we use the above concepts for an actual test that we have been writing in our previous subsections. For more details, please see [3_parameterised_not_using_fixture.cpp](https://github.com/ImperialCollegeLondon/unit_testing_Cpp_exercises/tree/main/src/Chapter4/3_parameterised_not_using_fixture.cpp).
 
 ```cpp
 // Create a structure that holds the input and output values.
@@ -250,7 +250,7 @@ With this parameterised test, we were able to solve the issues that we were disc
 >
 > > ## Solution
 > >
-> > The full solution is given in [Solution](../code/Chapter4/Exercise_solutions/a_param_test_normal_function.cpp). We present some important parts of the solution below.
+> > The full solution is given in [Solution](https://github.com/ImperialCollegeLondon/unit_testing_Cpp_exercises/tree/main/src/Chapter4/Exercise_solutions/a_param_test_normal_function.cpp). We present some important parts of the solution below.
 > >
 > > ```cpp
 > > // Define a test fixture class
@@ -298,7 +298,7 @@ With this parameterised test, we were able to solve the issues that we were disc
 > >  
 > > Although we are testing 3 parameterised functions, we do not have to add 3 `INSTANTIATE_TEST_SUITE_P` macros in our code. This is because an `INSTANTIATE_TEST_SUITE_P` macro looks for the test suite name (2nd argument) and if it is same, it will instantiate the tests for all of them.  Therefore, in our current exercise, we can use the same `INSTANTIATE_TEST_SUITE_P` for `Add` and `Multiply` functions while we can use a different `INSTANTIATE_TEST_SUITE_P` for the `Power` function.
 > >
-> > We provide some portion of solution code below. Full code can be found in [Solution](../code/Chapter4/Exercise_solutions/b_multiple_test_p_instant.cpp)
+> > We provide some portion of solution code below. Full code can be found in [Solution](https://github.com/ImperialCollegeLondon/unit_testing_Cpp_exercises/tree/main/src/Chapter4/Exercise_solutions/b_multiple_test_p_instant.cpp)
 > >
 > > ```cpp
 > > // Define the test case with the parameterized test for multiply function.
@@ -342,12 +342,12 @@ In order to create a parameterised test from a test fixture, all we need to do i
 
 ```cpp
 // create a parameterised test class from the fixture defined above.
-class YourParameterisedClass : public YourFixtureClass, 
+class YourParameterisedClass : public YourFixtureClass,
                                public WithParamInterface<T> {
 };
 ```
 
-For the purpose of demonstration, let us assume that we now want to check our tax calculation function `getTaxAmount()` which has more branches as compared to bonus calculation. For complete code, see the file [4_param_test_based_fixture.cpp](../code/Chapter4/4_param_test_based_fixture.cpp). We give a small section of code below for reference.
+For the purpose of demonstration, let us assume that we now want to check our tax calculation function `getTaxAmount()` which has more branches as compared to bonus calculation. For complete code, see the file [4_param_test_based_fixture.cpp](https://github.com/ImperialCollegeLondon/unit_testing_Cpp_exercises/tree/main/src/Chapter4/4_param_test_based_fixture.cpp). We give a small section of code below for reference.
 
 ```cpp
 // Create a test fixture.

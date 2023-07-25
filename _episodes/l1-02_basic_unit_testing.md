@@ -202,7 +202,7 @@ For writing your Unit Tests, it is advisable to follow the guidelines given belo
 
 ## 7. Unit Test for the Fibonacci Sequence
 
-With the above guidelines in mind, we can write some of the unit tests for our `fibonacci.cpp` that we learnt in Chapter 1. The complete code is given below and can be found in [Chapter2](../code/Chapter2/Fibonacci_test.cpp).
+With the above guidelines in mind, we can write some of the unit tests for our `fibonacci.cpp` that we learnt in Chapter 1. The complete code is given below and can be found in [Chapter2](https://github.com/ImperialCollegeLondon/unit_testing_Cpp_exercises/tree/main/src/Chapter2/test.cpp).
 
 ```cpp
 #include <iostream>
@@ -258,13 +258,13 @@ On compiling and running above program, we get the following output.
 {: .output}
 
 > ## Exercise: Test for negative values
-> 
+>
 > Modify the above program to throw an exception for negative values and write a test for this.
 >
 > > ## Solution
-> > 
-> > Add the following lines in your code. The full solution is given in [Solution](../code/Chapter2/Exercise_solution).
-> > 
+> >
+> > Add the following lines in your code. The full solution is given in [Solution](https://github.com/ImperialCollegeLondon/unit_testing_Cpp_exercises/tree/main/src/Chapter2/Exercise_solutions).
+> >
 > > ```cpp
 > > // Change the function as shown below.
 > > int recursive_fibonacci(int n)
