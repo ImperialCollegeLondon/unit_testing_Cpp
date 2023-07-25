@@ -125,37 +125,47 @@ $ g++ your_code.cpp -I path_to_your_gtest.h -L path_to_your_lgtest.a -lgtest_mai
 
 GoogleTest offers many types of assertions as described in [GoogleTest Assertions](http://google.github.io/googletest/reference/assertions.html). A few of them are described below as they will be used in our upcoming sections/chapters.
 
-1. **Equality Assertions**: Equality assertions are used to compare values for equality. The most commonly used assertion is `ASSERT_EQ(expected, actual)`, which verifies that the `expected` and `actual` values are equal. For example:
+1. **Equality Assertions**: Equality assertions are used to compare values for equality.
+   The most commonly used assertion is `ASSERT_EQ(expected, actual)`, which verifies
+   that the `expected` and `actual` values are equal. For example:
 
-```cpp
-ASSERT_EQ(expected_value, your_function(function_arguments));  
-// Verify that the expected value is equal to the value returned by your function.
+    ```cpp
+    ASSERT_EQ(expected_value, your_function(function_arguments));
+    // Verify that the expected value is equal to the value returned by your function.
 
-// You can alo change the order if you prefer.
-ASSERT_EQ(your_function(function_arguments), expected_value);
-```
+    // You can alo change the order if you prefer.
+    ASSERT_EQ(your_function(function_arguments), expected_value);
+    ```
 
-Other useful equality assertions include `ASSERT_NE`, `ASSERT_LT`, `ASSERT_LE`, `ASSERT_GT`, and `ASSERT_GE` for performing inequality comparisons.
+    Other useful equality assertions include `ASSERT_NE`, `ASSERT_LT`, `ASSERT_LE`,
+    `ASSERT_GT`, and `ASSERT_GE` for performing inequality comparisons.
 
-2. **Boolean Assertions**: Boolean assertions are used to verify boolean conditions. For example, `ASSERT_TRUE(condition)` checks that the `condition` is `true`, while `ASSERT_FALSE(condition)` ensures that the `condition` is `false`.
+2. **Boolean Assertions**: Boolean assertions are used to verify boolean conditions. For
+   example, `ASSERT_TRUE(condition)` checks that the `condition` is `true`, while
+   `ASSERT_FALSE(condition)` ensures that the `condition` is `false`.
 
-```cpp
-ASSERT_TRUE(isValid);  // Verify that the isValid flag is true
-ASSERT_FALSE(hasError);  // Verify that the hasError flag is false
-```
+    ```cpp
+    ASSERT_TRUE(isValid);  // Verify that the isValid flag is true
+    ASSERT_FALSE(hasError);  // Verify that the hasError flag is false
+    ```
 
-3. **Exception Assertions**: Exception assertions are used to validate that specific exceptions are thrown during the execution of code. In GoogleTest, you can use the `ASSERT_THROW(statement, exceptionType)` assertion. For example:
+3. **Exception Assertions**: Exception assertions are used to validate that specific
+   exceptions are thrown during the execution of code. In GoogleTest, you can use the
+   `ASSERT_THROW(statement, exceptionType)` assertion. For example:
 
-```cpp
-ASSERT_THROW(throwException(), std::runtime_error);  // Verify that throwException() throws a std::runtime_error
-```
+    ```cpp
+    ASSERT_THROW(throwException(), std::runtime_error);  // Verify that throwException() throws a std::runtime_error
+    ```
 
-4. **String Assertions**: String assertions are used to compare string values. GoogleTest provides various string assertions, such as `ASSERT_STREQ`, `ASSERT_STRNE`, `ASSERT_STRCASEEQ`, and `ASSERT_STRCASENE`. These assertions allow you to compare strings for equality, inequality, or case-insensitive equality.
+4. **String Assertions**: String assertions are used to compare string values.
+   GoogleTest provides various string assertions, such as `ASSERT_STREQ`,
+   `ASSERT_STRNE`, `ASSERT_STRCASEEQ`, and `ASSERT_STRCASENE`. These assertions allow
+   you to compare strings for equality, inequality, or case-insensitive equality.
 
-```cpp
-ASSERT_STREQ("Hello", getString());  // Verify that getString() returns the exact string "Hello"
-ASSERT_STRCASEEQ("hello", getString());  // Verify that getString() returns "hello" in a case-insensitive manner
-```
+    ```cpp
+    ASSERT_STREQ("Hello", getString());  // Verify that getString() returns the exact string "Hello"
+    ASSERT_STRCASEEQ("hello", getString());  // Verify that getString() returns "hello" in a case-insensitive manner
+    ```
 
 The majority of the macros listed above come as a pair with an `EXPECT_` variant and an `ASSERT_` variant. Upon failure, `EXPECT_` macros generate nonfatal failures and allow the current function to continue running, while `ASSERT_` macros generate fatal failures and abort the current function.
 
