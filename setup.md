@@ -33,19 +33,40 @@ you select the relevant options for C++ development.
 
 [download Visual Studio Community here]: https://visualstudio.microsoft.com/vs/community/
 
-### macOS: Installing clang and CMake
+### macOS: Installing developer tools and CMake
 
-If you are developing on macOS, it is easiest to install your developer tools via
-Homebrew. If you do not have Homebrew installed, please [visit the Homebrew website] and
-follow the instructions to install it.
-
-Then you can install [the clang compiler] and CMake like so:
+Apple provide a suite of UNIX-style command line tools that include a version of [the
+clang compiler]. Install them by opening the "Terminal" app and running:
 
 ```sh
-brew install llvm cmake
+$ xcode-select --install
+xcode-select: note: install requested for command line developer tools
+This will open dialog that asks for your confirmation to install the tools. If it does not open a dialog, it may be because it is already installed (the error message will be clear).
 ```
 
-[visit the Homebrew website]: https://brew.sh/
+You can check that the tools are correctly installed by running:
+
+```sh
+$ clang --version
+Apple clang version 12.0.0 (clang-1200.0.32.27)
+Target: x86_64-apple-darwin20.1.0
+Thread model: posix
+InstalledDir: /Library/Developer/CommandLineTools/usr/bin
+```
+
+If your output is similar, then you have installed the developer tools correctly.
+
+If you are developing on macOS, it is easiest to install CMake via [Homebrew]. If you do
+not have Homebrew installed, please follow [these installation instructions].
+
+Then you can install CMake like so:
+
+```sh
+brew install cmake
+```
+
+[Homebrew]: https://brew.sh/
+[these installation instructions]: https://docs.brew.sh/Installation
 [the clang compiler]: https://clang.llvm.org/
 
 ### Linux: Installing gcc and CMake
