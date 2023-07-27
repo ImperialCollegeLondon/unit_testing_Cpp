@@ -21,7 +21,7 @@ the popular [GoogleTest](https://github.com/google/googletest) C++ testing frame
 
 ## Syllabus
 
-- Introduction and motivation of software testing.
+- Introduction and motivation for software testing.
 - Writing simple unit tests.
 - Automatic setup and teardown using test fixtures.
 - Test ranges of inputs using parametrised tests.
