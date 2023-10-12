@@ -1,7 +1,7 @@
 ---
 title: "Introduction to Unit Testing using GoogleTest"
 teaching: 30
-exercises: 10
+exercises: 15
 questions:
 - "What framework/libraries can be used for unit testing in C++?"
 - "What is GoogleTest?"

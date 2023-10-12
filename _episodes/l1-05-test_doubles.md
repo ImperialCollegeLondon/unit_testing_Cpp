@@ -1,7 +1,7 @@
 ---
 title: "Tests doubles and dependency injection"
 teaching: 30
-exercises: 10
+exercises: 15
 questions:
 - "What are test doubles?"
 - "What types of test doubles are there?"
