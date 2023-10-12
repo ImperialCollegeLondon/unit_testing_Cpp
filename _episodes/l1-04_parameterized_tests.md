@@ -1,7 +1,7 @@
 ---
 title: "Parameterised Tests using GoogleTest"
-teaching: TBC
-exercises: TBC
+teaching: 30
+exercises: 15
 questions:
 - "What is a parameterised test?"
 - "How can I write my own parameterised tests using GoogleTest?"

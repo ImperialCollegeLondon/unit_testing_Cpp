@@ -1,7 +1,7 @@
 ---
 title: "Introduction to Test Fixtures using GoogleTest"
-teaching: TBC
-exercises: TBC
+teaching: 30
+exercises: 15
 questions:
 - "What is a test fixture?"
 - "How can I create my own test fixture using GoogleTest?"

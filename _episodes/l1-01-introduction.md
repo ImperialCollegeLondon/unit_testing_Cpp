@@ -1,6 +1,6 @@
 ---
 title: "Introduction to testing"
-teaching: 15
+teaching: 25
 exercises: 5
 questions:
 - "Why test my software?"

@@ -1,7 +1,7 @@
 ---
 title: "General unit testing best practice"
-teaching: TBC
-exercises: TBC
+teaching: 30
+exercises: 0
 questions:
 - "What are some best practices that should be followed when writing unit tests?"
 objectives:
