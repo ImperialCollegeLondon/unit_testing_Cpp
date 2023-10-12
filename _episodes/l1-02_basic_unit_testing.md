@@ -1,7 +1,7 @@
 ---
 title: "Introduction to Unit Testing using GoogleTest"
-teaching: TBC
-exercises: TBC
+teaching: 30
+exercises: 10
 questions:
 - "What framework/libraries can be used for unit testing in C++?"
 - "What is GoogleTest?"
