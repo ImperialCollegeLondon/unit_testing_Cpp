@@ -107,7 +107,7 @@ of these for this course.
 
 You can get more information about most of these types of testing as well as
 in general about several techniques used when writing tests in
-[Software Testing Fundamentals](http://softwaretestingfundamentals.com).
+[software testing fundamentals](https://www.geeksforgeeks.org/software-testing/software-testing-basics/).
 
 ### Unit Testing
 
